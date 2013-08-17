@@ -43,6 +43,34 @@ Get the body text of BBC News:
 ##Why use this over the plain C API?
 This has been written with object-orientation and Cocoa in mind to make it a lot easier to interact with from Objective-C, which also gains the benefits of not having to worry about C-style pointers and releasing memory. Furthermore, it also uses 'native' Objective-C paradigms such as dictionaries and arrays rather than the Vector implementation provided Gumbo. It also reduces the amount of code you have to write by allowing you to quickly fetch tags based on tag, ID or class (like jQuery). 
 
+##Classes
+###ObjectiveGumbo
+This class should be used for parsing HTML from NSStrings, NSURLs or NSData. Please note that, like Gumbo, ObjectiveGumbo *only* supports UTF8 web pages.
+
+###OGNode
+All tags and pieces of text get converted to an OGNode (and its subclasses). So the following HTML would be parsed as follows:
+
+	<p>This is a paragraph. <b>This is bold</b></p>
+	Paragraph (OGElement)
+		'This is a paragraph. ' (OGText)
+		Bold (OGElement)
+			'This is bold'	
+
+OGNode provides a variety of utility functions such as fetching the plaintext content and finding child nodes quickly:
+
+* elementsWithClass allows you to quickly find all elements with the given class
+* elementsWithID returns an array of all elements with a matching ID
+* elementsWithTag finds all tags of a certain type (such as links)
+
+###OGElement
+A subclass of OGNode that provides an array of child elements, a dictionary of attributes and an array of classes.
+
+###OGDocument
+A subclass of OGElement that includes DOCTYPE information. If you use the parseDocument* functions in ObjectiveGumbo you will receive this back as the root element.
+
+###OGText
+A subclass of OGNode that represents some plain text. Note that all OGNodes have a -(NSString*)text function, however OGElement recursively searches its children.
+
 ##Future aims
 
 * Progress in line with Gumbo
