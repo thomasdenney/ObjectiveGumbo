@@ -21,8 +21,9 @@ I am currently not particularly pleased with the way that you have to build the 
 
 ##Example usage
 
-	OGNode * data = [ObjectiveGumbo parseDocumentWithUrl:[NSURL urlWithString:@"http://news.ycombinator.com"]];
-	NSLog(@"%@", data.text);
+Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
+
+	OGNode * data = [ObjectiveGumbo parseDocumentWithUrl:[NSURL URLWithString:@"http://news.ycombinator.com"]];
 	NSArray * tableRows = [data elementsWithClass:@"title"];
 	for (OGElement * tableRow in tableRows)
 	{
@@ -32,6 +33,12 @@ I am currently not particularly pleased with the way that you have to build the 
 			NSLog(@"%@", link.attributes[@"href"]);
 		}
 	}
+	
+Get the body text of BBC News:
+
+	OGNode * data = [ObjectiveGumbo parseDocumentWithUrl:[NSURL URLWithString:@"http://bbc.co.uk/news"]];
+	OGElemet * body = [data elementsWithTag:GUMBO_TAG_BODY];
+	NSLog(@"%@", body.text);
 
 ##Why use this over the plain C API?
 This has been written with object-orientation and Cocoa in mind to make it a lot easier to interact with from Objective-C, which also gains the benefits of not having to worry about C-style pointers and releasing memory. Furthermore, it also uses 'native' Objective-C paradigms such as dictionaries and arrays rather than the Vector implementation provided Gumbo. It also reduces the amount of code you have to write by allowing you to quickly fetch tags based on tag, ID or class (like jQuery). 
