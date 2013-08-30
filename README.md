@@ -76,3 +76,6 @@ A subclass of OGNode that represents some plain text. Note that all OGNodes have
 * Progress in line with Gumbo
 * Once Gumbo reaches final release port the majority of the code over to Objective-C or rewrite non-trivial parts using Cocoa classes (NSString, NSArray, NSDictionary, etc)
 * Add more jQuery like selection features
+
+##Contact
+If you are using ObjectiveGumbo in your projects or want to ask specific support questions feel free to email at programmingthomas [at] gmail [dot] com.
