@@ -46,6 +46,21 @@
     return allMatchingObjects;
 }
 
+-(NSArray*)selectWithBlock:(SelectorBlock)block
+{
+    return [NSArray new];
+}
+
+-(OGNode*)first:(NSString *)selector
+{
+    return [[self select:selector] firstObject];
+}
+
+-(OGNode*)last:(NSString *)selector
+{
+    return [[self select:selector] lastObject];
+}
+
 -(NSArray*)elementsWithClass:(NSString*)class
 {
     return [NSArray new];

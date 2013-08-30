@@ -16,4 +16,6 @@
 @property NSArray * classes;
 @property NSDictionary * attributes;
 
+-(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value;
+
 @end

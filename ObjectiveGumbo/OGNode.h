@@ -10,6 +10,8 @@
 #import "OGUtility.h"
 #import "NSString+OGString.h"
 
+typedef BOOL(^SelectorBlock)(id node);
+
 @interface OGNode : NSObject
 
 @property OGNode * parent;
@@ -20,6 +22,11 @@
 //Usage:
 //#stuffwiththisid .orthisclass orthistag
 -(NSArray*)select:(NSString*)selector;
+-(NSArray*)selectWithBlock:(SelectorBlock)block;
+
+//Returns the first OGNode from the select:
+-(OGNode*)first:(NSString*)selector;
+-(OGNode*)last:(NSString*)selector;
 
 -(NSArray*)elementsWithClass:(NSString*)class;
 -(NSArray*)elementsWithID:(NSString*)id;

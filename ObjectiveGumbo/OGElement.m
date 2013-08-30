@@ -42,6 +42,34 @@
     return html;
 }
 
+-(NSArray*)selectWithBlock:(SelectorBlock)block
+{
+    NSMutableArray * matchingChildren = [NSMutableArray new];
+    for (OGNode * child in self.children)
+    {
+        if (block(child))
+        {
+            [matchingChildren addObject:child];
+        }
+    }
+    return matchingChildren;
+}
+
+-(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value
+{
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]])
+        {
+            OGElement * element = (OGElement*)node;
+            if ([element.attributes objectForKey:attribute] != nil)
+            {
+                return [element.attributes[attribute] isEqualToString:value];
+            }
+        }
+        return NO;
+    }];
+}
+
 -(NSArray*)elementsWithClass:(NSString*)class
 {
     NSMutableArray * elements = [NSMutableArray new];
