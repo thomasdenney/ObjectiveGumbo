@@ -11,5 +11,6 @@
 @interface NSString (OGString)
 
 -(NSString*)escapedString;
++(NSString*)indentationString:(int)indentationLevel;
 
 @end

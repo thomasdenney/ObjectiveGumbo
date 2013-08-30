@@ -17,4 +17,14 @@
     return escapedString;
 }
 
++(NSString*)indentationString:(int)indentationLevel
+{
+    NSMutableString * string = [NSMutableString new];
+    for (int n = 0; n < indentationLevel; n++)
+    {
+        [string appendString:@"\t"];
+    }
+    return string;
+}
+
 @end

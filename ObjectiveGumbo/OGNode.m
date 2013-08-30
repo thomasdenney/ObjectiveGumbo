@@ -16,6 +16,11 @@
 
 -(NSString*)html
 {
+    return [self htmlWithIndentation:0];
+}
+
+-(NSString*)htmlWithIndentation:(int)indentationLevel
+{
     return @"";
 }
 

@@ -18,6 +18,7 @@ typedef BOOL(^SelectorBlock)(id node);
 
 -(NSString*)text;
 -(NSString*)html;
+-(NSString*)htmlWithIndentation:(int)indentationLevel;
 
 //Usage:
 //#stuffwiththisid .orthisclass orthistag

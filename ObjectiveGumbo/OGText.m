@@ -35,17 +35,19 @@
     }
 }
 
--(NSString*)html
+-(NSString*)htmlWithIndentation:(int)indentationLevel
 {
+    _text = [_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.isText)
     {
-        return _text;
+        if ([_text hasSuffix:@"\n"]) return _text;
+        return [NSString stringWithFormat:@"%@\n", _text];
     }
     else if (self.isComment)
     {
-        return [NSString stringWithFormat:@"<!--%@-->", _text];
+        return [NSString stringWithFormat:@"<!--%@-->\n", _text];
     }
-    return @"";
+    return [NSString indentationString:indentationLevel];
 }
 
 @end

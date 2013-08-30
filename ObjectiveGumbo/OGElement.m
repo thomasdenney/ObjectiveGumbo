@@ -19,7 +19,7 @@
     return text;
 }
 
--(NSString*)html
+-(NSString*)htmlWithIndentation:(int)indentationLevel
 {
     NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
     for (NSString * attribute in self.attributes)
@@ -28,16 +28,16 @@
     }
     if (self.children.count == 0)
     {
-        [html appendString:@" />"];
+        [html appendString:@" />\n"];
     }
     else
     {
-        [html appendString:@">"];
+        [html appendString:@">\n"];
         for (OGNode * child in self.children)
         {
-            [html appendString:[child html]];
+            [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
         }
-        [html appendFormat:@"</%@>", [OGUtility tagForGumboTag:self.tag]];
+        [html appendFormat:@"</%@>\n", [OGUtility tagForGumboTag:self.tag]];
     }
     return html;
 }
