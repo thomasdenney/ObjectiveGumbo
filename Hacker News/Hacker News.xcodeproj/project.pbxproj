@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E95446F617D0740200EC248A /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E95446F517D0740200EC248A /* OGUtility.m */; };
+		E95446F917D0785200EC248A /* NSString+OGString.m in Sources */ = {isa = PBXBuildFile; fileRef = E95446F817D0785200EC248A /* NSString+OGString.m */; };
 		E9C3B44817BFC683001F07CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3B44717BFC683001F07CC /* Foundation.framework */; };
 		E9C3B44A17BFC683001F07CC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3B44917BFC683001F07CC /* CoreGraphics.framework */; };
 		E9C3B44C17BFC683001F07CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3B44B17BFC683001F07CC /* UIKit.framework */; };
@@ -52,6 +54,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E95446F417D0740200EC248A /* OGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
+		E95446F517D0740200EC248A /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
+		E95446F717D0785200EC248A /* NSString+OGString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+OGString.h"; sourceTree = "<group>"; };
+		E95446F817D0785200EC248A /* NSString+OGString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+OGString.m"; sourceTree = "<group>"; };
 		E9C3B44417BFC683001F07CC /* Hacker News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hacker News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C3B44717BFC683001F07CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E9C3B44917BFC683001F07CC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -228,6 +234,10 @@
 				E9C3B5B317BFD811001F07CC /* OGNode.m */,
 				E9C3B5B417BFD811001F07CC /* OGText.h */,
 				E9C3B5B517BFD811001F07CC /* OGText.m */,
+				E95446F417D0740200EC248A /* OGUtility.h */,
+				E95446F517D0740200EC248A /* OGUtility.m */,
+				E95446F717D0785200EC248A /* NSString+OGString.h */,
+				E95446F817D0785200EC248A /* NSString+OGString.m */,
 			);
 			name = ObjectiveGumbo;
 			path = ../../ObjectiveGumbo;
@@ -372,6 +382,7 @@
 				E9C3B60017BFD85A001F07CC /* attribute.c in Sources */,
 				E9C3B60217BFD85A001F07CC /* char_ref.c in Sources */,
 				E9C3B60417BFD85A001F07CC /* error.c in Sources */,
+				E95446F917D0785200EC248A /* NSString+OGString.m in Sources */,
 				E9C3B60817BFD85A001F07CC /* parser.c in Sources */,
 				E9C3B60A17BFD85A001F07CC /* string_buffer.c in Sources */,
 				E9C3B60C17BFD85A001F07CC /* string_piece.c in Sources */,
@@ -379,6 +390,7 @@
 				E9C3B61017BFD85A001F07CC /* tokenizer.c in Sources */,
 				E9C3B61317BFD85A001F07CC /* utf8.c in Sources */,
 				E9C3B61517BFD85A001F07CC /* util.c in Sources */,
+				E95446F617D0740200EC248A /* OGUtility.m in Sources */,
 				E9C3B61717BFD85A001F07CC /* vector.c in Sources */,
 				E9C3B46117BFC683001F07CC /* DetailViewController.m in Sources */,
 				E9C3B45817BFC683001F07CC /* AppDelegate.m in Sources */,
@@ -596,6 +608,7 @@
 				E9C3B47B17BFC683001F07CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9C3B47C17BFC683001F07CC /* Build configuration list for PBXNativeTarget "Hacker NewsTests" */ = {
 			isa = XCConfigurationList;
@@ -604,6 +617,7 @@
 				E9C3B47E17BFC683001F07CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

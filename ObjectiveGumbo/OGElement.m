@@ -19,6 +19,29 @@
     return text;
 }
 
+-(NSString*)html
+{
+    NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
+    for (NSString * attribute in self.attributes)
+    {
+        [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
+    }
+    if (self.children.count == 0)
+    {
+        [html appendString:@" />"];
+    }
+    else
+    {
+        [html appendString:@">"];
+        for (OGNode * child in self.children)
+        {
+            [html appendString:[child html]];
+        }
+        [html appendFormat:@"</%@>", [OGUtility tagForGumboTag:self.tag]];
+    }
+    return html;
+}
+
 -(NSArray*)elementsWithClass:(NSString*)class
 {
     NSMutableArray * elements = [NSMutableArray new];

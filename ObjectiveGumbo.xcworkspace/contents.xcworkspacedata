@@ -8,6 +8,18 @@
       location = "group:ObjectiveGumbo"
       name = "ObjectiveGumbo">
       <FileRef
+         location = "group:NSString+OGString.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSString+OGString.m">
+      </FileRef>
+      <FileRef
+         location = "group:OGUtility.h">
+      </FileRef>
+      <FileRef
+         location = "group:OGUtility.m">
+      </FileRef>
+      <FileRef
          location = "group:ObjectiveGumbo.h">
       </FileRef>
       <FileRef

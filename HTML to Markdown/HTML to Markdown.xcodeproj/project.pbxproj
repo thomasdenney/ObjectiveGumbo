@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E95446FD17D07A4F00EC248A /* NSString+OGString.m in Sources */ = {isa = PBXBuildFile; fileRef = E95446FA17D07A3B00EC248A /* NSString+OGString.m */; };
+		E95446FE17D07A4F00EC248A /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E95446FC17D07A3B00EC248A /* OGUtility.m */; };
 		E9C3B62E17BFDC4C001F07CC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C3B62D17BFDC4C001F07CC /* Cocoa.framework */; };
 		E9C3B63817BFDC4C001F07CC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9C3B63617BFDC4C001F07CC /* InfoPlist.strings */; };
 		E9C3B63A17BFDC4C001F07CC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C3B63917BFDC4C001F07CC /* main.m */; };
@@ -47,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E95446FA17D07A3B00EC248A /* NSString+OGString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+OGString.m"; sourceTree = "<group>"; };
+		E95446FB17D07A3B00EC248A /* OGUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
+		E95446FC17D07A3B00EC248A /* OGUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
 		E9C3B62A17BFDC4C001F07CC /* HTML to Markdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HTML to Markdown.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C3B62D17BFDC4C001F07CC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E9C3B63017BFDC4C001F07CC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -255,6 +260,9 @@
 		E9C3B66117BFDC5C001F07CC /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
+				E95446FA17D07A3B00EC248A /* NSString+OGString.m */,
+				E95446FB17D07A3B00EC248A /* OGUtility.h */,
+				E95446FC17D07A3B00EC248A /* OGUtility.m */,
 				E9C3B66C17BFDC6C001F07CC /* src */,
 				E9C3B66217BFDC5C001F07CC /* ObjectiveGumbo.h */,
 				E9C3B66317BFDC5C001F07CC /* ObjectiveGumbo.m */,
@@ -464,6 +472,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95446FD17D07A4F00EC248A /* NSString+OGString.m in Sources */,
+				E95446FE17D07A4F00EC248A /* OGUtility.m in Sources */,
 				E9C3B6B617BFDC90001F07CC /* attribute.c in Sources */,
 				E9C3B6B717BFDC90001F07CC /* char_ref.c in Sources */,
 				E9C3B6B817BFDC90001F07CC /* error.c in Sources */,
@@ -694,6 +704,7 @@
 				E9C3B65D17BFDC4C001F07CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9C3B65E17BFDC4C001F07CC /* Build configuration list for PBXNativeTarget "HTML to MarkdownTests" */ = {
 			isa = XCConfigurationList;
@@ -702,6 +713,7 @@
 				E9C3B66017BFDC4C001F07CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

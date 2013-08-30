@@ -14,6 +14,38 @@
     return @"";
 }
 
+-(NSString*)html
+{
+    return @"";
+}
+
+-(NSArray*)select:(NSString *)selector
+{
+    NSArray * selectors = [selector componentsSeparatedByString:@" "];
+    NSMutableArray * allMatchingObjects = [NSMutableArray new];
+    for (NSString * individualSelector in selectors)
+    {
+        if ([individualSelector hasPrefix:@"#"])
+        {
+            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
+        }
+        else if ([individualSelector hasPrefix:@"."])
+        {
+            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
+        }
+        else
+        {
+            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGUtility gumboTagForTag:individualSelector]]];
+        }
+    }
+    
+    //Remove duplicates
+    NSOrderedSet * set = [[NSOrderedSet alloc] initWithArray:allMatchingObjects];
+    allMatchingObjects = [[NSMutableArray alloc] initWithArray:[set array]];
+    
+    return allMatchingObjects;
+}
+
 -(NSArray*)elementsWithClass:(NSString*)class
 {
     return [NSArray new];

@@ -17,7 +17,7 @@
 - (IBAction)convert:(id)sender
 {
     OGNode * element = [ObjectiveGumbo parseNodeWithString:self.htmlField.stringValue];
-    self.markdownField.stringValue = [self markdownFromNode:element];
+    self.markdownField.stringValue = [NSString stringWithFormat:@"%@\n\n%@", [self markdownFromNode:element], [element html]];
 }
 
 -(NSString*)markdownFromNode:(OGNode*)node

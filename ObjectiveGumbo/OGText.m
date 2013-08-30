@@ -35,4 +35,17 @@
     }
 }
 
+-(NSString*)html
+{
+    if (self.isText)
+    {
+        return _text;
+    }
+    else if (self.isComment)
+    {
+        return [NSString stringWithFormat:@"<!--%@-->", _text];
+    }
+    return @"";
+}
+
 @end
