@@ -51,6 +51,7 @@
         {
             [matchingChildren addObject:child];
         }
+        [matchingChildren addObjectsFromArray:[child selectWithBlock:block]];
     }
     return matchingChildren;
 }
@@ -61,10 +62,7 @@
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
-            if ([element.attributes objectForKey:attribute] != nil)
-            {
-                return [element.attributes[attribute] isEqualToString:value];
-            }
+            return [element.attributes[attribute] isEqualToString:value];
         }
         return NO;
     }];
@@ -72,52 +70,43 @@
 
 -(NSArray*)elementsWithClass:(NSString*)class
 {
-    NSMutableArray * elements = [NSMutableArray new];
-    
-    for (NSString * classes in self.classes)
-    {
-        if ([classes isEqualToString:class])
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]])
         {
-            [elements addObject:self];
-            break;
+            OGElement * element = (OGElement*)node;
+            for (NSString * classes in element.classes)
+            {
+                if ([classes isEqualToString:class])
+                {
+                    return YES;
+                }
+            }
         }
-    }
-    
-    for (OGNode * child in self.children)
-    {
-        [elements addObjectsFromArray:[child elementsWithClass:class]];
-    }
-    
-    
-    return elements;
+        return NO;
+    }];
 }
 
 -(NSArray*)elementsWithID:(NSString *)elementId
 {
-    NSMutableArray * elements = [NSMutableArray new];
-    if ([self.attributes objectForKey:@"id"] != nil && [(NSString*)[self.attributes objectForKey:@"id"] isEqualToString:elementId])
-    {
-        [elements addObject:self];
-    }
-    for (OGNode * child in self.children)
-    {
-        [elements addObjectsFromArray:[child elementsWithID:elementId]];
-    }
-    return elements;
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]]) {
+            OGElement * element = (OGElement*)node;
+            return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
+        }
+        return NO;
+    }];
 }
 
 -(NSArray*)elementsWithTag:(GumboTag)tag
 {
-    NSMutableArray * elements = [NSMutableArray new];
-    if (self.tag == tag)
-    {
-        [elements addObject:self];
-    }
-    for (OGNode * child in self.children)
-    {
-        [elements addObjectsFromArray:[child elementsWithTag:tag]];
-    }
-    return elements;
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]])
+        {
+            OGElement * element = (OGElement*)node;
+            return element.tag == tag;
+        }
+        return NO;
+    }];
 }
 
 @end
