@@ -92,16 +92,16 @@
     return elements;
 }
 
--(NSArray*)elementsWithID:(NSString *)id
+-(NSArray*)elementsWithID:(NSString *)elementId
 {
     NSMutableArray * elements = [NSMutableArray new];
-    if ([self.attributes objectForKey:@"id"] != nil && [(NSString*)[self.attributes objectForKey:@"id"] isEqualToString:id])
+    if ([self.attributes objectForKey:@"id"] != nil && [(NSString*)[self.attributes objectForKey:@"id"] isEqualToString:elementId])
     {
         [elements addObject:self];
     }
     for (OGNode * child in self.children)
     {
-        [elements addObjectsFromArray:[child elementsWithID:id]];
+        [elements addObjectsFromArray:[child elementsWithID:elementId]];
     }
     return elements;
 }

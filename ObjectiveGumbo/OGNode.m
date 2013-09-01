@@ -36,7 +36,7 @@
         }
         else if ([individualSelector hasPrefix:@"."])
         {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
+            [allMatchingObjects addObjectsFromArray:[self elementsWithClass:[individualSelector substringFromIndex:1]]];
         }
         else
         {
