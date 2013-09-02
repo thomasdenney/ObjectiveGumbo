@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Periodic Table/Periodic Table.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:HTML to Markdown/HTML to Markdown.xcodeproj">
    </FileRef>
    <Group
