@@ -9,7 +9,7 @@ Examples were originally packaged with ObjectiveGumbo, however in order to avoid
 ##Compilation
 To add ObjectiveGumbo to your Mac/iOS project do the following:
 
-* Get a local copy of this repository and [Gumbo](http://github.com/google/gumbo-parser)
+* Get a local copy of this repository
 * Add the ObjectiveGumbo directory to your Xcode project or alternatively add your project to the ObjectiveGumbo workspace. This directory also contains the source code for Gumbo
 
 
