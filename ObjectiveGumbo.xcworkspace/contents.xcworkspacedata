@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "group:Periodic Table/Periodic Table.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:HTML to Markdown/HTML to Markdown.xcodeproj">
-   </FileRef>
    <Group
       location = "group:ObjectiveGumbo"
       name = "ObjectiveGumbo">
+      <FileRef
+         location = "group:Gumbo">
+      </FileRef>
       <FileRef
          location = "group:NSString+OGString.h">
       </FileRef>
@@ -53,7 +50,4 @@
          location = "group:OGText.m">
       </FileRef>
    </Group>
-   <FileRef
-      location = "group:Hacker News/Hacker News.xcodeproj">
-   </FileRef>
 </Workspace>
