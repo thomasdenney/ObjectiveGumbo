@@ -7,11 +7,21 @@ ObjectiveGumbo is a set of classes that make it easier to interact with Gumbo, G
 Examples were originally packaged with ObjectiveGumbo, however in order to avoid it getting bloated I've moved them into a separate repository. For examples for iOS and OSX please now go to my [OG-Demos repository](https://github.com/programmingthomas/OG-Demos).
 
 ##Compilation
-To add ObjectiveGumbo to your Mac/iOS project do the following:
+The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
+
+	platform :ios, '6.0'
+	pod "ObjectiveGumbo", "0.1"
+
+Alternatively if you are working with OSX or don't wish to use CocoaPods, you can do the following:
 
 * Get a local copy of this repository
 * Add the ObjectiveGumbo directory to your Xcode project or alternatively add your project to the ObjectiveGumbo workspace. This directory also contains the source code for Gumbo
 
+When you want to use ObjectiveGumbo in your project, simply import the header:
+
+```obj-c
+#import <ObjectiveGumbo.h>
+```
 
 ##Example usage
 
