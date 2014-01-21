@@ -9,10 +9,10 @@
 
 @implementation ObjectiveGumbo
 
-+(OGNode*)parseNodeWithUrl:(NSURL *)url
++(OGNode*)parseNodeWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
 {
     NSError * error;
-    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
     if (error == nil)
     {
         return [ObjectiveGumbo parseNodeWithString:string];
@@ -37,10 +37,10 @@
     return node;
 }
 
-+(OGDocument*)parseDocumentWithUrl:(NSURL *)url
++(OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
 {
     NSError * error;
-    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
     if (error == nil)
     {
         return [ObjectiveGumbo parseDocumentWithString:string];
@@ -51,9 +51,9 @@
     }
 }
 
-+(OGDocument*)parseDocumentWithData:(NSData *)data
++(OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc
 {
-    NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString * string = [[NSString alloc] initWithData:data encoding:enc];
     return [ObjectiveGumbo parseDocumentWithString:string];
 }
 
