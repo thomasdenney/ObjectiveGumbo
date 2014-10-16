@@ -20,56 +20,47 @@
 
 @implementation ObjectiveGumbo
 
-+(OGNode*)parseNodeWithData:(NSData *)data
-{
++ (OGNode*)parseNodeWithData:(NSData *)data {
     NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return [ObjectiveGumbo parseNodeWithString:string];
 }
 
-+(OGNode*)parseNodeWithString:(NSString *)string
-{
++ (OGNode*)parseNodeWithString:(NSString *)string {
     GumboOutput * output = [ObjectiveGumbo outputFromString:string];
     OGNode * node = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->root];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
     return node;
 }
 
-+(OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
-{
++ (OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc {
     NSError * error;
     NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
-    if (error == nil)
-    {
+    if (error == nil) {
         return [ObjectiveGumbo parseDocumentWithString:string];
     }
-    else
-    {
+    else {
         return nil;
     }
 }
 
-+(OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc
-{
++ (OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc {
     NSString * string = [[NSString alloc] initWithData:data encoding:enc];
     return [ObjectiveGumbo parseDocumentWithString:string];
 }
 
-+(OGDocument*)parseDocumentWithString:(NSString *)string
-{
++ (OGDocument*)parseDocumentWithString:(NSString *)string {
     GumboOutput * output = [ObjectiveGumbo outputFromString:string];
     OGDocument * node = (OGDocument*)[ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->document];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
     return node;
 }
 
-+(GumboOutput*)outputFromString:(NSString*)string
-{
++ (GumboOutput*)outputFromString:(NSString*)string {
     GumboOutput * output = gumbo_parse(string.UTF8String);
     return output;
 }
 
-+(OGNode*)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode
-{
++ (OGNode*)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode {
     OGNode * node;
     if (gumboNode->type == GUMBO_NODE_DOCUMENT) {
         const char * cName = gumboNode->v.document.name;
@@ -87,8 +78,7 @@
         
         node = documentNode;
     }
-    else if (gumboNode->type == GUMBO_NODE_ELEMENT)
-    {
+    else if (gumboNode->type == GUMBO_NODE_ELEMENT) {
         OGElement * elementNode = [[OGElement alloc] init];
         
         elementNode.tag = (OGTag)gumboNode->v.element.tag;
@@ -98,8 +88,7 @@
         
         GumboVector * cAttributes = &gumboNode->v.element.attributes;
         
-        for (int i = 0; i < cAttributes->length; i++)
-        {
+        for (int i = 0; i < cAttributes->length; i++) {
             GumboAttribute * cAttribute = (GumboAttribute*)cAttributes->data[i];
             
             const char * cName = cAttribute->name;
@@ -110,8 +99,7 @@
             
             [attributes setValue:value forKey:name];
             
-            if ([name isEqualToString:@"class"])
-            {
+            if ([name isEqualToString:@"class"]) {
                 elementNode.classes = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
             }
         }
@@ -123,8 +111,7 @@
         
         node = elementNode;
     }
-    else
-    {
+    else {
         const char * cText = gumboNode->v.text.text;
         NSString * text = [[NSString alloc] initWithUTF8String:cText];
         node = [[OGText alloc] initWithText:text andType:gumboNode->type];
@@ -134,12 +121,10 @@
     return node;
 }
 
-+(NSArray*)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent
-{
++ (NSArray*)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent {
     NSMutableArray * children = [NSMutableArray new];
     
-    for (int i = 0; i < cChildren->length; i++)
-    {
+    for (int i = 0; i < cChildren->length; i++) {
         OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
         childNode.parent = parent;
         [children addObject:childNode];
