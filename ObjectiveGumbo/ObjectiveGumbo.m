@@ -15,22 +15,10 @@
 // limitations under the License.
 
 #import "ObjectiveGumbo.h"
+#import "_OGMutableElement.h"
+#import "gumbo.h"
 
 @implementation ObjectiveGumbo
-
-+(OGNode*)parseNodeWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
-{
-    NSError * error;
-    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
-    if (error == nil)
-    {
-        return [ObjectiveGumbo parseNodeWithString:string];
-    }
-    else
-    {
-        return nil;
-    }
-}
 
 +(OGNode*)parseNodeWithData:(NSData *)data
 {
@@ -83,17 +71,16 @@
 +(OGNode*)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode
 {
     OGNode * node;
-    if (gumboNode->type == GUMBO_NODE_DOCUMENT)
-    {
-        OGDocument * documentNode = [[OGDocument alloc] init];
-        
+    if (gumboNode->type == GUMBO_NODE_DOCUMENT) {
         const char * cName = gumboNode->v.document.name;
-        const char * cSystemIdentifier = gumboNode->v.document.system_identifier;
         const char * cPublicIdentifier = gumboNode->v.document.public_identifier;
+        const char * cSystemIdentifier = gumboNode->v.document.system_identifier;
         
-        documentNode.name = [[NSString alloc] initWithUTF8String:cName];
-        documentNode.systemIdentifier = [[NSString alloc] initWithUTF8String:cSystemIdentifier];
-        documentNode.publicIdentifier = [[NSString alloc] initWithUTF8String:cPublicIdentifier];
+        NSString * name = [NSString stringWithUTF8String:cName];
+        NSString * publicID = [NSString stringWithUTF8String:cPublicIdentifier];
+        NSString * systemID = [NSString stringWithUTF8String:cSystemIdentifier];
+        
+        OGDocument * documentNode = [[OGDocument alloc] initWithName:name publicID:publicID systemID:systemID];
         
         GumboVector * cChildren = &gumboNode->v.document.children;
         documentNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:documentNode];
@@ -104,8 +91,8 @@
     {
         OGElement * elementNode = [[OGElement alloc] init];
         
-        elementNode.tag = gumboNode->v.element.tag;
-        elementNode.tagNamespace = gumboNode->v.element.tag_namespace;
+        elementNode.tag = (OGTag)gumboNode->v.element.tag;
+        elementNode.tagNamespace = (OGNamespace)gumboNode->v.element.tag_namespace;
         
         NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
         
@@ -141,6 +128,7 @@
         const char * cText = gumboNode->v.text.text;
         NSString * text = [[NSString alloc] initWithUTF8String:cText];
         node = [[OGText alloc] initWithText:text andType:gumboNode->type];
+        node = nil;
     }
     
     return node;
