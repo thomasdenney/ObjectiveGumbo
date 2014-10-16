@@ -1,0 +1,3 @@
+[submodule "Gumbo"]
+	path = Gumbo
+	url = git://github.com/google/gumbo-parser.git

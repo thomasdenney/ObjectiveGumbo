@@ -143,7 +143,7 @@
     array[GUMBO_TAG_METER] = @"meter";
     array[GUMBO_TAG_DETAILS] = @"details";
     array[GUMBO_TAG_SUMMARY] = @"summary";
-    array[GUMBO_TAG_COMMAND] = @"command";
+//    array[GUMBO_TAG_COMMAND] = @"command";
     array[GUMBO_TAG_MENU] = @"menu";
     array[GUMBO_TAG_APPLET] = @"applet";
     array[GUMBO_TAG_ACRONYM] = @"acronym";
