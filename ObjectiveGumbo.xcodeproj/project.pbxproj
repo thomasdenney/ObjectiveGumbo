@@ -84,6 +84,8 @@
 		E9D81F3319F0132E0012D908 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE319F00FC30012D908 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9D81F4B19F01CF80012D908 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9D81F4C19F01CF80012D908 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F4F19F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
+		E9D81F5019F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +131,7 @@
 		E9D81EE619F00FC30012D908 /* OGTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGTypes.m; sourceTree = "<group>"; };
 		E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D81F4A19F01CF80012D908 /* OGTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGTypes.h; sourceTree = "<group>"; };
+		E9D81F4D19F038550012D908 /* _OGMutableElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OGMutableElement.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,7 @@
 		E9D81E8E19F00E520012D908 /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
+				E9D81F5319F0385C0012D908 /* Private classes */,
 				E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */,
 				E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */,
 				E9D81EDF19F00FC30012D908 /* OGElement.h */,
@@ -230,6 +234,14 @@
 			path = Gumbo/src;
 			sourceTree = SOURCE_ROOT;
 		};
+		E9D81F5319F0385C0012D908 /* Private classes */ = {
+			isa = PBXGroup;
+			children = (
+				E9D81F4D19F038550012D908 /* _OGMutableElement.h */,
+			);
+			name = "Private classes";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -253,6 +265,7 @@
 				E9D81EEA19F00FC30012D908 /* OGDocument.h in Headers */,
 				E9D81ECC19F00F560012D908 /* string_buffer.h in Headers */,
 				E9D81F4B19F01CF80012D908 /* OGTypes.h in Headers */,
+				E9D81F4F19F038550012D908 /* _OGMutableElement.h in Headers */,
 				E9D81EC619F00F560012D908 /* error.h in Headers */,
 				E9D81ECE19F00F560012D908 /* string_piece.h in Headers */,
 				E9D81EEC19F00FC30012D908 /* OGElement.h in Headers */,
@@ -282,6 +295,7 @@
 				E9D81F2819F013220012D908 /* token_type.h in Headers */,
 				E9D81F2919F013220012D908 /* tokenizer.h in Headers */,
 				E9D81F2A19F013220012D908 /* tokenizer_states.h in Headers */,
+				E9D81F5019F038550012D908 /* _OGMutableElement.h in Headers */,
 				E9D81F2B19F013220012D908 /* utf8.h in Headers */,
 				E9D81F2C19F013220012D908 /* util.h in Headers */,
 				E9D81F2D19F013220012D908 /* vector.h in Headers */,

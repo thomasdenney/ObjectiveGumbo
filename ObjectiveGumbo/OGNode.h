@@ -63,7 +63,7 @@
  @return HTML source that represents this node
  @note This method doesn't return the original HTML source, but generates it based on known attributes, elements and contents. The source is therefore 'standard' HTML5 which is indented using 4 spaces + the provided indentation level. This means that this class is useful for generating hierarchies of HTML. Elements are positioned on new lines.
  */
-- (NSString*)htmlWithIndentation:(NSInteger)indentationLevel;
+- (NSString*)htmlWithIndentation:(NSUInteger)indentationLevel;
 
 //Usage:
 //#stuffwiththisid .orthisclass orthistag
@@ -89,7 +89,7 @@
  @param shouldUseNode A block which should return YES if the node should be included in the filtered results
  @return An array of child nodes of this node that have been filtered into the output
  */
-- (NSArray*)selectWithBlock:(BOOL(^)(OGNode*))shouldUseNode;
+- (NSArray*)selectWithFilter:(BOOL(^)(OGNode*))shouldUseNodeFilter;
 
 /**
  Applies the jQuery style selection in the standard select method to only return the first element that matches the criteria

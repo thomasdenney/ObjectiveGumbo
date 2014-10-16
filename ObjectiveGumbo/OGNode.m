@@ -37,7 +37,7 @@
     return [self htmlWithIndentation:0];
 }
 
-- (NSString*)htmlWithIndentation:(NSInteger)indentationLevel {
+- (NSString*)htmlWithIndentation:(NSUInteger)indentationLevel {
     //This method is implemented by subclasses
     return @"";
 }
@@ -61,7 +61,7 @@
     return allMatchingObjects.allObjects;
 }
 
-- (NSArray*)selectWithBlock:(BOOL(^)(OGNode*))block {
+- (NSArray*)selectWithFilter:(BOOL (^)(OGNode *))shouldUseNodeFilter {
     return [NSArray new];
 }
 

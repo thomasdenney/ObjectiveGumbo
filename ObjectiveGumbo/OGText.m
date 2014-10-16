@@ -47,7 +47,7 @@
     }
 }
 
-- (NSString*)htmlWithIndentation:(int)indentationLevel {
+- (NSString*)htmlWithIndentation:(NSUInteger)indentationLevel {
     _text = [_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.isText) {
         if ([_text hasSuffix:@"\n"]) {
