@@ -15,61 +15,51 @@
 // limitations under the License.
 
 #import "OGElement.h"
+#import "_OGMutableElement.h"
+#import "gumbo.h"
 
 @implementation OGElement
 
--(NSString*)text
-{
+- (NSString*)text {
     NSMutableString * text = [NSMutableString new];
-    for (OGNode * child in self.children)
-    {
+    for (OGNode * child in self.children) {
         [text appendString:[child text]];
     }
     return text;
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
-{
-    NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
-    for (NSString * attribute in self.attributes)
-    {
-        [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
+- (NSString*)htmlWithIndentation:(NSUInteger)indentationLevel {
+    NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGTypes tagForGumboTag:self.tag]];
+    for (NSString * attribute in self.attributes) {
+        [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  og_escapedString]];
     }
-    if (self.children.count == 0)
-    {
+    if (self.children.count == 0) {
         [html appendString:@" />\n"];
     }
-    else
-    {
+    else {
         [html appendString:@">\n"];
-        for (OGNode * child in self.children)
-        {
+        for (OGNode * child in self.children) {
             [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
         }
-        [html appendFormat:@"</%@>\n", [OGUtility tagForGumboTag:self.tag]];
+        [html appendFormat:@"</%@>\n", [OGTypes tagForGumboTag:self.tag]];
     }
     return html;
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
-{
+- (NSArray*)selectWithFilter:(BOOL (^)(OGNode *))shouldUseNodeFilter {
     NSMutableArray * matchingChildren = [NSMutableArray new];
-    for (OGNode * child in self.children)
-    {
-        if (block(child))
-        {
+    for (OGNode * child in self.children) {
+        if (shouldUseNodeFilter(child)) {
             [matchingChildren addObject:child];
         }
-        [matchingChildren addObjectsFromArray:[child selectWithBlock:block]];
+        [matchingChildren addObjectsFromArray:[child selectWithFilter:shouldUseNodeFilter]];
     }
     return matchingChildren;
 }
 
--(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
+- (NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value {
+    return [self selectWithFilter:^BOOL(OGNode * node) {
+        if ([node isKindOfClass:[OGElement class]]) {
             OGElement * element = (OGElement*)node;
             return [element.attributes[attribute] isEqualToString:value];
         }
@@ -77,16 +67,12 @@
     }];
 }
 
--(NSArray*)elementsWithClass:(NSString*)class
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
+- (NSArray*)elementsWithClass:(NSString*)class {
+    return [self selectWithFilter:^BOOL(OGNode * node) {
+        if ([node isKindOfClass:[OGElement class]]) {
             OGElement * element = (OGElement*)node;
-            for (NSString * classes in element.classes)
-            {
-                if ([classes isEqualToString:class])
-                {
+            for (NSString * classes in element.classes) {
+                if ([classes isEqualToString:class]) {
                     return YES;
                 }
             }
@@ -95,9 +81,8 @@
     }];
 }
 
--(NSArray*)elementsWithID:(NSString *)elementId
-{
-    return [self selectWithBlock:^BOOL(id node) {
+- (NSArray*)elementsWithID:(NSString *)elementId {
+    return [self selectWithFilter:^BOOL(OGNode * node) {
         if ([node isKindOfClass:[OGElement class]]) {
             OGElement * element = (OGElement*)node;
             return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
@@ -106,16 +91,38 @@
     }];
 }
 
--(NSArray*)elementsWithTag:(GumboTag)tag
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
+- (NSArray*)elementsWithTag:(OGTag)tag {
+    return [self selectWithFilter:^BOOL(OGNode * node) {
+        if ([node isKindOfClass:[OGElement class]]) {
             OGElement * element = (OGElement*)node;
             return element.tag == tag;
         }
         return NO;
     }];
+}
+
+@end
+
+@implementation OGElement (Mutable)
+
+- (void)setTag:(OGTag)tag {
+    _tag = tag;
+}
+
+- (void)setTagNamespace:(OGNamespace)tagNamespace {
+    _tagNamespace = tagNamespace;
+}
+
+- (void)setChildren:(NSArray*)children {
+    _children = children;
+}
+
+- (void)setClasses:(NSArray*)classes {
+    _classes = classes;
+}
+
+- (void)setAttributes:(NSDictionary*)attributes {
+    _attributes = attributes;
 }
 
 @end

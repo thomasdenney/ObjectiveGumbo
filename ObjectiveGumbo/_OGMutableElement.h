@@ -1,4 +1,4 @@
-// OGElement.h
+// _OGMutableElement
 //
 // Copyright 2014 Programming Thomas
 //
@@ -14,21 +14,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "OGNode.h"
-#import "OGTypes.h"
+#import "OGElement.h"
 
 /**
- OGElement instances represent HTML tags, which can contain child elements or text nodes.
+ Allows for mutating an OGElement.
+ @note This is a private extension used within the Objective Gumbo framework and it should not be used publically
  */
-@interface OGElement : OGNode
+@interface OGElement (Mutable)
 
-@property (readonly) OGTag tag;
-@property (readonly) OGNamespace tagNamespace;
-
-@property (readonly) NSArray * children;
-@property (readonly) NSArray * classes;
-@property (readonly) NSDictionary * attributes;
-
-- (NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value;
+- (void)setTag:(OGTag)tag;
+- (void)setTagNamespace:(OGNamespace)tagNamespace;
+- (void)setChildren:(NSArray*)children;
+- (void)setClasses:(NSArray*)classes;
+- (void)setAttributes:(NSDictionary*)attributes;
 
 @end
