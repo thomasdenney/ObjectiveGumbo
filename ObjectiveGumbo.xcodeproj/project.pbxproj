@@ -46,6 +46,44 @@
 		E9D81EF119F00FC30012D908 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE419F00FC30012D908 /* OGText.m */; };
 		E9D81EF219F00FC30012D908 /* OGUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE519F00FC30012D908 /* OGUtility.h */; };
 		E9D81EF319F00FC30012D908 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE619F00FC30012D908 /* OGUtility.m */; };
+		E9D81F0F19F0130A0012D908 /* NSString+OGString.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDB19F00FC30012D908 /* NSString+OGString.m */; };
+		E9D81F1019F0130A0012D908 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */; };
+		E9D81F1119F0130A0012D908 /* OGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDE19F00FC30012D908 /* OGDocument.m */; };
+		E9D81F1219F0130A0012D908 /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE019F00FC30012D908 /* OGElement.m */; };
+		E9D81F1319F0130A0012D908 /* OGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE219F00FC30012D908 /* OGNode.m */; };
+		E9D81F1419F0130A0012D908 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE419F00FC30012D908 /* OGText.m */; };
+		E9D81F1519F0130A0012D908 /* OGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE619F00FC30012D908 /* OGUtility.m */; };
+		E9D81F1619F0130A0012D908 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA619F00F560012D908 /* attribute.c */; };
+		E9D81F1719F0130A0012D908 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA819F00F560012D908 /* char_ref.c */; };
+		E9D81F1819F0130A0012D908 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAB19F00F560012D908 /* error.c */; };
+		E9D81F1919F0130A0012D908 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAF19F00F560012D908 /* parser.c */; };
+		E9D81F1A19F0130A0012D908 /* string_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB119F00F560012D908 /* string_buffer.c */; };
+		E9D81F1B19F0130A0012D908 /* string_piece.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB319F00F560012D908 /* string_piece.c */; };
+		E9D81F1C19F0130A0012D908 /* tag.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB519F00F560012D908 /* tag.c */; };
+		E9D81F1D19F0130A0012D908 /* tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB719F00F560012D908 /* tokenizer.c */; };
+		E9D81F1E19F0130A0012D908 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBA19F00F560012D908 /* utf8.c */; };
+		E9D81F1F19F0130A0012D908 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBC19F00F560012D908 /* util.c */; };
+		E9D81F2019F0130A0012D908 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBE19F00F560012D908 /* vector.c */; };
+		E9D81F2119F013210012D908 /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA719F00F560012D908 /* attribute.h */; };
+		E9D81F2219F013220012D908 /* char_ref.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA919F00F560012D908 /* char_ref.h */; };
+		E9D81F2319F013220012D908 /* gumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAD19F00F560012D908 /* gumbo.h */; };
+		E9D81F2419F013220012D908 /* insertion_mode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAE19F00F560012D908 /* insertion_mode.h */; };
+		E9D81F2519F013220012D908 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB019F00F560012D908 /* parser.h */; };
+		E9D81F2619F013220012D908 /* string_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB219F00F560012D908 /* string_buffer.h */; };
+		E9D81F2719F013220012D908 /* string_piece.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB419F00F560012D908 /* string_piece.h */; };
+		E9D81F2819F013220012D908 /* token_type.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB619F00F560012D908 /* token_type.h */; };
+		E9D81F2919F013220012D908 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB819F00F560012D908 /* tokenizer.h */; };
+		E9D81F2A19F013220012D908 /* tokenizer_states.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB919F00F560012D908 /* tokenizer_states.h */; };
+		E9D81F2B19F013220012D908 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBB19F00F560012D908 /* utf8.h */; };
+		E9D81F2C19F013220012D908 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBD19F00F560012D908 /* util.h */; };
+		E9D81F2D19F013220012D908 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBF19F00F560012D908 /* vector.h */; };
+		E9D81F2E19F0132E0012D908 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F2F19F0132E0012D908 /* NSString+OGString.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDA19F00FC30012D908 /* NSString+OGString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F3019F0132E0012D908 /* OGDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDD19F00FC30012D908 /* OGDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F3119F0132E0012D908 /* OGElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDF19F00FC30012D908 /* OGElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F3219F0132E0012D908 /* OGNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE119F00FC30012D908 /* OGNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F3319F0132E0012D908 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE319F00FC30012D908 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9D81F3419F0132E0012D908 /* OGUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE519F00FC30012D908 /* OGUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,10 +128,18 @@
 		E9D81EE419F00FC30012D908 /* OGText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGText.m; sourceTree = "<group>"; };
 		E9D81EE519F00FC30012D908 /* OGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGUtility.h; sourceTree = "<group>"; };
 		E9D81EE619F00FC30012D908 /* OGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGUtility.m; sourceTree = "<group>"; };
+		E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E9D81E8819F00E520012D908 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9D81EF519F012B80012D908 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */,
+				E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,6 +169,7 @@
 		E9D81E8E19F00E520012D908 /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
+				E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */,
 				E9D81EDA19F00FC30012D908 /* NSString+OGString.h */,
 				E9D81EDB19F00FC30012D908 /* NSString+OGString.m */,
 				E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */,
@@ -136,7 +184,6 @@
 				E9D81EE519F00FC30012D908 /* OGUtility.h */,
 				E9D81EE619F00FC30012D908 /* OGUtility.m */,
 				E9D81EA519F00F560012D908 /* Gumbo */,
-				E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */,
 				E9D81E8F19F00E520012D908 /* Supporting Files */,
 			);
 			path = ObjectiveGumbo;
@@ -214,6 +261,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E9D81EF619F012B80012D908 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9D81F2E19F0132E0012D908 /* ObjectiveGumbo.h in Headers */,
+				E9D81F2F19F0132E0012D908 /* NSString+OGString.h in Headers */,
+				E9D81F3019F0132E0012D908 /* OGDocument.h in Headers */,
+				E9D81F3119F0132E0012D908 /* OGElement.h in Headers */,
+				E9D81F3219F0132E0012D908 /* OGNode.h in Headers */,
+				E9D81F3319F0132E0012D908 /* OGText.h in Headers */,
+				E9D81F3419F0132E0012D908 /* OGUtility.h in Headers */,
+				E9D81F2119F013210012D908 /* attribute.h in Headers */,
+				E9D81F2219F013220012D908 /* char_ref.h in Headers */,
+				E9D81F2319F013220012D908 /* gumbo.h in Headers */,
+				E9D81F2419F013220012D908 /* insertion_mode.h in Headers */,
+				E9D81F2519F013220012D908 /* parser.h in Headers */,
+				E9D81F2619F013220012D908 /* string_buffer.h in Headers */,
+				E9D81F2719F013220012D908 /* string_piece.h in Headers */,
+				E9D81F2819F013220012D908 /* token_type.h in Headers */,
+				E9D81F2919F013220012D908 /* tokenizer.h in Headers */,
+				E9D81F2A19F013220012D908 /* tokenizer_states.h in Headers */,
+				E9D81F2B19F013220012D908 /* utf8.h in Headers */,
+				E9D81F2C19F013220012D908 /* util.h in Headers */,
+				E9D81F2D19F013220012D908 /* vector.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -235,6 +309,24 @@
 			productReference = E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		E9D81EF819F012B80012D908 /* ObjectiveGumboiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9D81F0919F012B80012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboiOS" */;
+			buildPhases = (
+				E9D81EF419F012B80012D908 /* Sources */,
+				E9D81EF519F012B80012D908 /* Frameworks */,
+				E9D81EF619F012B80012D908 /* Headers */,
+				E9D81EF719F012B80012D908 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjectiveGumboiOS;
+			productName = ObjectiveGumboiOS;
+			productReference = E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -245,6 +337,9 @@
 				ORGANIZATIONNAME = "Programming Thomas";
 				TargetAttributes = {
 					E9D81E8B19F00E520012D908 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					E9D81EF819F012B80012D908 = {
 						CreatedOnToolsVersion = 6.0;
 					};
 				};
@@ -262,12 +357,20 @@
 			projectRoot = "";
 			targets = (
 				E9D81E8B19F00E520012D908 /* ObjectiveGumbo */,
+				E9D81EF819F012B80012D908 /* ObjectiveGumboiOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E9D81E8A19F00E520012D908 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9D81EF719F012B80012D908 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -299,6 +402,31 @@
 				E9D81EC219F00F560012D908 /* char_ref.c in Sources */,
 				E9D81ED119F00F560012D908 /* tokenizer.c in Sources */,
 				E9D81EEF19F00FC30012D908 /* OGNode.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9D81EF419F012B80012D908 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9D81F0F19F0130A0012D908 /* NSString+OGString.m in Sources */,
+				E9D81F1019F0130A0012D908 /* ObjectiveGumbo.m in Sources */,
+				E9D81F1119F0130A0012D908 /* OGDocument.m in Sources */,
+				E9D81F1219F0130A0012D908 /* OGElement.m in Sources */,
+				E9D81F1319F0130A0012D908 /* OGNode.m in Sources */,
+				E9D81F1419F0130A0012D908 /* OGText.m in Sources */,
+				E9D81F1519F0130A0012D908 /* OGUtility.m in Sources */,
+				E9D81F1619F0130A0012D908 /* attribute.c in Sources */,
+				E9D81F1719F0130A0012D908 /* char_ref.c in Sources */,
+				E9D81F1819F0130A0012D908 /* error.c in Sources */,
+				E9D81F1919F0130A0012D908 /* parser.c in Sources */,
+				E9D81F1A19F0130A0012D908 /* string_buffer.c in Sources */,
+				E9D81F1B19F0130A0012D908 /* string_piece.c in Sources */,
+				E9D81F1C19F0130A0012D908 /* tag.c in Sources */,
+				E9D81F1D19F0130A0012D908 /* tokenizer.c in Sources */,
+				E9D81F1E19F0130A0012D908 /* utf8.c in Sources */,
+				E9D81F1F19F0130A0012D908 /* util.c in Sources */,
+				E9D81F2019F0130A0012D908 /* vector.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +549,49 @@
 			};
 			name = Release;
 		};
+		E9D81F0A19F012B80012D908 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ObjectiveGumboiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ObjectiveGumbo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E9D81F0B19F012B80012D908 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ObjectiveGumboiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = ObjectiveGumbo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -441,6 +612,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E9D81F0919F012B80012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9D81F0A19F012B80012D908 /* Debug */,
+				E9D81F0B19F012B80012D908 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
