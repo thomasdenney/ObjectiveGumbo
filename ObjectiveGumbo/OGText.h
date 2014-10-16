@@ -30,11 +30,12 @@
 
 /**
  Initializes a text node with the given text type
+ @param parent The parent node that this node is a child of
  @param text The text content of the node
  @param type The node type. Must by OGNodeTypeText, OGNodeTypeComment, OGNodeTypeWhitespace or OGNodeTypeCData
  @return A text object
  @note The text will not be set unless the type is a valid text type as described above
  */
-- (instancetype)initWithText:(NSString*)text type:(OGNodeType)type;
+- (instancetype)initWithParent:(OGNode*)parent text:(NSString*)text type:(OGNodeType)type;
 
 @end
