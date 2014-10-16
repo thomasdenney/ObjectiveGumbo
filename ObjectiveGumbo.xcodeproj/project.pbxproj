@@ -86,6 +86,8 @@
 		E9D81F4C19F01CF80012D908 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9D81F4F19F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
 		E9D81F5019F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
+		E9D81F5519F03DD80012D908 /* _OGMutableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F5419F03DD80012D908 /* _OGMutableNode.h */; };
+		E9D81F5619F03DD80012D908 /* _OGMutableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F5419F03DD80012D908 /* _OGMutableNode.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +134,7 @@
 		E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D81F4A19F01CF80012D908 /* OGTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGTypes.h; sourceTree = "<group>"; };
 		E9D81F4D19F038550012D908 /* _OGMutableElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OGMutableElement.h; sourceTree = "<group>"; };
+		E9D81F5419F03DD80012D908 /* _OGMutableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OGMutableNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				E9D81F4D19F038550012D908 /* _OGMutableElement.h */,
+				E9D81F5419F03DD80012D908 /* _OGMutableNode.h */,
 			);
 			name = "Private class extensions";
 			sourceTree = "<group>";
@@ -261,6 +265,7 @@
 				E9D81EF019F00FC30012D908 /* OGText.h in Headers */,
 				E9D81EC119F00F560012D908 /* attribute.h in Headers */,
 				E9D81EE719F00FC30012D908 /* NSString+OG.h in Headers */,
+				E9D81F5519F03DD80012D908 /* _OGMutableNode.h in Headers */,
 				E9D81ECA19F00F560012D908 /* parser.h in Headers */,
 				E9D81EEA19F00FC30012D908 /* OGDocument.h in Headers */,
 				E9D81ECC19F00F560012D908 /* string_buffer.h in Headers */,
@@ -289,6 +294,7 @@
 				E9D81F2219F013220012D908 /* char_ref.h in Headers */,
 				E9D81F2319F013220012D908 /* gumbo.h in Headers */,
 				E9D81F2419F013220012D908 /* insertion_mode.h in Headers */,
+				E9D81F5619F03DD80012D908 /* _OGMutableNode.h in Headers */,
 				E9D81F2519F013220012D908 /* parser.h in Headers */,
 				E9D81F2619F013220012D908 /* string_buffer.h in Headers */,
 				E9D81F2719F013220012D908 /* string_piece.h in Headers */,

@@ -24,8 +24,8 @@
 
 @implementation OGText
 
-- (instancetype)initWithParent:(OGNode *)parent text:(NSString *)text type:(OGNodeType)type {
-    self = [super initWithParent:parent];
+- (instancetype)initWithText:(NSString *)text type:(OGNodeType)type {
+    self = [super init];
     if (self) {
         _isText = type == OGNodeTypeText;
         _isWhitespace = type == OGNodeTypeWhitespace;

@@ -1,4 +1,4 @@
-// OGDocument.h
+// _OGMutableNode.h
 //
 // Copyright 2014 Programming Thomas
 //
@@ -14,19 +14,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import "OGDocument.h"
+#import "OGNode.h"
 
-@implementation OGDocument
+/**
+ Allows for mutating an OGNode.
+ @note This is a private extension used within the Objective Gumbo framework and it should not be used publically
+ */
+@interface OGNode (Mutable)
 
-- (instancetype)initWithName:(NSString *)name publicID:(NSString *)publicID systemID:(NSString *)systemID {
-    //Documents do not have parent nodes
-    self = [super init];
-    if (self) {
-        _name = name;
-        _publicIdentifier = publicID;
-        _systemIdentifier = systemID;
-    }
-    return self;
-}
+- (void)setParent:(OGNode*)parent;
 
 @end

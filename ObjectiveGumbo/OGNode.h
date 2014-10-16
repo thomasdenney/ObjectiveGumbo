@@ -26,15 +26,6 @@
  */
 @interface OGNode : NSObject
 
-///--------------------
-///@name Initialization
-///--------------------
-
-/**
- Initializes a new instance of a node and sets its parent property
-*/
-- (instancetype)initWithParent:(OGNode*)parent;
-
 ///---------------
 ///@name Hierarchy
 ///---------------

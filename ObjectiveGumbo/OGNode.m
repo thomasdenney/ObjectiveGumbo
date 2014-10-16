@@ -15,18 +15,11 @@
 // limitations under the License.
 
 #import "OGNode.h"
+#import "_OGMutableElement.h"
 
 @implementation OGNode
 
 #pragma mark - Initialization
-
-- (instancetype)initWithParent:(OGNode *)parent {
-    self = [super init];
-    if (self) {
-        _parent = parent;
-    }
-    return self;
-}
 
 - (NSString*)text {
     //This method is implemented by subclasses
@@ -84,6 +77,14 @@
 
 - (NSArray*)elementsWithTag:(OGTag)tag {
     return [NSArray new];
+}
+
+@end
+
+@implementation OGNode (Mutable)
+
+- (void)setParent:(OGNode*)parent {
+    _parent = parent;
 }
 
 @end
