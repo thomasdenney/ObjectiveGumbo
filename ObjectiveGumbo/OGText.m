@@ -27,10 +27,10 @@
 - (instancetype)initWithText:(NSString *)text type:(OGNodeType)type {
     self = [super init];
     if (self) {
-        _isText = type == GUMBO_NODE_TEXT;
-        _isWhitespace = type == GUMBO_NODE_WHITESPACE;
-        _isComment = type == GUMBO_NODE_COMMENT;
-        _isCData = type == GUMBO_NODE_CDATA;
+        _isText = type == OGNodeTypeText;
+        _isWhitespace = type == OGNodeTypeWhitespace;
+        _isComment = type == OGNodeTypeComment;
+        _isCData = type == OGNodeTypeCData;
         NSAssert(_isText || _isWhitespace || _isComment || _isCData, @"Attempt to instantiate a text node with a non-text node type");
         _text = text;
     }
