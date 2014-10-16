@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>91A4C9B9-7979-4010-AF5E-B0104D54AFC3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ObjectiveGumbo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>2F312F938608360F2FD672790CC629062853806D</key>
+		<string>git://github.com/google/gumbo-parser.git</string>
+		<key>C0860435B6D2FA73F75D3DA0D3365DBD9DE3ED12</key>
+		<string>https://github.com/programmingthomas/ObjectiveGumbo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ObjectiveGumbo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>2F312F938608360F2FD672790CC629062853806D</key>
+		<string>../..Gumbo/</string>
+		<key>C0860435B6D2FA73F75D3DA0D3365DBD9DE3ED12</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/programmingthomas/ObjectiveGumbo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C0860435B6D2FA73F75D3DA0D3365DBD9DE3ED12</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>2F312F938608360F2FD672790CC629062853806D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Gumbo</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C0860435B6D2FA73F75D3DA0D3365DBD9DE3ED12</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ObjectiveGumbo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

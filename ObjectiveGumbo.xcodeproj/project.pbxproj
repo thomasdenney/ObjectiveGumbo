@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E9D81E9219F00E520012D908 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81E9C19F00E520012D908 /* ObjectiveGumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81E9B19F00E520012D908 /* ObjectiveGumboTests.m */; };
 		E9D81EC019F00F560012D908 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA619F00F560012D908 /* attribute.c */; };
 		E9D81EC119F00F560012D908 /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA719F00F560012D908 /* attribute.h */; };
 		E9D81EC219F00F560012D908 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA819F00F560012D908 /* char_ref.c */; };
@@ -53,9 +52,6 @@
 		E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D81E9019F00E520012D908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveGumbo.h; sourceTree = "<group>"; };
-		E9D81E9719F00E520012D908 /* ObjectiveGumboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectiveGumboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9D81E9A19F00E520012D908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9D81E9B19F00E520012D908 /* ObjectiveGumboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveGumboTests.m; sourceTree = "<group>"; };
 		E9D81EA619F00F560012D908 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		E9D81EA719F00F560012D908 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
 		E9D81EA819F00F560012D908 /* char_ref.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = char_ref.c; sourceTree = "<group>"; };
@@ -104,13 +100,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E9D81E9419F00E520012D908 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -118,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				E9D81E8E19F00E520012D908 /* ObjectiveGumbo */,
-				E9D81E9819F00E520012D908 /* ObjectiveGumboTests */,
 				E9D81E8D19F00E520012D908 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */,
-				E9D81E9719F00E520012D908 /* ObjectiveGumboTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,23 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				E9D81E9019F00E520012D908 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E9D81E9819F00E520012D908 /* ObjectiveGumboTests */ = {
-			isa = PBXGroup;
-			children = (
-				E9D81E9B19F00E520012D908 /* ObjectiveGumboTests.m */,
-				E9D81E9919F00E520012D908 /* Supporting Files */,
-			);
-			path = ObjectiveGumboTests;
-			sourceTree = "<group>";
-		};
-		E9D81E9919F00E520012D908 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E9D81E9A19F00E520012D908 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -265,23 +235,6 @@
 			productReference = E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E9D81E9619F00E520012D908 /* ObjectiveGumboTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E9D81EA219F00E520012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboTests" */;
-			buildPhases = (
-				E9D81E9319F00E520012D908 /* Sources */,
-				E9D81E9419F00E520012D908 /* Frameworks */,
-				E9D81E9519F00E520012D908 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ObjectiveGumboTests;
-			productName = ObjectiveGumboTests;
-			productReference = E9D81E9719F00E520012D908 /* ObjectiveGumboTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -292,9 +245,6 @@
 				ORGANIZATIONNAME = "Programming Thomas";
 				TargetAttributes = {
 					E9D81E8B19F00E520012D908 = {
-						CreatedOnToolsVersion = 6.0;
-					};
-					E9D81E9619F00E520012D908 = {
 						CreatedOnToolsVersion = 6.0;
 					};
 				};
@@ -312,20 +262,12 @@
 			projectRoot = "";
 			targets = (
 				E9D81E8B19F00E520012D908 /* ObjectiveGumbo */,
-				E9D81E9619F00E520012D908 /* ObjectiveGumboTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E9D81E8A19F00E520012D908 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81E9519F00E520012D908 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -357,14 +299,6 @@
 				E9D81EC219F00F560012D908 /* char_ref.c in Sources */,
 				E9D81ED119F00F560012D908 /* tokenizer.c in Sources */,
 				E9D81EEF19F00FC30012D908 /* OGNode.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81E9319F00E520012D908 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E9D81E9C19F00E520012D908 /* ObjectiveGumboTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,38 +421,6 @@
 			};
 			name = Release;
 		};
-		E9D81EA319F00E520012D908 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ObjectiveGumboTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E9D81EA419F00E520012D908 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ObjectiveGumboTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -536,15 +438,6 @@
 			buildConfigurations = (
 				E9D81EA019F00E520012D908 /* Debug */,
 				E9D81EA119F00E520012D908 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E9D81EA219F00E520012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E9D81EA319F00E520012D908 /* Debug */,
-				E9D81EA419F00E520012D908 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
