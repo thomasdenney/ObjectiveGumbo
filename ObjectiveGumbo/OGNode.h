@@ -64,7 +64,8 @@
 ///------------------------
 
 /**
- jQuery style selection for nodes
+ jQuery style selection for nodes. You can use multiple selectors at once for OR style matching (e.g. p .grey finds all paragraph tags or all tags with the 'grey' class applied).
+ TODO: Support AND requirements. The DSL will get more complex...
  @param selector A string that you can use to find children of a specific type:
   - #someIdentifier: Find children with a given ID (if it is valid HTML this array will only contain one element
   - .someClass: Find children with a given class

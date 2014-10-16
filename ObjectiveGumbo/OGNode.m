@@ -18,75 +18,61 @@
 
 @implementation OGNode
 
--(NSString*)text
-{
+- (NSString*)text {
+    //This method is implemented by subclasses
     return @"";
 }
 
--(NSString*)html
-{
+- (NSString*)html {
     return [self htmlWithIndentation:0];
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
-{
+- (NSString*)htmlWithIndentation:(NSInteger)indentationLevel {
+    //This method is implemented by subclasses
     return @"";
 }
 
--(NSArray*)select:(NSString *)selector
-{
+- (NSArray*)select:(NSString *)selector {
     NSArray * selectors = [selector componentsSeparatedByString:@" "];
-    NSMutableArray * allMatchingObjects = [NSMutableArray new];
-    for (NSString * individualSelector in selectors)
-    {
-        if ([individualSelector hasPrefix:@"#"])
-        {
+    //By using a set you ensure that the same tag is not added more than once
+    NSMutableSet * allMatchingObjects = [NSMutableSet new];
+    for (NSString * individualSelector in selectors) {
+        if ([individualSelector hasPrefix:@"#"]) {
             [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
         }
-        else if ([individualSelector hasPrefix:@"."])
-        {
+        else if ([individualSelector hasPrefix:@"."]) {
             [allMatchingObjects addObjectsFromArray:[self elementsWithClass:[individualSelector substringFromIndex:1]]];
         }
-        else
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGUtility gumboTagForTag:individualSelector]]];
+        else {
+            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGTypes gumboTagForTag:individualSelector]]];
         }
     }
     
-    //Remove duplicates
-    NSOrderedSet * set = [[NSOrderedSet alloc] initWithArray:allMatchingObjects];
-    allMatchingObjects = [[NSMutableArray alloc] initWithArray:[set array]];
-    
-    return allMatchingObjects;
+    return allMatchingObjects.allObjects;
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
-{
+- (NSArray*)selectWithBlock:(BOOL(^)(OGNode*))block {
     return [NSArray new];
 }
 
--(OGNode*)first:(NSString *)selector
-{
+- (OGNode*)first:(NSString *)selector {
+    //TODO: This completes in O(n) time when it could complete in O(1). Fix that
     return [[self select:selector] firstObject];
 }
 
--(OGNode*)last:(NSString *)selector
-{
+- (OGNode*)last:(NSString *)selector {
     return [[self select:selector] lastObject];
 }
 
--(NSArray*)elementsWithClass:(NSString*)class
-{
+- (NSArray*)elementsWithClass:(NSString*)class {
     return [NSArray new];
 }
 
--(NSArray*)elementsWithID:(NSString *)id
-{
+- (NSArray*)elementsWithID:(NSString *)id {
     return [NSArray new];
 }
 
--(NSArray*)elementsWithTag:(GumboTag)tag
-{
+- (NSArray*)elementsWithTag:(OGTag)tag {
     return [NSArray new];
 }
 
