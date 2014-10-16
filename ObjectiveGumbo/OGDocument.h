@@ -16,10 +16,15 @@
 
 #import "OGElement.h"
 
+/**
+ OGDocument instances are elements that represent the whole HTML document, including the DOCTYPE
+ */
 @interface OGDocument : OGElement
 
-@property NSString * name;
-@property NSString * publicIdentifier;
-@property NSString * systemIdentifier;
+@property (readonly) NSString * name;
+@property (readonly) NSString * publicIdentifier;
+@property (readonly) NSString * systemIdentifier;
+
+- (instancetype)initWithName:(NSString*)name publicID:(NSString*)publicID systemID:(NSString*)systemID;
 
 @end

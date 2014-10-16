@@ -18,14 +18,12 @@
 
 @implementation OGDocument
 
--(id)init
-{
+- (instancetype)initWithName:(NSString *)name publicID:(NSString *)publicID systemID:(NSString *)systemID {
     self = [super init];
-    if (self)
-    {
-        self.publicIdentifier = @"";
-        self.systemIdentifier = @"";
-        self.name = @"";
+    if (self) {
+        _name = name;
+        _publicIdentifier = publicID;
+        _systemIdentifier = systemID;
     }
     return self;
 }
