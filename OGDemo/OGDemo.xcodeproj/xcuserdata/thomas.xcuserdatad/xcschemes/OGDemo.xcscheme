@@ -9,15 +9,15 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9D81E9619F00E520012D908"
-               BuildableName = "ObjectiveGumboTests.xctest"
-               BlueprintName = "ObjectiveGumboTests"
-               ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+               BlueprintIdentifier = "E9D81F3D19F016670012D908"
+               BuildableName = "OGDemo"
+               BlueprintName = "OGDemo"
+               ReferencedContainer = "container:OGDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9D81E9619F00E520012D908"
-               BuildableName = "ObjectiveGumboTests.xctest"
-               BlueprintName = "ObjectiveGumboTests"
-               ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9D81E9619F00E520012D908"
-            BuildableName = "ObjectiveGumboTests.xctest"
-            BlueprintName = "ObjectiveGumboTests"
-            ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+            BlueprintIdentifier = "E9D81F3D19F016670012D908"
+            BuildableName = "OGDemo"
+            BlueprintName = "OGDemo"
+            ReferencedContainer = "container:OGDemo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -58,15 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9D81E9619F00E520012D908"
-            BuildableName = "ObjectiveGumboTests.xctest"
-            BlueprintName = "ObjectiveGumboTests"
-            ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+            BlueprintIdentifier = "E9D81F3D19F016670012D908"
+            BuildableName = "OGDemo"
+            BlueprintName = "OGDemo"
+            ReferencedContainer = "container:OGDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -76,15 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9D81E9619F00E520012D908"
-            BuildableName = "ObjectiveGumboTests.xctest"
-            BlueprintName = "ObjectiveGumboTests"
-            ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+            BlueprintIdentifier = "E9D81F3D19F016670012D908"
+            BuildableName = "OGDemo"
+            BlueprintName = "OGDemo"
+            ReferencedContainer = "container:OGDemo.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
