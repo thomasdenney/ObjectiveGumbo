@@ -19,7 +19,11 @@ Objective Gumbo is a set of classes that make it easier to interact with [Gumbo]
 
 Objective Gumbo can be used to parse HTML from both Objective-C and Swift. It supports a jQuery style API for querying the DOM.
 
-##Understanding the classes
+##Code style
+
+Objective Gumbo is written according to the [New York Times style guide](https://github.com/NYTimes/objective-c-style-guide) and validated with [Knyt](https://github.com/programmingthomas/knyt).
+
+##Class heirarchy
 
 ###ObjectiveGumbo
 
