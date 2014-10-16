@@ -137,9 +137,13 @@
     
     for (unsigned int i = 0; i < cChildren->length; i++) {
         OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
-        childNode.parent = parent;
-        [children addObject:childNode];
+        if (childNode) {
+            childNode.parent = parent;
+            [children addObject:childNode];
+        }
     }
+    
+    NSAssert(cChildren->length == children.count, @"Failed to parse children of node");
     
     return children;
 }
