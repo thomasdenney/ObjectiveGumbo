@@ -33,14 +33,13 @@
 }
 
 + (OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc {
+    //TODO: Remove this method once deprecation is complete
     NSError * error;
     NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
-    if (error == nil) {
+    if (!error) {
         return [ObjectiveGumbo parseDocumentWithString:string];
     }
-    else {
-        return nil;
-    }
+    return nil;
 }
 
 + (OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc {
@@ -88,7 +87,7 @@
         
         GumboVector * cAttributes = &gumboNode->v.element.attributes;
         
-        for (int i = 0; i < cAttributes->length; i++) {
+        for (unsigned int i = 0; i < cAttributes->length; i++) {
             GumboAttribute * cAttribute = (GumboAttribute*)cAttributes->data[i];
             
             const char * cName = cAttribute->name;
