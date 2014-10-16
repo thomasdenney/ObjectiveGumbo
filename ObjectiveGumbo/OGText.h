@@ -15,17 +15,26 @@
 // limitations under the License.
 
 #import "OGNode.h"
+#import "OGTypes.h"
 
+/**
+ Represents a raw text node in the DOM. Raw text nodes are not surrounded by HTML tags. To get the raw text call the -(NSString*)text (a method defined by OGNode)
+ @see OGNode
+ */
 @interface OGText : OGNode
-{
-    NSString * _text;
-}
 
-@property BOOL isComment;
-@property BOOL isCData;
-@property BOOL isWhitespace;
-@property BOOL isText;
+@property (readonly) BOOL isComment;
+@property (readonly) BOOL isCData;
+@property (readonly) BOOL isWhitespace;
+@property (readonly) BOOL isText;
 
--(id)initWithText:(NSString*)text andType:(GumboNodeType)type;
+/**
+ Initializes a text node with the given text type
+ @param text The text content of the node
+ @param type The node type. Must by OGNodeTypeText, OGNodeTypeComment, OGNodeTypeWhitespace or OGNodeTypeCData
+ @return A text object
+ @note The text will not be set unless the type is a valid text type as described above
+ */
+- (instancetype)initWithText:(NSString*)text type:(OGNodeType)type;
 
 @end

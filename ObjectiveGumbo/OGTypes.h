@@ -201,6 +201,15 @@ typedef NS_ENUM(NSUInteger, OGNamespace) {
     OGNameSpaceMATHML
 };
 
+typedef NS_ENUM(NSUInteger, OGNodeType) {
+    OGNodeTypeDocument,
+    OGNodeTypeElement,
+    OGNodeTypeText,
+    OGNodeTypeCData,
+    OGNodeTypeComment,
+    OGNodeTypeWhitespace
+};
+
 /**
  Utility interface for converting between strings and Objective Gumbo tag types.
  @note I will add support directly to a Swift enum in the future.

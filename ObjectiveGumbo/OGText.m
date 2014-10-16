@@ -16,47 +16,50 @@
 
 #import "OGText.h"
 
+@interface OGText () {
+    NSString * _text;
+}
+
+@end
+
 @implementation OGText
 
--(id)initWithText:(NSString *)text andType:(GumboNodeType)type
-{
+- (instancetype)initWithText:(NSString *)text type:(OGNodeType)type {
     self = [super init];
-    if (self)
-    {
+    if (self) {
+        _isText = type == GUMBO_NODE_TEXT;
+        _isWhitespace = type == GUMBO_NODE_WHITESPACE;
+        _isComment = type == GUMBO_NODE_COMMENT;
+        _isCData = type == GUMBO_NODE_CDATA;
+        NSAssert(_isText || _isWhitespace || _isComment || _isCData, @"Attempt to instantiate a text node with a non-text node type");
         _text = text;
-        self.isText = type == GUMBO_NODE_TEXT;
-        self.isWhitespace = type == GUMBO_NODE_WHITESPACE;
-        self.isComment = type == GUMBO_NODE_COMMENT;
-        self.isCData = type == GUMBO_NODE_CDATA;
     }
     return self;
 }
 
--(NSString*)text
-{
-    if (self.isText)
-    {
+- (NSString*)text {
+    //TODO: Support returning the actual text of a comment or whitespace...
+    if (self.isText) {
         return _text;
     }
-    else
-    {
+    else {
         return @"";
     }
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
-{
+- (NSString*)htmlWithIndentation:(int)indentationLevel {
     _text = [_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (self.isText)
-    {
-        if ([_text hasSuffix:@"\n"]) return _text;
+    if (self.isText) {
+        if ([_text hasSuffix:@"\n"]) {
+            return _text;
+        }
         return [NSString stringWithFormat:@"%@\n", _text];
     }
-    else if (self.isComment)
-    {
+    else if (self.isComment) {
+        //TODO: String escaping?
         return [NSString stringWithFormat:@"<!--%@-->\n", _text];
     }
-    return [NSString indentationString:indentationLevel];
+    return [NSString og_indentationString:indentationLevel];
 }
 
 @end
