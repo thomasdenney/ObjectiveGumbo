@@ -19,7 +19,8 @@
 @implementation OGDocument
 
 - (instancetype)initWithName:(NSString *)name publicID:(NSString *)publicID systemID:(NSString *)systemID {
-    self = [super init];
+    //Documents do not have parent nodes
+    self = [super initWithParent:nil];
     if (self) {
         _name = name;
         _publicIdentifier = publicID;
