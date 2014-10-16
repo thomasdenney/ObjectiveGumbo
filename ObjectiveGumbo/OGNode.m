@@ -18,6 +18,16 @@
 
 @implementation OGNode
 
+#pragma mark - Initialization
+
+- (instancetype)initWithParent:(OGNode *)parent {
+    self = [super init];
+    if (self) {
+        _parent = parent;
+    }
+    return self;
+}
+
 - (NSString*)text {
     //This method is implemented by subclasses
     return @"";

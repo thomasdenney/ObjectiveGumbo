@@ -20,11 +20,20 @@
 #import "NSString+OG.h"
 
 /**
- Abstract class used to define a node. Nodes are either HTML elements, documents or raw text (such as a comment, whitespace or element contents).
+ Abstract class used to define a node. Nodes are either HTML elements, documents or raw text (such as a comment, whitespace or element contents). All nodes (irrespective of their type) are immutable as Objective Gumbo is only designed to be a parser, rather than an HTML manipulator.
  @warning You generally do not need to use this class directly
  @see OGDocument, OGElement, OGText
  */
 @interface OGNode : NSObject
+
+///--------------------
+///@name Initialization
+///--------------------
+
+/**
+ Initializes a new instance of a node and sets its parent property
+*/
+- (instancetype)initWithParent:(OGNode*)parent;
 
 ///---------------
 ///@name Hierarchy
