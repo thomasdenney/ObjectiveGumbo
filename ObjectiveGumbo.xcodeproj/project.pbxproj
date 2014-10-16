@@ -172,7 +172,7 @@
 		E9D81E8E19F00E520012D908 /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
-				E9D81F5319F0385C0012D908 /* Private classes */,
+				E9D81F5319F0385C0012D908 /* Private class extensions */,
 				E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */,
 				E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */,
 				E9D81EDF19F00FC30012D908 /* OGElement.h */,
@@ -234,12 +234,12 @@
 			path = Gumbo/src;
 			sourceTree = SOURCE_ROOT;
 		};
-		E9D81F5319F0385C0012D908 /* Private classes */ = {
+		E9D81F5319F0385C0012D908 /* Private class extensions */ = {
 			isa = PBXGroup;
 			children = (
 				E9D81F4D19F038550012D908 /* _OGMutableElement.h */,
 			);
-			name = "Private classes";
+			name = "Private class extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
