@@ -22,11 +22,17 @@
 @implementation ObjectiveGumbo
 
 + (OGNode*)parseNodeWithData:(NSData *)data {
+    if (!data) {
+        return nil;
+    }
     NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return [ObjectiveGumbo parseNodeWithString:string];
 }
 
 + (OGNode*)parseNodeWithString:(NSString *)string {
+    if (!string.length) {
+        return nil;
+    }
     GumboOutput * output = [ObjectiveGumbo outputFromString:string];
     OGNode * node = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->root];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
@@ -34,6 +40,9 @@
 }
 
 + (OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc {
+    if (!url) {
+        return nil;
+    }
     //TODO: Remove this method once deprecation is complete
     NSError * error;
     NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
@@ -44,11 +53,17 @@
 }
 
 + (OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc {
+    if (!data) {
+        return nil;
+    }
     NSString * string = [[NSString alloc] initWithData:data encoding:enc];
     return [ObjectiveGumbo parseDocumentWithString:string];
 }
 
 + (OGDocument*)parseDocumentWithString:(NSString *)string {
+    if (!string) {
+        return nil;
+    }
     GumboOutput * output = [ObjectiveGumbo outputFromString:string];
     OGDocument * node = (OGDocument*)[ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->document];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
@@ -56,12 +71,10 @@
 }
 
 + (GumboOutput*)outputFromString:(NSString*)string {
-    GumboOutput * output = gumbo_parse(string.UTF8String);
-    return output;
+    return gumbo_parse(string.UTF8String);
 }
 
 + (OGNode*)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode {
-    OGNode * node;
     if (gumboNode->type == GUMBO_NODE_DOCUMENT) {
         const char * cName = gumboNode->v.document.name;
         const char * cPublicIdentifier = gumboNode->v.document.public_identifier;
@@ -76,10 +89,10 @@
         GumboVector * cChildren = &gumboNode->v.document.children;
         documentNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:documentNode];
         
-        node = documentNode;
+        return documentNode;
     }
     else if (gumboNode->type == GUMBO_NODE_ELEMENT) {
-        OGElement * elementNode = [[OGElement alloc] init];
+        OGElement * elementNode = [OGElement new];
         
         elementNode.tag = (OGTag)gumboNode->v.element.tag;
         elementNode.tagNamespace = (OGNamespace)gumboNode->v.element.tag_namespace;
@@ -97,7 +110,7 @@
             NSString * name = [[NSString alloc] initWithUTF8String:cName];
             NSString * value = [[NSString alloc] initWithUTF8String:cValue];
             
-            [attributes setValue:value forKey:name];
+            attributes[name] = value;
             
             if ([name isEqualToString:@"class"]) {
                 elementNode.classes = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -109,21 +122,20 @@
         GumboVector * cChildren = &gumboNode->v.element.children;
         elementNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:elementNode];
         
-        node = elementNode;
+        return elementNode;
     }
-    else {
+    else if (gumboNode->type == GUMBO_NODE_TEXT || gumboNode->type == GUMBO_NODE_CDATA || gumboNode->type == GUMBO_NODE_COMMENT || gumboNode->type == GUMBO_NODE_WHITESPACE) {
         const char * cText = gumboNode->v.text.text;
         NSString * text = [[NSString alloc] initWithUTF8String:cText];
-        node = [[OGText alloc] initWithText:text type:(OGNodeType)gumboNode->type];
+        return [[OGText alloc] initWithText:text type:(OGNodeType)gumboNode->type];
     }
-    
-    return node;
+    return nil;
 }
 
 + (NSArray*)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent {
     NSMutableArray * children = [NSMutableArray new];
     
-    for (int i = 0; i < cChildren->length; i++) {
+    for (unsigned int i = 0; i < cChildren->length; i++) {
         OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
         childNode.parent = parent;
         [children addObject:childNode];
