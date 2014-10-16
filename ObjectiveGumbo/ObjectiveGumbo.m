@@ -16,6 +16,7 @@
 
 #import "ObjectiveGumbo.h"
 #import "_OGMutableElement.h"
+#import "_OGMutableNode.h"
 #import "gumbo.h"
 
 @implementation ObjectiveGumbo
@@ -113,8 +114,7 @@
     else {
         const char * cText = gumboNode->v.text.text;
         NSString * text = [[NSString alloc] initWithUTF8String:cText];
-        node = [[OGText alloc] initWithText:text andType:gumboNode->type];
-        node = nil;
+        node = [[OGText alloc] initWithText:text type:(OGNodeType)gumboNode->type];
     }
     
     return node;
