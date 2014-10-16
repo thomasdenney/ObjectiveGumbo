@@ -16,9 +16,19 @@
 
 @import Foundation;
 
+/**
+ Utility methods used in Objective Gumbo for dealing with strings
+ */
 @interface NSString (OG)
 
--(NSString*)escapedString;
-+(NSString*)indentationString:(int)indentationLevel;
+/**
+ Inefficiently escapes a string by surrounding it with double quotes ("") and ensures all quotes within the string are also escaped.
+ */
+- (NSString*)og_escapedString;
+
+/**
+ Creates a string that indents characters by 4 spaces * indentation level
+ */
++ (NSString*)og_indentationString:(NSUInteger)indentationLevel;
 
 @end

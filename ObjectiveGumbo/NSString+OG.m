@@ -18,19 +18,16 @@
 
 @implementation NSString (OG)
 
--(NSString*)escapedString
-{
+- (NSString*)og_escapedString {
     NSString *escapedString = [self stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
     escapedString = [escapedString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     return escapedString;
 }
 
-+(NSString*)indentationString:(int)indentationLevel
-{
-    NSMutableString * string = [NSMutableString new];
-    for (int n = 0; n < indentationLevel; n++)
-    {
-        [string appendString:@"\t"];
++ (NSString*)og_indentationString:(NSUInteger)indentationLevel {
+    NSMutableString * string = [[NSMutableString alloc] initWithCapacity:4 * indentationLevel];
+    for (NSUInteger n = 0; n < indentationLevel; n++) {
+        [string appendString:@"   "];
     }
     return string;
 }
