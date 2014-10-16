@@ -1,4 +1,4 @@
-// ObjectiveGumbo.h
+// NSString+OG.m
 //
 // Copyright 2014 Programming Thomas
 //
@@ -14,21 +14,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <Foundation/Foundation.h>
+#import "NSString+OG.h"
 
-#import "OGElement.h"
-#import "OGNode.h"
-#import "OGDocument.h"
-#import "OGText.h"
+@implementation NSString (OG)
 
-@interface ObjectiveGumbo : NSObject
+-(NSString*)escapedString
+{
+    NSString *escapedString = [self stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+    escapedString = [escapedString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    return escapedString;
+}
 
-+(OGDocument*)parseDocumentWithData:(NSData*)data encoding:(NSStringEncoding)enc;
-+(OGDocument*)parseDocumentWithString:(NSString*)string;
-+(OGDocument*)parseDocumentWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
-
-+(OGNode*)parseNodeWithData:(NSData*)data;
-+(OGNode*)parseNodeWithString:(NSString*)string;
-+(OGNode*)parseNodeWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
++(NSString*)indentationString:(int)indentationLevel
+{
+    NSMutableString * string = [NSMutableString new];
+    for (int n = 0; n < indentationLevel; n++)
+    {
+        [string appendString:@"\t"];
+    }
+    return string;
+}
 
 @end

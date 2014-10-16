@@ -1,4 +1,4 @@
-// ObjectiveGumbo.h
+// NSString+OG.h
 //
 // Copyright 2014 Programming Thomas
 //
@@ -16,19 +16,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "OGElement.h"
-#import "OGNode.h"
-#import "OGDocument.h"
-#import "OGText.h"
+@interface NSString (OG)
 
-@interface ObjectiveGumbo : NSObject
-
-+(OGDocument*)parseDocumentWithData:(NSData*)data encoding:(NSStringEncoding)enc;
-+(OGDocument*)parseDocumentWithString:(NSString*)string;
-+(OGDocument*)parseDocumentWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
-
-+(OGNode*)parseNodeWithData:(NSData*)data;
-+(OGNode*)parseNodeWithString:(NSString*)string;
-+(OGNode*)parseNodeWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
+-(NSString*)escapedString;
++(NSString*)indentationString:(int)indentationLevel;
 
 @end
