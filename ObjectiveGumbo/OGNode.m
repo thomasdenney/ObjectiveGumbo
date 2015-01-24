@@ -83,7 +83,7 @@
 
 @implementation OGNode (Mutable)
 
-- (void)setParent:(OGNode*)parent {
+- (void)setParent:(OGElement*)parent {
     _parent = parent;
 }
 

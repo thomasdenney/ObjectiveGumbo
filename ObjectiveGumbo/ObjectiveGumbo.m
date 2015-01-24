@@ -139,7 +139,7 @@
     for (unsigned int i = 0; i < cChildren->length; i++) {
         OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
         if (childNode) {
-            childNode.parent = parent;
+            childNode.parent = (OGElement*)parent;
             [children addObject:childNode];
         }
     }
