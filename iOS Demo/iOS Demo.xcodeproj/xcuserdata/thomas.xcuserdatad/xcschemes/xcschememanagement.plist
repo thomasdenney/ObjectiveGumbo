@@ -4,15 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>OGDemo.xcscheme</key>
+		<key>iOS Demo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>E9D81F3D19F016670012D908</key>
+		<key>E9D81F6419F0542C0012D908</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9D81F7919F0542C0012D908</key>
 		<dict>
 			<key>primary</key>
 			<true/>
