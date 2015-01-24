@@ -24,6 +24,9 @@
     NSMutableString * text = [NSMutableString new];
     for (OGNode * child in self.children) {
         [text appendString:[child text]];
+        if (child != self.children.lastObject) {
+            [text appendString:@" "];
+        }
     }
     return text;
 }

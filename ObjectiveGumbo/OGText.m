@@ -39,7 +39,7 @@
 
 - (NSString*)text {
     //TODO: Support returning the actual text of a comment or whitespace...
-    if (self.isText) {
+    if (self.isText || self.isWhitespace) {
         return _text;
     }
     else {
