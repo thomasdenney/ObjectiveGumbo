@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E9D81EF819F012B80012D908"
-               BuildableName = "ObjectiveGumbo.framework"
-               BlueprintName = "ObjectiveGumboiOS"
+               BlueprintIdentifier = "E9CD1BD819F05A4500034087"
+               BuildableName = "ObjectiveGumboTests.xctest"
+               BlueprintName = "ObjectiveGumboTests"
                ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E9CD1BD819F05A4500034087"
+               BuildableName = "ObjectiveGumboTests.xctest"
+               BlueprintName = "ObjectiveGumboTests"
+               ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E9CD1BD819F05A4500034087"
+            BuildableName = "ObjectiveGumboTests.xctest"
+            BlueprintName = "ObjectiveGumboTests"
+            ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -42,9 +61,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9D81EF819F012B80012D908"
-            BuildableName = "ObjectiveGumbo.framework"
-            BlueprintName = "ObjectiveGumboiOS"
+            BlueprintIdentifier = "E9CD1BD819F05A4500034087"
+            BuildableName = "ObjectiveGumboTests.xctest"
+            BlueprintName = "ObjectiveGumboTests"
             ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,9 +79,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E9D81EF819F012B80012D908"
-            BuildableName = "ObjectiveGumbo.framework"
-            BlueprintName = "ObjectiveGumboiOS"
+            BlueprintIdentifier = "E9CD1BD819F05A4500034087"
+            BuildableName = "ObjectiveGumboTests.xctest"
+            BlueprintName = "ObjectiveGumboTests"
             ReferencedContainer = "container:ObjectiveGumbo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

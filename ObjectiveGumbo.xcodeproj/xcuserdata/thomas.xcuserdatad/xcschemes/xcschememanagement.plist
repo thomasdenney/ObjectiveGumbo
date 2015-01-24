@@ -9,14 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ObjectiveGumboTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>ObjectiveGumboiOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E9CD1BCE19F05A4500034087</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E9CD1BD819F05A4500034087</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E9D81E8B19F00E520012D908</key>
 		<dict>
 			<key>primary</key>
