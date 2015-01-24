@@ -7,92 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E9D81E9219F00E520012D908 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EC019F00F560012D908 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA619F00F560012D908 /* attribute.c */; };
-		E9D81EC119F00F560012D908 /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA719F00F560012D908 /* attribute.h */; };
-		E9D81EC219F00F560012D908 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA819F00F560012D908 /* char_ref.c */; };
-		E9D81EC319F00F560012D908 /* char_ref.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA919F00F560012D908 /* char_ref.h */; };
-		E9D81EC519F00F560012D908 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAB19F00F560012D908 /* error.c */; };
-		E9D81EC619F00F560012D908 /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAC19F00F560012D908 /* error.h */; };
-		E9D81EC719F00F560012D908 /* gumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAD19F00F560012D908 /* gumbo.h */; };
-		E9D81EC819F00F560012D908 /* insertion_mode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAE19F00F560012D908 /* insertion_mode.h */; };
-		E9D81EC919F00F560012D908 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAF19F00F560012D908 /* parser.c */; };
-		E9D81ECA19F00F560012D908 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB019F00F560012D908 /* parser.h */; };
-		E9D81ECB19F00F560012D908 /* string_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB119F00F560012D908 /* string_buffer.c */; };
-		E9D81ECC19F00F560012D908 /* string_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB219F00F560012D908 /* string_buffer.h */; };
-		E9D81ECD19F00F560012D908 /* string_piece.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB319F00F560012D908 /* string_piece.c */; };
-		E9D81ECE19F00F560012D908 /* string_piece.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB419F00F560012D908 /* string_piece.h */; };
-		E9D81ECF19F00F560012D908 /* tag.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB519F00F560012D908 /* tag.c */; };
-		E9D81ED019F00F560012D908 /* token_type.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB619F00F560012D908 /* token_type.h */; };
-		E9D81ED119F00F560012D908 /* tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB719F00F560012D908 /* tokenizer.c */; };
-		E9D81ED219F00F560012D908 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB819F00F560012D908 /* tokenizer.h */; };
-		E9D81ED319F00F560012D908 /* tokenizer_states.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB919F00F560012D908 /* tokenizer_states.h */; };
-		E9D81ED419F00F560012D908 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBA19F00F560012D908 /* utf8.c */; };
-		E9D81ED519F00F560012D908 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBB19F00F560012D908 /* utf8.h */; };
-		E9D81ED619F00F560012D908 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBC19F00F560012D908 /* util.c */; };
-		E9D81ED719F00F560012D908 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBD19F00F560012D908 /* util.h */; };
-		E9D81ED819F00F560012D908 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBE19F00F560012D908 /* vector.c */; };
-		E9D81ED919F00F560012D908 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBF19F00F560012D908 /* vector.h */; };
-		E9D81EE719F00FC30012D908 /* NSString+OG.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDA19F00FC30012D908 /* NSString+OG.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EE819F00FC30012D908 /* NSString+OG.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDB19F00FC30012D908 /* NSString+OG.m */; };
-		E9D81EE919F00FC30012D908 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */; };
-		E9D81EEA19F00FC30012D908 /* OGDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDD19F00FC30012D908 /* OGDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EEB19F00FC30012D908 /* OGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDE19F00FC30012D908 /* OGDocument.m */; };
-		E9D81EEC19F00FC30012D908 /* OGElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDF19F00FC30012D908 /* OGElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EED19F00FC30012D908 /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE019F00FC30012D908 /* OGElement.m */; };
-		E9D81EEE19F00FC30012D908 /* OGNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE119F00FC30012D908 /* OGNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EEF19F00FC30012D908 /* OGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE219F00FC30012D908 /* OGNode.m */; };
-		E9D81EF019F00FC30012D908 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE319F00FC30012D908 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81EF119F00FC30012D908 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE419F00FC30012D908 /* OGText.m */; };
-		E9D81EF319F00FC30012D908 /* OGTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE619F00FC30012D908 /* OGTypes.m */; };
-		E9D81F0F19F0130A0012D908 /* NSString+OG.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDB19F00FC30012D908 /* NSString+OG.m */; };
-		E9D81F1019F0130A0012D908 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */; };
-		E9D81F1119F0130A0012D908 /* OGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDE19F00FC30012D908 /* OGDocument.m */; };
-		E9D81F1219F0130A0012D908 /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE019F00FC30012D908 /* OGElement.m */; };
-		E9D81F1319F0130A0012D908 /* OGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE219F00FC30012D908 /* OGNode.m */; };
-		E9D81F1419F0130A0012D908 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE419F00FC30012D908 /* OGText.m */; };
-		E9D81F1519F0130A0012D908 /* OGTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE619F00FC30012D908 /* OGTypes.m */; };
-		E9D81F1619F0130A0012D908 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA619F00F560012D908 /* attribute.c */; };
-		E9D81F1719F0130A0012D908 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA819F00F560012D908 /* char_ref.c */; };
-		E9D81F1819F0130A0012D908 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAB19F00F560012D908 /* error.c */; };
-		E9D81F1919F0130A0012D908 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAF19F00F560012D908 /* parser.c */; };
-		E9D81F1A19F0130A0012D908 /* string_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB119F00F560012D908 /* string_buffer.c */; };
-		E9D81F1B19F0130A0012D908 /* string_piece.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB319F00F560012D908 /* string_piece.c */; };
-		E9D81F1C19F0130A0012D908 /* tag.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB519F00F560012D908 /* tag.c */; };
-		E9D81F1D19F0130A0012D908 /* tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB719F00F560012D908 /* tokenizer.c */; };
-		E9D81F1E19F0130A0012D908 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBA19F00F560012D908 /* utf8.c */; };
-		E9D81F1F19F0130A0012D908 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBC19F00F560012D908 /* util.c */; };
-		E9D81F2019F0130A0012D908 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBE19F00F560012D908 /* vector.c */; };
-		E9D81F2119F013210012D908 /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA719F00F560012D908 /* attribute.h */; };
-		E9D81F2219F013220012D908 /* char_ref.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA919F00F560012D908 /* char_ref.h */; };
-		E9D81F2319F013220012D908 /* gumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAD19F00F560012D908 /* gumbo.h */; };
-		E9D81F2419F013220012D908 /* insertion_mode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAE19F00F560012D908 /* insertion_mode.h */; };
-		E9D81F2519F013220012D908 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB019F00F560012D908 /* parser.h */; };
-		E9D81F2619F013220012D908 /* string_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB219F00F560012D908 /* string_buffer.h */; };
-		E9D81F2719F013220012D908 /* string_piece.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB419F00F560012D908 /* string_piece.h */; };
-		E9D81F2819F013220012D908 /* token_type.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB619F00F560012D908 /* token_type.h */; };
-		E9D81F2919F013220012D908 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB819F00F560012D908 /* tokenizer.h */; };
-		E9D81F2A19F013220012D908 /* tokenizer_states.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB919F00F560012D908 /* tokenizer_states.h */; };
-		E9D81F2B19F013220012D908 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBB19F00F560012D908 /* utf8.h */; };
-		E9D81F2C19F013220012D908 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBD19F00F560012D908 /* util.h */; };
-		E9D81F2D19F013220012D908 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBF19F00F560012D908 /* vector.h */; };
-		E9D81F2E19F0132E0012D908 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F2F19F0132E0012D908 /* NSString+OG.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDA19F00FC30012D908 /* NSString+OG.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F3019F0132E0012D908 /* OGDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDD19F00FC30012D908 /* OGDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F3119F0132E0012D908 /* OGElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDF19F00FC30012D908 /* OGElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F3219F0132E0012D908 /* OGNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE119F00FC30012D908 /* OGNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F3319F0132E0012D908 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE319F00FC30012D908 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F4B19F01CF80012D908 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F4C19F01CF80012D908 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9D81F4F19F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
-		E9D81F5019F038550012D908 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
-		E9D81F5519F03DD80012D908 /* _OGMutableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F5419F03DD80012D908 /* _OGMutableNode.h */; };
-		E9D81F5619F03DD80012D908 /* _OGMutableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F5419F03DD80012D908 /* _OGMutableNode.h */; };
+		E9CD1BE519F05A6300034087 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */; };
+		E9CD1BE619F05A6300034087 /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE019F00FC30012D908 /* OGElement.m */; };
+		E9CD1BE719F05A6300034087 /* NSString+OG.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDB19F00FC30012D908 /* NSString+OG.m */; };
+		E9CD1BE819F05A6300034087 /* OGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDE19F00FC30012D908 /* OGDocument.m */; };
+		E9CD1BE919F05A6300034087 /* OGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE219F00FC30012D908 /* OGNode.m */; };
+		E9CD1BEA19F05A6300034087 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE419F00FC30012D908 /* OGText.m */; };
+		E9CD1BEB19F05A6300034087 /* OGTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE619F00FC30012D908 /* OGTypes.m */; };
+		E9CD1BEC19F05A6300034087 /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA619F00F560012D908 /* attribute.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BED19F05A6300034087 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EA819F00F560012D908 /* char_ref.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BEE19F05A6300034087 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAB19F00F560012D908 /* error.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BEF19F05A6300034087 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EAF19F00F560012D908 /* parser.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF019F05A6300034087 /* string_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB119F00F560012D908 /* string_buffer.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF119F05A6300034087 /* string_piece.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB319F00F560012D908 /* string_piece.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF219F05A6300034087 /* tag.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB519F00F560012D908 /* tag.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF319F05A6300034087 /* tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EB719F00F560012D908 /* tokenizer.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF419F05A6300034087 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBA19F00F560012D908 /* utf8.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF519F05A6300034087 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBC19F00F560012D908 /* util.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF619F05A6300034087 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EBE19F00F560012D908 /* vector.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		E9CD1BF719F05A8500034087 /* _OGMutableElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4D19F038550012D908 /* _OGMutableElement.h */; };
+		E9CD1BF819F05A8500034087 /* _OGMutableNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F5419F03DD80012D908 /* _OGMutableNode.h */; };
+		E9CD1BF919F05A8500034087 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFA19F05A8500034087 /* OGElement.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDF19F00FC30012D908 /* OGElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFB19F05A8500034087 /* NSString+OG.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDA19F00FC30012D908 /* NSString+OG.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFC19F05A8500034087 /* OGDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EDD19F00FC30012D908 /* OGDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFD19F05A8500034087 /* OGNode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE119F00FC30012D908 /* OGNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFE19F05A8500034087 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EE319F00FC30012D908 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1BFF19F05A8500034087 /* OGTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81F4A19F01CF80012D908 /* OGTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9CD1C0019F05A8500034087 /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA719F00F560012D908 /* attribute.h */; };
+		E9CD1C0119F05A8500034087 /* char_ref.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EA919F00F560012D908 /* char_ref.h */; };
+		E9CD1C0219F05A8500034087 /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAC19F00F560012D908 /* error.h */; };
+		E9CD1C0319F05A8500034087 /* gumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAD19F00F560012D908 /* gumbo.h */; };
+		E9CD1C0419F05A8500034087 /* insertion_mode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EAE19F00F560012D908 /* insertion_mode.h */; };
+		E9CD1C0519F05A8500034087 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB019F00F560012D908 /* parser.h */; };
+		E9CD1C0619F05A8500034087 /* string_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB219F00F560012D908 /* string_buffer.h */; };
+		E9CD1C0719F05A8500034087 /* string_piece.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB419F00F560012D908 /* string_piece.h */; };
+		E9CD1C0819F05A8500034087 /* token_type.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB619F00F560012D908 /* token_type.h */; };
+		E9CD1C0919F05A8500034087 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB819F00F560012D908 /* tokenizer.h */; };
+		E9CD1C0A19F05A8500034087 /* tokenizer_states.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EB919F00F560012D908 /* tokenizer_states.h */; };
+		E9CD1C0B19F05A8500034087 /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBB19F00F560012D908 /* utf8.h */; };
+		E9CD1C0C19F05A8500034087 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBD19F00F560012D908 /* util.h */; };
+		E9CD1C0D19F05A8500034087 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D81EBF19F00F560012D908 /* vector.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9D81E9019F00E520012D908 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9CD1BCF19F05A4500034087 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9CD1BD219F05A4500034087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveGumbo.h; sourceTree = "<group>"; };
 		E9D81EA619F00F560012D908 /* attribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = attribute.c; sourceTree = "<group>"; };
 		E9D81EA719F00F560012D908 /* attribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
@@ -131,21 +91,13 @@
 		E9D81EE319F00FC30012D908 /* OGText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGText.h; sourceTree = "<group>"; };
 		E9D81EE419F00FC30012D908 /* OGText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGText.m; sourceTree = "<group>"; };
 		E9D81EE619F00FC30012D908 /* OGTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGTypes.m; sourceTree = "<group>"; };
-		E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D81F4A19F01CF80012D908 /* OGTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGTypes.h; sourceTree = "<group>"; };
 		E9D81F4D19F038550012D908 /* _OGMutableElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OGMutableElement.h; sourceTree = "<group>"; };
 		E9D81F5419F03DD80012D908 /* _OGMutableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _OGMutableNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E9D81E8819F00E520012D908 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81EF519F012B80012D908 /* Frameworks */ = {
+		E9CD1BCB19F05A4500034087 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -155,10 +107,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9CD1BD019F05A4500034087 /* ObjectiveGumbo */ = {
+			isa = PBXGroup;
+			children = (
+				E9CD1BD119F05A4500034087 /* Supporting Files */,
+			);
+			path = ObjectiveGumbo;
+			sourceTree = "<group>";
+		};
+		E9CD1BD119F05A4500034087 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9CD1BD219F05A4500034087 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E9D81E8219F00E520012D908 = {
 			isa = PBXGroup;
 			children = (
 				E9D81E8E19F00E520012D908 /* ObjectiveGumbo */,
+				E9CD1BD019F05A4500034087 /* ObjectiveGumbo */,
 				E9D81E8D19F00E520012D908 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,8 +135,7 @@
 		E9D81E8D19F00E520012D908 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */,
-				E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */,
+				E9CD1BCF19F05A4500034087 /* ObjectiveGumbo.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,7 +167,6 @@
 		E9D81E8F19F00E520012D908 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E9D81E9019F00E520012D908 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,76 +216,47 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		E9D81E8919F00E520012D908 /* Headers */ = {
+		E9CD1BCC19F05A4500034087 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9D81ED519F00F560012D908 /* utf8.h in Headers */,
-				E9D81E9219F00E520012D908 /* ObjectiveGumbo.h in Headers */,
-				E9D81EC719F00F560012D908 /* gumbo.h in Headers */,
-				E9D81ED919F00F560012D908 /* vector.h in Headers */,
-				E9D81ED319F00F560012D908 /* tokenizer_states.h in Headers */,
-				E9D81ED219F00F560012D908 /* tokenizer.h in Headers */,
-				E9D81EEE19F00FC30012D908 /* OGNode.h in Headers */,
-				E9D81ED019F00F560012D908 /* token_type.h in Headers */,
-				E9D81EC319F00F560012D908 /* char_ref.h in Headers */,
-				E9D81EF019F00FC30012D908 /* OGText.h in Headers */,
-				E9D81EC119F00F560012D908 /* attribute.h in Headers */,
-				E9D81EE719F00FC30012D908 /* NSString+OG.h in Headers */,
-				E9D81F5519F03DD80012D908 /* _OGMutableNode.h in Headers */,
-				E9D81ECA19F00F560012D908 /* parser.h in Headers */,
-				E9D81EEA19F00FC30012D908 /* OGDocument.h in Headers */,
-				E9D81ECC19F00F560012D908 /* string_buffer.h in Headers */,
-				E9D81F4B19F01CF80012D908 /* OGTypes.h in Headers */,
-				E9D81F4F19F038550012D908 /* _OGMutableElement.h in Headers */,
-				E9D81EC619F00F560012D908 /* error.h in Headers */,
-				E9D81ECE19F00F560012D908 /* string_piece.h in Headers */,
-				E9D81EEC19F00FC30012D908 /* OGElement.h in Headers */,
-				E9D81ED719F00F560012D908 /* util.h in Headers */,
-				E9D81EC819F00F560012D908 /* insertion_mode.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81EF619F012B80012D908 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E9D81F2E19F0132E0012D908 /* ObjectiveGumbo.h in Headers */,
-				E9D81F2F19F0132E0012D908 /* NSString+OG.h in Headers */,
-				E9D81F3019F0132E0012D908 /* OGDocument.h in Headers */,
-				E9D81F3119F0132E0012D908 /* OGElement.h in Headers */,
-				E9D81F3219F0132E0012D908 /* OGNode.h in Headers */,
-				E9D81F3319F0132E0012D908 /* OGText.h in Headers */,
-				E9D81F4C19F01CF80012D908 /* OGTypes.h in Headers */,
-				E9D81F2119F013210012D908 /* attribute.h in Headers */,
-				E9D81F2219F013220012D908 /* char_ref.h in Headers */,
-				E9D81F2319F013220012D908 /* gumbo.h in Headers */,
-				E9D81F2419F013220012D908 /* insertion_mode.h in Headers */,
-				E9D81F5619F03DD80012D908 /* _OGMutableNode.h in Headers */,
-				E9D81F2519F013220012D908 /* parser.h in Headers */,
-				E9D81F2619F013220012D908 /* string_buffer.h in Headers */,
-				E9D81F2719F013220012D908 /* string_piece.h in Headers */,
-				E9D81F2819F013220012D908 /* token_type.h in Headers */,
-				E9D81F2919F013220012D908 /* tokenizer.h in Headers */,
-				E9D81F2A19F013220012D908 /* tokenizer_states.h in Headers */,
-				E9D81F5019F038550012D908 /* _OGMutableElement.h in Headers */,
-				E9D81F2B19F013220012D908 /* utf8.h in Headers */,
-				E9D81F2C19F013220012D908 /* util.h in Headers */,
-				E9D81F2D19F013220012D908 /* vector.h in Headers */,
+				E9CD1BF919F05A8500034087 /* ObjectiveGumbo.h in Headers */,
+				E9CD1BFA19F05A8500034087 /* OGElement.h in Headers */,
+				E9CD1BFB19F05A8500034087 /* NSString+OG.h in Headers */,
+				E9CD1BFC19F05A8500034087 /* OGDocument.h in Headers */,
+				E9CD1BFD19F05A8500034087 /* OGNode.h in Headers */,
+				E9CD1BFE19F05A8500034087 /* OGText.h in Headers */,
+				E9CD1BFF19F05A8500034087 /* OGTypes.h in Headers */,
+				E9CD1BF719F05A8500034087 /* _OGMutableElement.h in Headers */,
+				E9CD1BF819F05A8500034087 /* _OGMutableNode.h in Headers */,
+				E9CD1C0019F05A8500034087 /* attribute.h in Headers */,
+				E9CD1C0119F05A8500034087 /* char_ref.h in Headers */,
+				E9CD1C0219F05A8500034087 /* error.h in Headers */,
+				E9CD1C0319F05A8500034087 /* gumbo.h in Headers */,
+				E9CD1C0419F05A8500034087 /* insertion_mode.h in Headers */,
+				E9CD1C0519F05A8500034087 /* parser.h in Headers */,
+				E9CD1C0619F05A8500034087 /* string_buffer.h in Headers */,
+				E9CD1C0719F05A8500034087 /* string_piece.h in Headers */,
+				E9CD1C0819F05A8500034087 /* token_type.h in Headers */,
+				E9CD1C0919F05A8500034087 /* tokenizer.h in Headers */,
+				E9CD1C0A19F05A8500034087 /* tokenizer_states.h in Headers */,
+				E9CD1C0B19F05A8500034087 /* utf8.h in Headers */,
+				E9CD1C0C19F05A8500034087 /* util.h in Headers */,
+				E9CD1C0D19F05A8500034087 /* vector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		E9D81E8B19F00E520012D908 /* ObjectiveGumbo */ = {
+		E9CD1BCE19F05A4500034087 /* ObjectiveGumbo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E9D81E9F19F00E520012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */;
+			buildConfigurationList = E9CD1BDF19F05A4500034087 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */;
 			buildPhases = (
-				E9D81E8719F00E520012D908 /* Sources */,
-				E9D81E8819F00E520012D908 /* Frameworks */,
-				E9D81E8919F00E520012D908 /* Headers */,
-				E9D81E8A19F00E520012D908 /* Resources */,
+				E9CD1BCA19F05A4500034087 /* Sources */,
+				E9CD1BCB19F05A4500034087 /* Frameworks */,
+				E9CD1BCC19F05A4500034087 /* Headers */,
+				E9CD1BCD19F05A4500034087 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -326,25 +264,7 @@
 			);
 			name = ObjectiveGumbo;
 			productName = ObjectiveGumbo;
-			productReference = E9D81E8C19F00E520012D908 /* ObjectiveGumbo.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		E9D81EF819F012B80012D908 /* ObjectiveGumboiOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E9D81F0919F012B80012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboiOS" */;
-			buildPhases = (
-				E9D81EF419F012B80012D908 /* Sources */,
-				E9D81EF519F012B80012D908 /* Frameworks */,
-				E9D81EF619F012B80012D908 /* Headers */,
-				E9D81EF719F012B80012D908 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ObjectiveGumboiOS;
-			productName = ObjectiveGumboiOS;
-			productReference = E9D81EF919F012B80012D908 /* ObjectiveGumbo.framework */;
+			productReference = E9CD1BCF19F05A4500034087 /* ObjectiveGumbo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -356,11 +276,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Programming Thomas";
 				TargetAttributes = {
-					E9D81E8B19F00E520012D908 = {
+					E9CD1BCE19F05A4500034087 = {
 						CreatedOnToolsVersion = 6.0;
-					};
-					E9D81EF819F012B80012D908 = {
-						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = XT4Q76JCC4;
 					};
 				};
 			};
@@ -376,21 +294,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E9D81E8B19F00E520012D908 /* ObjectiveGumbo */,
-				E9D81EF819F012B80012D908 /* ObjectiveGumboiOS */,
+				E9CD1BCE19F05A4500034087 /* ObjectiveGumbo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E9D81E8A19F00E520012D908 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81EF719F012B80012D908 /* Resources */ = {
+		E9CD1BCD19F05A4500034087 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -400,59 +310,79 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		E9D81E8719F00E520012D908 /* Sources */ = {
+		E9CD1BCA19F05A4500034087 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9D81EF319F00FC30012D908 /* OGTypes.m in Sources */,
-				E9D81ECF19F00F560012D908 /* tag.c in Sources */,
-				E9D81EF119F00FC30012D908 /* OGText.m in Sources */,
-				E9D81ECB19F00F560012D908 /* string_buffer.c in Sources */,
-				E9D81EE819F00FC30012D908 /* NSString+OG.m in Sources */,
-				E9D81EC519F00F560012D908 /* error.c in Sources */,
-				E9D81EE919F00FC30012D908 /* ObjectiveGumbo.m in Sources */,
-				E9D81EC019F00F560012D908 /* attribute.c in Sources */,
-				E9D81EEB19F00FC30012D908 /* OGDocument.m in Sources */,
-				E9D81ECD19F00F560012D908 /* string_piece.c in Sources */,
-				E9D81ED819F00F560012D908 /* vector.c in Sources */,
-				E9D81EED19F00FC30012D908 /* OGElement.m in Sources */,
-				E9D81ED619F00F560012D908 /* util.c in Sources */,
-				E9D81EC919F00F560012D908 /* parser.c in Sources */,
-				E9D81ED419F00F560012D908 /* utf8.c in Sources */,
-				E9D81EC219F00F560012D908 /* char_ref.c in Sources */,
-				E9D81ED119F00F560012D908 /* tokenizer.c in Sources */,
-				E9D81EEF19F00FC30012D908 /* OGNode.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E9D81EF419F012B80012D908 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E9D81F0F19F0130A0012D908 /* NSString+OG.m in Sources */,
-				E9D81F1019F0130A0012D908 /* ObjectiveGumbo.m in Sources */,
-				E9D81F1119F0130A0012D908 /* OGDocument.m in Sources */,
-				E9D81F1219F0130A0012D908 /* OGElement.m in Sources */,
-				E9D81F1319F0130A0012D908 /* OGNode.m in Sources */,
-				E9D81F1419F0130A0012D908 /* OGText.m in Sources */,
-				E9D81F1519F0130A0012D908 /* OGTypes.m in Sources */,
-				E9D81F1619F0130A0012D908 /* attribute.c in Sources */,
-				E9D81F1719F0130A0012D908 /* char_ref.c in Sources */,
-				E9D81F1819F0130A0012D908 /* error.c in Sources */,
-				E9D81F1919F0130A0012D908 /* parser.c in Sources */,
-				E9D81F1A19F0130A0012D908 /* string_buffer.c in Sources */,
-				E9D81F1B19F0130A0012D908 /* string_piece.c in Sources */,
-				E9D81F1C19F0130A0012D908 /* tag.c in Sources */,
-				E9D81F1D19F0130A0012D908 /* tokenizer.c in Sources */,
-				E9D81F1E19F0130A0012D908 /* utf8.c in Sources */,
-				E9D81F1F19F0130A0012D908 /* util.c in Sources */,
-				E9D81F2019F0130A0012D908 /* vector.c in Sources */,
+				E9CD1BE519F05A6300034087 /* ObjectiveGumbo.m in Sources */,
+				E9CD1BE619F05A6300034087 /* OGElement.m in Sources */,
+				E9CD1BE719F05A6300034087 /* NSString+OG.m in Sources */,
+				E9CD1BE819F05A6300034087 /* OGDocument.m in Sources */,
+				E9CD1BE919F05A6300034087 /* OGNode.m in Sources */,
+				E9CD1BEA19F05A6300034087 /* OGText.m in Sources */,
+				E9CD1BEB19F05A6300034087 /* OGTypes.m in Sources */,
+				E9CD1BEC19F05A6300034087 /* attribute.c in Sources */,
+				E9CD1BED19F05A6300034087 /* char_ref.c in Sources */,
+				E9CD1BEE19F05A6300034087 /* error.c in Sources */,
+				E9CD1BEF19F05A6300034087 /* parser.c in Sources */,
+				E9CD1BF019F05A6300034087 /* string_buffer.c in Sources */,
+				E9CD1BF119F05A6300034087 /* string_piece.c in Sources */,
+				E9CD1BF219F05A6300034087 /* tag.c in Sources */,
+				E9CD1BF319F05A6300034087 /* tokenizer.c in Sources */,
+				E9CD1BF419F05A6300034087 /* utf8.c in Sources */,
+				E9CD1BF519F05A6300034087 /* util.c in Sources */,
+				E9CD1BF619F05A6300034087 /* vector.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		E9CD1BE019F05A4500034087 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ObjectiveGumbo/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E9CD1BE119F05A4500034087 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ObjectiveGumbo/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		E9D81E9D19F00E520012D908 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -533,88 +463,18 @@
 			};
 			name = Release;
 		};
-		E9D81EA019F00E520012D908 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ObjectiveGumbo/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		E9D81EA119F00E520012D908 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = ObjectiveGumbo/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		E9D81F0A19F012B80012D908 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = ObjectiveGumboiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ObjectiveGumbo;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		E9D81F0B19F012B80012D908 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = ObjectiveGumboiOS/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = ObjectiveGumbo;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E9CD1BDF19F05A4500034087 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9CD1BE019F05A4500034087 /* Debug */,
+				E9CD1BE119F05A4500034087 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E9D81E8619F00E520012D908 /* Build configuration list for PBXProject "ObjectiveGumbo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -623,23 +483,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		E9D81E9F19F00E520012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E9D81EA019F00E520012D908 /* Debug */,
-				E9D81EA119F00E520012D908 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E9D81F0919F012B80012D908 /* Build configuration list for PBXNativeTarget "ObjectiveGumboiOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E9D81F0A19F012B80012D908 /* Debug */,
-				E9D81F0B19F012B80012D908 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
