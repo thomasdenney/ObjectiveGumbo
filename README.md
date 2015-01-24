@@ -9,7 +9,7 @@ Objective Gumbo is a set of classes that make it easier to interact with [Gumbo]
 * Version 2 doesn't currently support CocoaPods
 * Add the Objective Gumbo repository to your project by downloading the source or adding it as a git submodule
 * You'll need to run `git submodule init` and `git submodule update` to ensure that both the Objective Gumbo source and the Gumbo source are pulled
-* Link your app with the Objective Gumbo framework (currently on OS X)
+* Link your app with the Objective Gumbo framework
 
 ##Examples
 
