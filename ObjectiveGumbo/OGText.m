@@ -15,6 +15,7 @@
 // limitations under the License.
 
 #import "OGText.h"
+#import "GTMNSString+HTML.h"
 
 @interface OGText () {
     NSString * _text;
@@ -48,7 +49,7 @@
 }
 
 - (NSString*)htmlWithIndentation:(NSUInteger)indentationLevel {
-    _text = [_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    _text = [[_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] gtm_stringByEscapingForHTML];
     if (self.isText) {
         if ([_text hasSuffix:@"\n"]) {
             return _text;
