@@ -1,3 +1,6 @@
 [submodule "Gumbo"]
 	path = Gumbo
 	url = git://github.com/google/gumbo-parser.git
+[submodule "google-toolbox-for-mac"]
+	path = google-toolbox-for-mac
+	url = https://github.com/google/google-toolbox-for-mac.git

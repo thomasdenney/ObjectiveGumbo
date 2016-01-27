@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85F417CF1C59188E0099F569 /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 85F417CD1C59188E0099F569 /* GTMNSString+HTML.h */; };
+		85F417D01C59188E0099F569 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 85F417CE1C59188E0099F569 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		85F417D21C5918AB0099F569 /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 85F417D11C5918AB0099F569 /* GTMDefines.h */; };
 		E9CD1BE519F05A6300034087 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDC19F00FC30012D908 /* ObjectiveGumbo.m */; };
 		E9CD1BE619F05A6300034087 /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EE019F00FC30012D908 /* OGElement.m */; };
 		E9CD1BE719F05A6300034087 /* NSString+OG.m in Sources */ = {isa = PBXBuildFile; fileRef = E9D81EDB19F00FC30012D908 /* NSString+OG.m */; };
@@ -51,6 +54,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		85F417CD1C59188E0099F569 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		85F417CE1C59188E0099F569 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		85F417D11C5918AB0099F569 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		E9CD1BCF19F05A4500034087 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9CD1BD219F05A4500034087 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D81E9119F00E520012D908 /* ObjectiveGumbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveGumbo.h; sourceTree = "<group>"; };
@@ -107,6 +113,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85F417CB1C5918440099F569 /* google-toolbox-for-mac */ = {
+			isa = PBXGroup;
+			children = (
+				85F417CC1C5918770099F569 /* Foundation */,
+				85F417D11C5918AB0099F569 /* GTMDefines.h */,
+			);
+			name = "google-toolbox-for-mac";
+			path = "../google-toolbox-for-mac";
+			sourceTree = "<group>";
+		};
+		85F417CC1C5918770099F569 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				85F417CD1C59188E0099F569 /* GTMNSString+HTML.h */,
+				85F417CE1C59188E0099F569 /* GTMNSString+HTML.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		E9CD1BD019F05A4500034087 /* ObjectiveGumbo */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +183,7 @@
 				E9D81EE419F00FC30012D908 /* OGText.m */,
 				E9D81F4A19F01CF80012D908 /* OGTypes.h */,
 				E9D81EE619F00FC30012D908 /* OGTypes.m */,
+				85F417CB1C5918440099F569 /* google-toolbox-for-mac */,
 				E9D81EA519F00F560012D908 /* Gumbo */,
 				E9D81E8F19F00E520012D908 /* Supporting Files */,
 			);
@@ -232,10 +258,12 @@
 				E9CD1C0019F05A8500034087 /* attribute.h in Headers */,
 				E9CD1C0119F05A8500034087 /* char_ref.h in Headers */,
 				E9CD1C0219F05A8500034087 /* error.h in Headers */,
+				85F417D21C5918AB0099F569 /* GTMDefines.h in Headers */,
 				E9CD1C0319F05A8500034087 /* gumbo.h in Headers */,
 				E9CD1C0419F05A8500034087 /* insertion_mode.h in Headers */,
 				E9CD1C0519F05A8500034087 /* parser.h in Headers */,
 				E9CD1C0619F05A8500034087 /* string_buffer.h in Headers */,
+				85F417CF1C59188E0099F569 /* GTMNSString+HTML.h in Headers */,
 				E9CD1C0719F05A8500034087 /* string_piece.h in Headers */,
 				E9CD1C0819F05A8500034087 /* token_type.h in Headers */,
 				E9CD1C0919F05A8500034087 /* tokenizer.h in Headers */,
@@ -324,6 +352,7 @@
 				E9CD1BEC19F05A6300034087 /* attribute.c in Sources */,
 				E9CD1BED19F05A6300034087 /* char_ref.c in Sources */,
 				E9CD1BEE19F05A6300034087 /* error.c in Sources */,
+				85F417D01C59188E0099F569 /* GTMNSString+HTML.m in Sources */,
 				E9CD1BEF19F05A6300034087 /* parser.c in Sources */,
 				E9CD1BF019F05A6300034087 /* string_buffer.c in Sources */,
 				E9CD1BF119F05A6300034087 /* string_piece.c in Sources */,
