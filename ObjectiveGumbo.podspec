@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name = 'ObjectiveGumbo'
   s.version = '0.1'
-  s.license = {:type => 'Apache', :file => 'LICENSE'}
+  s.license = {:type => 'Apache', :file => 'ObjectiveGumbo/LICENSE'}
   s.summary = 'A simple way to parse HTML5 reliably with Cocoa'
   s.homepage = 'https://github.com/programmingthomas/ObjectiveGumbo'
   s.authors = {'Programming Thomas' => 'programmingthomas@gmail.com'}
