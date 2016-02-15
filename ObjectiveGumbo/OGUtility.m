@@ -187,7 +187,7 @@
     array[GUMBO_TAG_SPACER] = @"spacer";
     array[GUMBO_TAG_TT] = @"tt";
     array[GUMBO_TAG_U] = @"u";
-    array[GUMBO_TAG_UNKNOWN] = @"≈";
+    array[GUMBO_TAG_UNKNOWN] = @"unknown";
     return array;
 }
 
