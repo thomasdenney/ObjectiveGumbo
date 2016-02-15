@@ -17,10 +17,27 @@
 
 +(GumboTag)gumboTagForTag:(NSString *)tag
 {
-    return [[OGUtility tagStrings] indexOfObject:tag];
+    NSInteger tagIndex = [[OGUtility tagStrings] indexOfObject:tag];
+    if (tagIndex == NSNotFound) {
+        return GUMBO_TAG_UNKNOWN;
+    } else {
+        return (GumboTag)tagIndex;
+    }
 }
 
 +(NSArray*)tagStrings
+{
+    static NSArray *gumboTagArray;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        gumboTagArray = [[self mutableTagStrings] copy];
+    });
+    
+    return gumboTagArray;
+}
+
++ (NSMutableArray *)mutableTagStrings
 {
     NSMutableArray * array = [NSMutableArray arrayWithCapacity:GUMBO_TAG_LAST];
     //These were generated using a Textmate macro
@@ -143,7 +160,6 @@
     array[GUMBO_TAG_METER] = @"meter";
     array[GUMBO_TAG_DETAILS] = @"details";
     array[GUMBO_TAG_SUMMARY] = @"summary";
-    array[GUMBO_TAG_COMMAND] = @"command";
     array[GUMBO_TAG_MENU] = @"menu";
     array[GUMBO_TAG_APPLET] = @"applet";
     array[GUMBO_TAG_ACRONYM] = @"acronym";
@@ -171,7 +187,7 @@
     array[GUMBO_TAG_SPACER] = @"spacer";
     array[GUMBO_TAG_TT] = @"tt";
     array[GUMBO_TAG_U] = @"u";
-    array[GUMBO_TAG_UNKNOWN] = @"unknown";
+    array[GUMBO_TAG_UNKNOWN] = @"≈";
     return array;
 }
 
