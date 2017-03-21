@@ -8,15 +8,12 @@
 #import "OGNode.h"
 
 @interface OGText : OGNode
-{
-    NSString * _text;
-}
 
-@property BOOL isComment;
-@property BOOL isCData;
-@property BOOL isWhitespace;
-@property BOOL isText;
+@property (nonatomic, assign) BOOL isComment;
+@property (nonatomic, assign) BOOL isCData;
+@property (nonatomic, assign) BOOL isWhitespace;
+@property (nonatomic, assign) BOOL isText;
 
--(id)initWithText:(NSString*)text andType:(GumboNodeType)type;
+- (instancetype)initWithText:(NSString*)text andType:(GumboNodeType)type;
 
 @end

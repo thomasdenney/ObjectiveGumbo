@@ -6,10 +6,11 @@
 //
 
 #import "OGElement.h"
+#import "OGNode+OGElementSearch.h"
 
 @implementation OGElement
 
--(NSString*)text
+-(NSString *)text
 {
     NSMutableString * text = [NSMutableString new];
     for (OGNode * child in self.children)
@@ -19,7 +20,7 @@
     return text;
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
+-(NSString *)htmlWithIndentation:(int)indentationLevel
 {
     NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
     for (NSString * attribute in self.attributes)
@@ -42,7 +43,7 @@
     return html;
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
+-(NSArray<OGNode *> *)selectWithBlock:(SelectorBlock)block
 {
     NSMutableArray * matchingChildren = [NSMutableArray new];
     for (OGNode * child in self.children)
@@ -54,59 +55,6 @@
         [matchingChildren addObjectsFromArray:[child selectWithBlock:block]];
     }
     return matchingChildren;
-}
-
--(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
-            OGElement * element = (OGElement*)node;
-            return [element.attributes[attribute] isEqualToString:value];
-        }
-        return NO;
-    }];
-}
-
--(NSArray*)elementsWithClass:(NSString*)class
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
-            OGElement * element = (OGElement*)node;
-            for (NSString * classes in element.classes)
-            {
-                if ([classes isEqualToString:class])
-                {
-                    return YES;
-                }
-            }
-        }
-        return NO;
-    }];
-}
-
--(NSArray*)elementsWithID:(NSString *)elementId
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]]) {
-            OGElement * element = (OGElement*)node;
-            return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
-        }
-        return NO;
-    }];
-}
-
--(NSArray*)elementsWithTag:(GumboTag)tag
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
-            OGElement * element = (OGElement*)node;
-            return element.tag == tag;
-        }
-        return NO;
-    }];
 }
 
 @end

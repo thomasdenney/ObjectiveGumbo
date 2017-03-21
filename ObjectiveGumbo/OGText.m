@@ -7,6 +7,12 @@
 
 #import "OGText.h"
 
+@interface OGText ()
+
+@property (nonatomic, copy) NSString *text;
+
+@end
+
 @implementation OGText
 
 -(id)initWithText:(NSString *)text andType:(GumboNodeType)type
@@ -14,7 +20,7 @@
     self = [super init];
     if (self)
     {
-        _text = text;
+        self.text = text;
         self.isText = type == GUMBO_NODE_TEXT;
         self.isWhitespace = type == GUMBO_NODE_WHITESPACE;
         self.isComment = type == GUMBO_NODE_COMMENT;
@@ -27,7 +33,7 @@
 {
     if (self.isText)
     {
-        return _text;
+        return self.text;
     }
     else
     {
@@ -37,15 +43,15 @@
 
 -(NSString*)htmlWithIndentation:(int)indentationLevel
 {
-    _text = [_text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    self.text = [self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.isText)
     {
-        if ([_text hasSuffix:@"\n"]) return _text;
-        return [NSString stringWithFormat:@"%@\n", _text];
+        if ([self.text hasSuffix:@"\n"]) return self.text;
+        return [NSString stringWithFormat:@"%@\n", self.text];
     }
     else if (self.isComment)
     {
-        return [NSString stringWithFormat:@"<!--%@-->\n", _text];
+        return [NSString stringWithFormat:@"<!--%@-->\n", self.text];
     }
     return [NSString indentationString:indentationLevel];
 }

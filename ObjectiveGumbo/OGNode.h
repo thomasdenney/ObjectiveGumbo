@@ -13,23 +13,15 @@ typedef BOOL(^SelectorBlock)(id node);
 
 @interface OGNode : NSObject
 
-@property OGNode * parent;
+@property (nonatomic, weak) OGNode *parent;
+@property (nonatomic, strong) NSArray<OGNode *> *children;
 
--(NSString*)text;
--(NSString*)html;
+@property (nonatomic, readonly) NSString *text;
+@property (nonatomic, strong, readonly) NSString *html;
+
 -(NSString*)htmlWithIndentation:(int)indentationLevel;
 
-//Usage:
-//#stuffwiththisid .orthisclass orthistag
--(NSArray*)select:(NSString*)selector;
--(NSArray*)selectWithBlock:(SelectorBlock)block;
-
-//Returns the first OGNode from the select:
--(OGNode*)first:(NSString*)selector;
--(OGNode*)last:(NSString*)selector;
-
--(NSArray*)elementsWithClass:(NSString*)class;
--(NSArray*)elementsWithID:(NSString*)id;
--(NSArray*)elementsWithTag:(GumboTag)tag;
+@property (nonatomic, readonly) OGNode *first;
+@property (nonatomic, readonly) OGNode *last;
 
 @end

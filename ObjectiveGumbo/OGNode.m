@@ -7,6 +7,13 @@
 
 #import "OGNode.h"
 
+@interface OGNode ()
+
+@property (nonatomic, strong) NSString *text;
+
+@end
+
+
 @implementation OGNode
 
 -(NSString*)text
@@ -24,61 +31,16 @@
     return @"";
 }
 
--(NSArray*)select:(NSString *)selector
+- (OGNode *)first
 {
-    NSArray * selectors = [selector componentsSeparatedByString:@" "];
-    NSMutableArray * allMatchingObjects = [NSMutableArray new];
-    for (NSString * individualSelector in selectors)
-    {
-        if ([individualSelector hasPrefix:@"#"])
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
-        }
-        else if ([individualSelector hasPrefix:@"."])
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithClass:[individualSelector substringFromIndex:1]]];
-        }
-        else
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGUtility gumboTagForTag:individualSelector]]];
-        }
-    }
-    
-    //Remove duplicates
-    NSOrderedSet * set = [[NSOrderedSet alloc] initWithArray:allMatchingObjects];
-    allMatchingObjects = [[NSMutableArray alloc] initWithArray:[set array]];
-    
-    return allMatchingObjects;
+    return [self.children firstObject];
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
+- (OGNode *)last
 {
-    return [NSArray new];
+    return [self.children lastObject];
 }
 
--(OGNode*)first:(NSString *)selector
-{
-    return [[self select:selector] firstObject];
-}
 
--(OGNode*)last:(NSString *)selector
-{
-    return [[self select:selector] lastObject];
-}
-
--(NSArray*)elementsWithClass:(NSString*)class
-{
-    return [NSArray new];
-}
-
--(NSArray*)elementsWithID:(NSString *)id
-{
-    return [NSArray new];
-}
-
--(NSArray*)elementsWithTag:(GumboTag)tag
-{
-    return [NSArray new];
-}
 
 @end

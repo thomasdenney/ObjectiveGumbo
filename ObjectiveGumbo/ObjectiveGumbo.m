@@ -9,10 +9,10 @@
 
 @implementation ObjectiveGumbo
 
-+(OGNode*)parseNodeWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
++ (OGNode *)parseNodeWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
 {
-    NSError * error;
-    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
+    NSError *error = nil;
+    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
     if (error == nil)
     {
         return [ObjectiveGumbo parseNodeWithString:string];
@@ -23,24 +23,24 @@
     }
 }
 
-+(OGNode*)parseNodeWithData:(NSData *)data
++ (OGNode *)parseNodeWithData:(NSData *)data
 {
     NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return [ObjectiveGumbo parseNodeWithString:string];
 }
 
-+(OGNode*)parseNodeWithString:(NSString *)string
++ (OGNode *)parseNodeWithString:(NSString *)string
 {
-    GumboOutput * output = [ObjectiveGumbo outputFromString:string];
-    OGNode * node = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->root];
+    GumboOutput *output = [ObjectiveGumbo outputFromString:string];
+    OGNode *node = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->root];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
     return node;
 }
 
-+(OGDocument*)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
++ (OGDocument *)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
 {
-    NSError * error;
-    NSString * string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
+    NSError *error = nil;
+    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
     if (error == nil)
     {
         return [ObjectiveGumbo parseDocumentWithString:string];
@@ -51,13 +51,13 @@
     }
 }
 
-+(OGDocument*)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc
++ (OGDocument *)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc
 {
     NSString * string = [[NSString alloc] initWithData:data encoding:enc];
     return [ObjectiveGumbo parseDocumentWithString:string];
 }
 
-+(OGDocument*)parseDocumentWithString:(NSString *)string
++ (OGDocument *)parseDocumentWithString:(NSString *)string
 {
     GumboOutput * output = [ObjectiveGumbo outputFromString:string];
     OGDocument * node = (OGDocument*)[ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->document];
@@ -65,13 +65,13 @@
     return node;
 }
 
-+(GumboOutput*)outputFromString:(NSString*)string
++ (GumboOutput *)outputFromString:(NSString*)string
 {
     GumboOutput * output = gumbo_parse(string.UTF8String);
     return output;
 }
 
-+(OGNode*)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode
++ (OGNode *)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode
 {
     OGNode * node;
     if (gumboNode->type == GUMBO_NODE_DOCUMENT)
@@ -137,7 +137,7 @@
     return node;
 }
 
-+(NSArray*)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent
++ (NSArray *)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent
 {
     NSMutableArray * children = [NSMutableArray new];
     

@@ -9,13 +9,10 @@
 
 @interface OGElement : OGNode
 
-@property GumboTag tag;
-@property GumboNamespaceEnum tagNamespace;
+@property (nonatomic, assign) GumboTag tag;
+@property (nonatomic, assign) GumboNamespaceEnum tagNamespace;
 
-@property NSArray * children;
-@property NSArray * classes;
-@property NSDictionary * attributes;
-
--(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value;
+@property (nonatomic, strong) NSArray *classes;
+@property (nonatomic, strong) NSDictionary *attributes;
 
 @end

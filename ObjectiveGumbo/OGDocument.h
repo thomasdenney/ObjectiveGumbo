@@ -9,8 +9,8 @@
 
 @interface OGDocument : OGElement
 
-@property NSString * name;
-@property NSString * publicIdentifier;
-@property NSString * systemIdentifier;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *publicIdentifier;
+@property (nonatomic, copy) NSString *systemIdentifier;
 
 @end
