@@ -11,15 +11,16 @@
 #import "OGNode.h"
 #import "OGDocument.h"
 #import "OGText.h"
+#import "OGNode+OGElementSearch.h"
 
 @interface ObjectiveGumbo : NSObject
 
-+(OGDocument *)parseDocumentWithData:(NSData*)data encoding:(NSStringEncoding)enc;
-+(OGDocument *)parseDocumentWithString:(NSString*)string;
-+(OGDocument *)parseDocumentWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
++ (OGDocument *)parseDocumentWithData:(NSData*)data encoding:(NSStringEncoding)enc;
++ (OGDocument *)parseDocumentWithString:(NSString*)string;
++ (OGDocument *)parseDocumentWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
 
-+(OGNode *)parseNodeWithData:(NSData*)data;
-+(OGNode *)parseNodeWithString:(NSString*)string;
-+(OGNode *)parseNodeWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
++ (OGNode *)parseNodeWithData:(NSData*)data;
++ (OGNode *)parseNodeWithString:(NSString*)string;
++ (OGNode *)parseNodeWithUrl:(NSURL*)url encoding:(NSStringEncoding)enc;
 
 @end

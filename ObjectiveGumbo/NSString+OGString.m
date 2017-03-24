@@ -10,14 +10,14 @@
 
 @implementation NSString (OGString)
 
--(NSString*)escapedString
+- (NSString*)escapedString
 {
     NSString *escapedString = [self stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
     escapedString = [escapedString stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     return escapedString;
 }
 
-+(NSString*)indentationString:(int)indentationLevel
++ (NSString*)indentationString:(int)indentationLevel
 {
     NSMutableString * string = [NSMutableString new];
     for (int n = 0; n < indentationLevel; n++)

@@ -6,6 +6,7 @@
 //
 
 #import "ObjectiveGumbo.h"
+#import "OGNodeProtected.h"
 
 @implementation ObjectiveGumbo
 
@@ -76,16 +77,7 @@
     OGNode * node;
     if (gumboNode->type == GUMBO_NODE_DOCUMENT)
     {
-        OGDocument * documentNode = [[OGDocument alloc] init];
-        
-        const char * cName = gumboNode->v.document.name;
-        const char * cSystemIdentifier = gumboNode->v.document.system_identifier;
-        const char * cPublicIdentifier = gumboNode->v.document.public_identifier;
-        
-        documentNode.name = [[NSString alloc] initWithUTF8String:cName];
-        documentNode.systemIdentifier = [[NSString alloc] initWithUTF8String:cSystemIdentifier];
-        documentNode.publicIdentifier = [[NSString alloc] initWithUTF8String:cPublicIdentifier];
-        
+        OGDocument * documentNode = [[OGDocument alloc] initWithGumboNode:gumboNode];
         GumboVector * cChildren = &gumboNode->v.document.children;
         documentNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:documentNode];
         
@@ -93,35 +85,7 @@
     }
     else if (gumboNode->type == GUMBO_NODE_ELEMENT)
     {
-        OGElement * elementNode = [[OGElement alloc] init];
-        
-        elementNode.tag = gumboNode->v.element.tag;
-        elementNode.tagNamespace = gumboNode->v.element.tag_namespace;
-        
-        NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
-        
-        GumboVector * cAttributes = &gumboNode->v.element.attributes;
-        
-        for (int i = 0; i < cAttributes->length; i++)
-        {
-            GumboAttribute * cAttribute = (GumboAttribute*)cAttributes->data[i];
-            
-            const char * cName = cAttribute->name;
-            const char * cValue = cAttribute->value;
-            
-            NSString * name = [[NSString alloc] initWithUTF8String:cName];
-            NSString * value = [[NSString alloc] initWithUTF8String:cValue];
-            
-            [attributes setValue:value forKey:name];
-            
-            if ([name isEqualToString:@"class"])
-            {
-                elementNode.classes = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-            }
-        }
-        
-        elementNode.attributes = attributes;
-        
+        OGElement * elementNode = [[OGElement alloc] initWithGumboNode:gumboNode];
         GumboVector * cChildren = &gumboNode->v.element.children;
         elementNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:elementNode];
         
@@ -131,7 +95,8 @@
     {
         const char * cText = gumboNode->v.text.text;
         NSString * text = [[NSString alloc] initWithUTF8String:cText];
-        node = [[OGText alloc] initWithText:text andType:gumboNode->type];
+        
+        node = [OGText textNodeWithText:text andType:gumboNode->type];
     }
     
     return node;
@@ -141,11 +106,16 @@
 {
     NSMutableArray * children = [NSMutableArray new];
     
+    OGNode *previousSibling = nil;
     for (int i = 0; i < cChildren->length; i++)
     {
         OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
         childNode.parent = parent;
+        childNode.previousSibling = previousSibling;
         [children addObject:childNode];
+        
+        previousSibling.nextSibling = childNode;
+        previousSibling = childNode;
     }
     
     return children;

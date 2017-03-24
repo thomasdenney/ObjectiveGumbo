@@ -6,10 +6,8 @@
 //
 //
 
-#import <ObjectiveGumbo/ObjectiveGumbo.h>
-
-#import <ObjectiveGumbo/OGNode.h>
-#import <ObjectiveGumbo/OGElement.h>
+#import "OGNode.h"
+#import "OGElement.h"
 
 @interface OGNode (OGElementSearch)
 

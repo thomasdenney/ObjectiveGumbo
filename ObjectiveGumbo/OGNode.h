@@ -13,15 +13,18 @@ typedef BOOL(^SelectorBlock)(id node);
 
 @interface OGNode : NSObject
 
-@property (nonatomic, weak) OGNode *parent;
-@property (nonatomic, strong) NSArray<OGNode *> *children;
+@property (nonatomic, weak, readonly) OGNode *parent;
+@property (nonatomic, strong, readonly) NSArray<OGNode *> *children;
 
-@property (nonatomic, readonly) NSString *text;
-@property (nonatomic, strong, readonly) NSString *html;
-
--(NSString*)htmlWithIndentation:(int)indentationLevel;
+@property (nonatomic, copy, readonly) NSString *text;
+@property (nonatomic, copy, readonly) NSString *html;
 
 @property (nonatomic, readonly) OGNode *first;
 @property (nonatomic, readonly) OGNode *last;
+
+@property (nonatomic, weak, readonly) OGNode *nextSibling;
+@property (nonatomic, weak, readonly) OGNode *previousSibling;
+
+-(NSString *)htmlWithIndentation:(int)indentationLevel;
 
 @end

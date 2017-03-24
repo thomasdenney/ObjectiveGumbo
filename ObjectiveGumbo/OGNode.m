@@ -6,27 +6,24 @@
 //
 
 #import "OGNode.h"
-
-@interface OGNode ()
-
-@property (nonatomic, strong) NSString *text;
-
-@end
-
+#import "OGNodeProtected.h"
 
 @implementation OGNode
 
--(NSString*)text
+- (instancetype)initWithGumboNode:(GumboNode *)gumboNode
 {
-    return @"";
+    if (self = [super init]) {
+        // This is really an abstract class
+    }
+    return self;
 }
 
--(NSString*)html
+- (NSString *)html
 {
     return [self htmlWithIndentation:0];
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
+- (NSString *)htmlWithIndentation:(int)indentationLevel
 {
     return @"";
 }
@@ -41,6 +38,10 @@
     return [self.children lastObject];
 }
 
-
+- (NSString *)description
+{
+    NSString *className = NSStringFromClass([self class]);
+    return [NSString stringWithFormat:@"<%@: %p>", className, self];
+}
 
 @end

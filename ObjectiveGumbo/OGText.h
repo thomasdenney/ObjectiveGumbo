@@ -9,11 +9,17 @@
 
 @interface OGText : OGNode
 
-@property (nonatomic, assign) BOOL isComment;
-@property (nonatomic, assign) BOOL isCData;
-@property (nonatomic, assign) BOOL isWhitespace;
-@property (nonatomic, assign) BOOL isText;
+@property (nonatomic, assign, readonly) BOOL isComment;
+@property (nonatomic, assign, readonly) BOOL isCData;
+@property (nonatomic, assign, readonly) BOOL isWhitespace;
+@property (nonatomic, assign, readonly) BOOL isText;
 
-- (instancetype)initWithText:(NSString*)text andType:(GumboNodeType)type;
+@property (nonatomic, copy, readonly) NSString *text;
 
+@end
+
+@interface OGComment : OGText
+@end
+
+@interface OGCDataSection : OGText
 @end
