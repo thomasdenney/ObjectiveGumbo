@@ -11,8 +11,12 @@
 
 @interface OGUtility : NSObject
 
-+(NSString *)tagForGumboTag:(GumboTag)tag;
-+(GumboTag)gumboTagForTag:(NSString *)tag;
-+(NSArray *)tagStrings;
++ (instancetype)sharedInstance;
+
++ (NSString *)tagForGumboTag:(GumboTag)tag;
++ (GumboTag)gumboTagForTag:(NSString *)tag;
+
+- (NSString *)tagForGumboTag:(GumboTag)gumboTag;
+- (GumboTag)gumboTagForTag:(NSString *)tag;
 
 @end
