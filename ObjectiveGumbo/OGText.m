@@ -62,11 +62,7 @@
 - (NSString *)text
 {
     if (_text.length > 0) {
-        if (self.isWhitespace) {
-            return @"  ";
-        } else {
-            return _text;
-        }
+        return _text;
     } else {
         return @"";
     }
@@ -76,8 +72,15 @@
 
 - (NSString *)description
 {
+    NSString *debugText = _text;
+    if (debugText.length > 0) {
+        if (self.isWhitespace) {
+            debugText = @"  ";
+        }
+    }
+    
     NSString *className = NSStringFromClass([self class]);
-    return [NSString stringWithFormat:@"<%@: %p \"%@\">", className, self, self.text];
+    return [NSString stringWithFormat:@"<%@: %p \"%@\">", className, self, debugText];
 }
 
 - (NSString *)htmlWithIndentation:(int)indentationLevel
