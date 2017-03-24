@@ -21,7 +21,7 @@ OGDocumentDocType OGDocTypeFromGumboDocType(GumboQuirksModeEnum quirksMode)
             
         case GUMBO_DOCTYPE_QUIRKS:
         default:
-            return OGDocumentDocTypeQuirksMode;
+            return OGDocumentDocTypeQuirks;
     }
 }
 
@@ -36,7 +36,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
             return @"Limited Quirks Mode";
             break;
             
-        case OGDocumentDocTypeQuirksMode:
+        case OGDocumentDocTypeQuirks:
         default:
             return @"Quirks Mode";
     }

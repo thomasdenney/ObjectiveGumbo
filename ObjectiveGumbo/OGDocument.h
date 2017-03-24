@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSInteger, OGDocumentDocType) {
     OGDocumentDocTypeNoQuirks,
-    OGDocumentDocTypeQuirksMode,
+    OGDocumentDocTypeQuirks,
     OGDocumentDocTypeLimitedQuirks
 };
 
