@@ -85,6 +85,26 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
     return self;
 }
 
+- (NSString *)htmlWithIndentation:(int)indentationLevel
+{
+    NSMutableString *html = [NSMutableString stringWithFormat:@"<!DOCTYPE %@", self.name];
+    if (self.publicIdentifier.length > 0) {
+        [html appendFormat:@" \"%@\"", self.publicIdentifier];
+    }
+    
+    if (self.systemIdentifier.length > 0) {
+        [html appendFormat:@" \"%@\"", self.systemIdentifier];
+    }
+    
+    [html appendString:@">\n"];
+    
+    for (OGNode * child in self.children) {
+        [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
+    }
+    return html;
+}
+
+
 #pragma mark - Debug
 
 - (NSString *)description
