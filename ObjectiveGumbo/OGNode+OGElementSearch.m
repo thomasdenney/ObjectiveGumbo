@@ -10,7 +10,7 @@
 
 @implementation OGNode (OGElementSearch)
 
--(NSArray<OGNode *> *)select:(NSString *)selector
+- (NSArray<OGNode *> *)select:(NSString *)selector
 {
     NSArray<NSString *>* selectors = [selector componentsSeparatedByString:@" "];
     NSMutableArray<OGNode *> * allMatchingObjects = [NSMutableArray new];
@@ -18,7 +18,7 @@
     {
         if ([individualSelector hasPrefix:@"#"])
         {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
+            [allMatchingObjects addObject:[self elementWithID:[individualSelector substringFromIndex:1]]];
         }
         else if ([individualSelector hasPrefix:@"."])
         {
@@ -37,17 +37,22 @@
     return allMatchingObjects;
 }
 
--(NSArray<OGNode *> *)selectWithBlock:(SelectorBlock)block
+- (NSArray<OGNode *> *)selectWithBlock:(SelectorBlock)block
 {
-    return [NSArray new];
+    return [[NSArray alloc] init];
 }
 
--(OGNode *)first:(NSString *)selector
+- (OGNode *)selectFirstWithBlock:(SelectorBlock)block
+{
+    return nil;
+}
+
+- (OGNode *)first:(NSString *)selector
 {
     return [[self select:selector] firstObject];
 }
 
--(OGNode *)last:(NSString *)selector
+- (OGNode *)last:(NSString *)selector
 {
     return [[self select:selector] lastObject];
 }
@@ -64,7 +69,7 @@
     }];
 }
 
-- (NSArray<OGElement*> *)elementsWithClass:(NSString*)class
+- (NSArray<OGElement*> *)elementsWithClass:(NSString*)className
 {
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
@@ -72,7 +77,7 @@
             OGElement * element = (OGElement*)node;
             for (NSString * classes in element.classes)
             {
-                if ([classes isEqualToString:class])
+                if ([classes isEqualToString:className])
                 {
                     return YES;
                 }
@@ -82,11 +87,11 @@
     }];
 }
 
-- (NSArray<OGElement*> *)elementsWithID:(NSString *)elementId
+- (nullable OGElement *)elementWithID:(NSString *)elementId
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return [self selectFirstWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]]) {
-            OGElement * element = (OGElement*)node;
+            OGElement * element = (OGElement *)node;
             return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
         }
         return NO;

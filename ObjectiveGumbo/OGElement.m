@@ -63,6 +63,19 @@
     return text;
 }
 
+- (nullable OGNode *)selectFirstWithBlock:(SelectorBlock)block
+{
+    for (OGNode *child in self.children)
+    {
+        if (block(child)) {
+            return child;
+        } else {
+            return [child selectWithBlock:block];
+        }
+    }
+    return nil;
+}
+
 - (NSArray<OGNode *> *)selectWithBlock:(SelectorBlock)block
 {
     NSMutableArray * matchingChildren = [NSMutableArray new];
