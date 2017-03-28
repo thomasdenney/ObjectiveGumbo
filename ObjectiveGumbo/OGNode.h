@@ -13,21 +13,45 @@ typedef BOOL(^SelectorBlock)(id node);
 
 @class OGDocument;
 
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ Super class the DOM tree nodes are built from. This is an abstract class that doesn't get implemented directly but sets up the relationships between the other nodes.
+ */
 @interface OGNode : NSObject
 
-@property (nonatomic, weak, readonly) OGDocument *ownerDocument;
-@property (nonatomic, weak, readonly) OGNode *parent;
+/**
+ The OGDocument that owns the tree this node is part of.
+ @warning If the ObjectiveGumbo node-prefixed class methods were used instead of the document-prefixed class methods then the tree does not have a document and therefore will be nil.
+ */
+@property (nonatomic, weak, readonly, nullable) OGDocument *ownerDocument;
+
+/** The parent node that this child node belongs to */
+@property (nonatomic, weak, readonly, nullable) OGNode *parent;
+
+/** If this node has any child nodes, they will be in this array */
 @property (nonatomic, strong, readonly) NSArray<OGNode *> *children;
 
+/** Any text content contained by this node and all it's sub-nodes */
 @property (nonatomic, copy, readonly) NSString *text;
+
+/** Any HTML and text contained by this node and all it's sub-nodes */
 @property (nonatomic, copy, readonly) NSString *html;
 
-@property (nonatomic, readonly) OGNode *first;
-@property (nonatomic, readonly) OGNode *last;
+/** The first child node */
+@property (nonatomic, readonly, nullable) OGNode *first;
 
-@property (nonatomic, weak, readonly) OGNode *nextSibling;
-@property (nonatomic, weak, readonly) OGNode *previousSibling;
+/** The last child node */
+@property (nonatomic, readonly, nullable) OGNode *last;
 
--(NSString *)htmlWithIndentation:(int)indentationLevel;
+/** If this is a child node and there are other children then it is the next node in the sequence */
+@property (nonatomic, weak, readonly, nullable) OGNode *nextSibling;
+
+/** If this is a child node and there are other children then it is the previous node in the sequence or nil */
+@property (nonatomic, weak, readonly, nullable) OGNode *previousSibling;
+
+- (NSString *)htmlWithIndentation:(int)indentationLevel;
 
 @end
+
+NS_ASSUME_NONNULL_END

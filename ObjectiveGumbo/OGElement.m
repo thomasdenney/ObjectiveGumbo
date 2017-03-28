@@ -94,8 +94,8 @@
 
 - (NSString *)htmlWithIndentation:(int)indentationLevel
 {
-    NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
-    for (NSString * attribute in self.attributes)
+    NSMutableString *html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
+    for (NSString *attribute in self.attributes)
     {
         [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
     }
@@ -106,7 +106,7 @@
     else
     {
         [html appendString:@">\n"];
-        for (OGNode * child in self.children)
+        for (OGNode *child in self.children)
         {
             [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
         }

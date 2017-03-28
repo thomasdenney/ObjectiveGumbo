@@ -7,6 +7,8 @@
 
 #import "OGNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface OGText : OGNode
 
 @property (nonatomic, assign, readonly) BOOL isComment;
@@ -23,3 +25,5 @@
 
 @interface OGCDataSection : OGText
 @end
+
+NS_ASSUME_NONNULL_END

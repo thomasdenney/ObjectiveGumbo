@@ -7,6 +7,8 @@
 
 #import "OGNode.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface OGElement : OGNode
 
 @property (nonatomic, assign, readonly) GumboTag tag;
@@ -16,3 +18,5 @@
 @property (nonatomic, strong, readonly) NSDictionary *attributes;
 
 @end
+
+NS_ASSUME_NONNULL_END

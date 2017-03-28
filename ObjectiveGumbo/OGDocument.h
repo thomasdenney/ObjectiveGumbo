@@ -18,36 +18,28 @@ typedef NS_ENUM(NSInteger, OGDocumentDocType) {
     OGDocumentDocTypeLimitedQuirks      /* Document is should use almost mode */
 };
 
-/**
- * Converts OGDocType enum to an NSString for use in logging to the console
- */
+/** Converts OGDocType enum to an NSString for use in logging to the console */
 NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode);
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface OGDocument : OGElement
 
-/**
- * Indicates document has provided a doc type and it isn't automatically inferred.
- */
+/** Indicates document has provided a doc type and it isn't automatically inferred */
 @property (nonatomic, assign, readonly) BOOL hasDocType;
 
-/**
- * Shortcut for seeing if quirks mode should be enabled
- */
+/** Shortcut for seeing if quirks mode should be enabled */
 @property (nonatomic, assign, readonly) BOOL quirksMode;
 
-/**
- * The doctype name. This will usually be html
- */
+/** The doctype name. This will usually be HTML */
 @property (nonatomic, copy, readonly) NSString *name;
 
-/**
- * Doctype Public identifier if one is specified
- */
+/** Doctype Public identifier if one is specified */
 @property (nonatomic, copy, readonly) NSString *publicIdentifier;
 
-/**
- * Doctype Public identifier if one is specified
- */
+/** Doctype Public identifier if one is specified */
 @property (nonatomic, copy, readonly) NSString *systemIdentifier;
 
 @end
+
+NS_ASSUME_NONNULL_END
