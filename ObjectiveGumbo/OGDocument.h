@@ -13,9 +13,9 @@
  * See https://en.wikipedia.org/wiki/Quirks_mode for more info
  */
 typedef NS_ENUM(NSInteger, OGDocumentDocType) {
-    OGDocumentDocTypeNoQuirks,          /* Document is being read using strict mode */
-    OGDocumentDocTypeQuirks,            /* Document is using full quirks mode */
-    OGDocumentDocTypeLimitedQuirks      /* Document is being read using almost mode */
+    OGDocumentDocTypeNoQuirks,          /* Document is should use strict mode */
+    OGDocumentDocTypeQuirks,            /* Document is should use full quirks mode */
+    OGDocumentDocTypeLimitedQuirks      /* Document is should use almost mode */
 };
 
 /**
