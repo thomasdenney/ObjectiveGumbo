@@ -85,11 +85,9 @@
 
 - (NSString *)htmlWithIndentation:(int)indentationLevel
 {
-    self.text = [self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (self.isText)
     {
-        if ([self.text hasSuffix:@"\n"]) return self.text;
-        return [NSString stringWithFormat:@"%@\n", self.text];
+        return self.text;
     }
     else if (self.isComment)
     {
