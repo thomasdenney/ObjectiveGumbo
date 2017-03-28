@@ -7,79 +7,119 @@
 
 #import "ObjectiveGumbo.h"
 #import "OGNodeProtected.h"
+#import "OGError.h"
 
-@implementation ObjectiveGumbo
+typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
+    OGParseOptionsParseUseRootNode = 1 << 0, /* If set, ignore the document node and skip straight to next root node */
+};
 
-+ (OGNode *)parseNodeWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
+
+@interface OGParseError ()
+@property (nonatomic, assign) OGErrorPosition position;
+@end
+
+
+@interface ObjectiveGumboInternal : NSObject
+
+- (instancetype)initWithString:(NSString *)string;
+
+- (instancetype)initWithData:(NSData *)data
+                    encoding:(NSStringEncoding)enc;
+
+- (BOOL)parseWithOptions:(OGParseOptions)options;
+
+@property (nonatomic, copy) NSString *string;
+@property (nonatomic, strong) OGDocument *documentNode;
+@property (nonatomic, strong) OGNode *rootNode;
+@property (nonatomic, strong) NSError *parseError;
+@end
+
+
+@implementation ObjectiveGumboInternal
+
+- (instancetype)initWithString:(NSString *)string
 {
-    NSError *error = nil;
-    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
-    if (error == nil)
-    {
-        return [ObjectiveGumbo parseNodeWithString:string];
+    if (self = [super init]) {
+        self.string = string;
     }
-    else
-    {
-        return nil;
-    }
+    return self;
 }
 
-+ (OGNode *)parseNodeWithData:(NSData *)data
+- (instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)enc
 {
-    NSString * string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    return [ObjectiveGumbo parseNodeWithString:string];
+    if (self = [super init]) {
+        self.string = [[NSString alloc] initWithData:data encoding:enc];
+    }
+    return self;
 }
 
-+ (OGNode *)parseNodeWithString:(NSString *)string
+- (BOOL)parseWithOptions:(OGParseOptions)options
 {
-    GumboOutput *output = [ObjectiveGumbo outputFromString:string];
-    OGNode *node = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->root];
+    self.documentNode = nil;
+    self.rootNode = nil;
+    self.parseError = nil;
+    
+    if ((self.string == nil) || self.string.length == 0) {
+        NSError *error = [NSError errorWithDomain:OGErrorDomain
+                                             code:OGErrorNoContent
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Data is empty or doesn't exist so there is nothing to parse"}];
+        
+        self.parseError = error;
+        return NO;
+    }
+    
+    if (![self.string canBeConvertedToEncoding:NSUTF8StringEncoding]) {
+        NSError *error = [NSError errorWithDomain:OGErrorDomain
+                                             code:OGErrorNotUTF8Compatible
+                                         userInfo:@{NSLocalizedDescriptionKey: @"Text cannot be converted to UTF-8 without data loss."}];
+        
+        self.parseError = error;
+        return NO;
+    }
+
+    
+    GumboOutput *output = gumbo_parse(self.string.UTF8String);
+    
+    if (output->errors.length != 0) {
+        GumboError *error = output->errors.data[0];
+        if (error->type == GUMBO_ERR_PARSER) {
+            GumboParserError parseError = error->v.parser;
+            
+            NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+            
+            OGErrorPosition position = {error->position.line, error->position.column, error->position.offset};
+            
+            [userInfo setValue:@"Cannot parse HTML" forKey:NSLocalizedDescriptionKey];
+            
+            OGParseError *error = [OGParseError errorWithDomain:OGErrorDomain
+                                                           code:OGErrorNoContent
+                                                       userInfo:userInfo.copy];
+            error.position = position;
+            self.parseError = error;
+            return NO;
+        }
+    }
+
+    BOOL useRoot = options & OGParseOptionsParseUseRootNode;
+    GumboNode *gumboNode = (useRoot ? output->root : output->document);
+    
+    OGNode *node = [self objectiveGumboNodeFromGumboNode:gumboNode];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
-    return node;
+    
+    self.rootNode = (useRoot ? node : [node.children firstObject]);
+    
+    return YES;
 }
 
-+ (OGDocument *)parseDocumentWithUrl:(NSURL *)url encoding:(NSStringEncoding)enc
-{
-    NSError *error = nil;
-    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:&error];
-    if (error == nil)
-    {
-        return [ObjectiveGumbo parseDocumentWithString:string];
-    }
-    else
-    {
-        return nil;
-    }
-}
-
-+ (OGDocument *)parseDocumentWithData:(NSData *)data encoding:(NSStringEncoding)enc
-{
-    NSString * string = [[NSString alloc] initWithData:data encoding:enc];
-    return [ObjectiveGumbo parseDocumentWithString:string];
-}
-
-+ (OGDocument *)parseDocumentWithString:(NSString *)string
-{
-    GumboOutput * output = [ObjectiveGumbo outputFromString:string];
-    OGDocument * node = (OGDocument*)[ObjectiveGumbo objectiveGumboNodeFromGumboNode:output->document];
-    gumbo_destroy_output(&kGumboDefaultOptions, output);
-    return node;
-}
-
-+ (GumboOutput *)outputFromString:(NSString*)string
-{
-    GumboOutput * output = gumbo_parse(string.UTF8String);
-    return output;
-}
-
-+ (OGNode *)objectiveGumboNodeFromGumboNode:(GumboNode*)gumboNode
+- (OGNode *)objectiveGumboNodeFromGumboNode:(GumboNode *)gumboNode
 {
     OGNode * node;
     if (gumboNode->type == GUMBO_NODE_DOCUMENT)
     {
-        OGDocument * documentNode = [[OGDocument alloc] initWithGumboNode:gumboNode];
+        OGDocument *documentNode = [[OGDocument alloc] initWithGumboNode:gumboNode];
+        self.documentNode = documentNode;
         GumboVector * cChildren = &gumboNode->v.document.children;
-        documentNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:documentNode];
+        documentNode.children = [self arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:documentNode];
         
         node = documentNode;
     }
@@ -87,29 +127,31 @@
     {
         OGElement * elementNode = [[OGElement alloc] initWithGumboNode:gumboNode];
         GumboVector * cChildren = &gumboNode->v.element.children;
-        elementNode.children = [ObjectiveGumbo arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:elementNode];
+        elementNode.children = [self arrayOfObjectiveGumboNodesFromGumboVector:cChildren andParent:elementNode];
+        elementNode.ownerDocument = self.documentNode;
         
         node = elementNode;
     }
     else
     {
-        const char * cText = gumboNode->v.text.text;
-        NSString * text = [[NSString alloc] initWithUTF8String:cText];
+        const char *cText = gumboNode->v.text.text;
+        NSString *text = [[NSString alloc] initWithUTF8String:cText];
         
         node = [OGText textNodeWithText:text andType:gumboNode->type];
+        node.ownerDocument = self.documentNode;
     }
     
     return node;
 }
 
-+ (NSArray *)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent
+- (NSArray *)arrayOfObjectiveGumboNodesFromGumboVector:(GumboVector*)cChildren andParent:(OGNode*)parent
 {
-    NSMutableArray * children = [NSMutableArray new];
+    NSMutableArray *children = [NSMutableArray new];
     
     OGNode *previousSibling = nil;
     for (int i = 0; i < cChildren->length; i++)
     {
-        OGNode * childNode = [ObjectiveGumbo objectiveGumboNodeFromGumboNode:cChildren->data[i]];
+        OGNode * childNode = [self objectiveGumboNodeFromGumboNode:cChildren->data[i]];
         childNode.parent = parent;
         childNode.previousSibling = previousSibling;
         [children addObject:childNode];
@@ -119,6 +161,98 @@
     }
     
     return children;
+}
+
+@end
+
+
+@implementation ObjectiveGumbo
+
+#pragma mark - Private internal methods
+//* For returning two types of nodes from the internal gumbo object */
+
++ (nullable OGNode *)documentFromGumboInternal:(ObjectiveGumboInternal *)gumbo error:(NSError **)error
+{
+    BOOL success = [gumbo parseWithOptions:0];
+    if (success) {
+        return gumbo.documentNode;
+    } else {
+        if (error != nil) {
+            *error = gumbo.parseError;
+        }
+        return nil;
+    }
+}
+
++ (nullable OGNode *)nodeFromGumboInternal:(ObjectiveGumboInternal *)gumbo error:(NSError **)error
+{
+    BOOL success = [gumbo parseWithOptions:OGParseOptionsParseUseRootNode];
+    if (success) {
+        return gumbo.rootNode;
+    } else {
+        if (error != nil) {
+            *error = gumbo.parseError;
+        }
+        return nil;
+    }
+}
+
+#pragma mark - Class method initialisers
+
++ (nullable OGDocument *)documentWithData:(NSData *)data
+                                 encoding:(NSStringEncoding)enc
+                                    error:(NSError **)error
+{
+    ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithData:data encoding:enc];
+    return [ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
+}
+
++ (nullable OGNode *)nodeWithData:(NSData *)data
+                         encoding:(NSStringEncoding)enc
+                            error:(NSError **)error
+{
+    ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithData:data encoding:enc];
+    return [ObjectiveGumbo nodeFromGumboInternal:gumbo error:error];
+}
+
++ (nullable OGDocument *)documentWithString:(NSString *)string
+                                      error:(NSError **)error
+{
+    ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithString:string];
+    return [ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
+}
+
++ (nullable OGNode *)nodeWithString:(NSString *)string
+                              error:(NSError **)error
+{
+    ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithString:string];
+    return [ObjectiveGumbo nodeFromGumboInternal:gumbo error:error];
+}
+
++ (nullable OGDocument *)documentWithURL:(NSURL *)url
+                                encoding:(NSStringEncoding)enc
+                                   error:(NSError **)error
+{
+    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:error];
+    if (string) {
+        ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithString:string];
+        return [ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
+    } else {
+        return nil;
+    }
+}
+
++ (nullable OGNode *)nodeWithURL:(NSURL *)url
+                        encoding:(NSStringEncoding)enc
+                           error:(NSError **)error
+{
+    NSString *string = [[NSString alloc] initWithContentsOfURL:url encoding:enc error:error];
+    if (string) {
+        ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithString:string];
+        return [self nodeFromGumboInternal:gumbo error:error];
+    } else {
+        return nil;
+    }
 }
 
 @end

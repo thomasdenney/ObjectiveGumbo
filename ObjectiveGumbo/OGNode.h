@@ -11,8 +11,11 @@
 
 typedef BOOL(^SelectorBlock)(id node);
 
+@class OGDocument;
+
 @interface OGNode : NSObject
 
+@property (nonatomic, weak, readonly) OGDocument *ownerDocument;
 @property (nonatomic, weak, readonly) OGNode *parent;
 @property (nonatomic, strong, readonly) NSArray<OGNode *> *children;
 

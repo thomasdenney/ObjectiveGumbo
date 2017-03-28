@@ -10,6 +10,7 @@
 
 @interface OGNode ()
 @property (nonatomic, weak) OGNode *parent;
+@property (nonatomic, weak) OGDocument *ownerDocument;
 @property (nonatomic, strong) NSArray<OGNode *> *children;
 
 @property (nonatomic, weak) OGNode *nextSibling;
