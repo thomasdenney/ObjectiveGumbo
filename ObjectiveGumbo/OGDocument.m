@@ -7,6 +7,7 @@
 
 #import "OGDocument.h"
 #import "OGText.h"
+#import "OGNode+OGElementSearch.h"
 
 OGDocumentDocType OGDocTypeFromGumboDocType(GumboQuirksModeEnum quirksMode)
 {
@@ -50,6 +51,15 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *systemIdentifier;
 @property (nonatomic, copy) NSString *publicIdentifier;
+
+@property (nonatomic, strong) NSDictionary<NSString *, OGElement *>* meta;
+@property (nonatomic, strong) NSArray<OGElement *>* anchors;
+@property (nonatomic, strong) NSArray<OGElement *>* forms;
+@property (nonatomic, strong) NSArray<OGElement *>* images;
+@property (nonatomic, strong) NSArray<OGElement *>* links;
+
+@property (nonatomic, strong) OGElement *head;
+@property (nonatomic, strong) OGElement *body;
 
 @end
 
@@ -104,6 +114,83 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
     return html;
 }
 
+- (NSDictionary<NSString *, OGElement *>*)meta
+{
+    if (_meta == nil) {
+        NSArray<OGElement *> *elements = [self elementsWithTag:GUMBO_TAG_META attribute:@"name"];
+        NSMutableDictionary *meta = [[NSMutableDictionary alloc] initWithCapacity:elements.count];
+        for (OGElement *metaElement in elements) {
+            [meta setValue:metaElement forKey:metaElement.attributes[@"name"]];
+        }
+        self.meta = meta.copy;
+    }
+    return _meta;
+}
+
+- (NSArray<OGElement *>*)anchors
+{
+    if (_anchors == nil) {
+        self.anchors = [self elementsWithTag:GUMBO_TAG_A attribute:@"name"];
+    }
+    return _anchors;
+}
+
+- (NSArray<OGElement *>*)forms
+{
+    if (_forms == nil) {
+        self.forms = [self elementsWithTag:GUMBO_TAG_FORM];
+    }
+    return _forms;
+}
+
+- (NSArray<OGElement *>*)images
+{
+    if (_images == nil) {
+        self.images = [self elementsWithTag:GUMBO_TAG_IMG];
+    }
+    return _images;
+}
+
+- (NSArray<OGElement *>*)links
+{
+    if (_links == nil) {
+        self.links = [self elementsContainingLinks];
+    }
+    return _links;
+}
+
+/** Private method that returns @b a or @b area tags that have href attributes on them */
+- (NSArray<OGElement *>*)elementsContainingLinks
+{
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]])
+        {
+            OGElement * element = (OGElement*)node;
+            if (element.tag == GUMBO_TAG_A || element.tag == GUMBO_TAG_AREA) {
+                if (element.attributes[@"href"] != nil) {
+                    return YES;
+                }
+            }
+        }
+        return NO;
+    }];
+}
+
+- (OGElement *)head
+{
+    if (_head == nil) {
+        self.head = [[self elementsWithTag:GUMBO_TAG_HEAD] firstObject];
+    }
+    return _head;
+}
+
+- (OGElement *)body
+{
+    if (_body == nil) {
+        self.body = [[self elementsWithTag:GUMBO_TAG_BODY] firstObject];
+    }
+    return _body;
+}
 
 #pragma mark - Debug
 

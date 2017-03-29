@@ -57,7 +57,7 @@
     return [[self select:selector] lastObject];
 }
 
-- (NSArray<OGElement*> *)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value
+- (NSArray<OGElement*> *)elementsWithAttribute:(NSString *)attribute value:(NSString *)value
 {
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
@@ -105,6 +105,18 @@
         {
             OGElement * element = (OGElement*)node;
             return element.tag == tag;
+        }
+        return NO;
+    }];
+}
+
+- (NSArray<OGElement*> *)elementsWithTag:(GumboTag)tag attribute:(NSString *)attribute
+{
+    return [self selectWithBlock:^BOOL(id node) {
+        if ([node isKindOfClass:[OGElement class]])
+        {
+            OGElement * element = (OGElement*)node;
+            return ((element.tag == tag) && (element.attributes[attribute] != nil));
         }
         return NO;
     }];

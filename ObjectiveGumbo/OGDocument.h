@@ -40,6 +40,27 @@ NS_ASSUME_NONNULL_BEGIN
 /** Doctype Public identifier if one is specified */
 @property (nonatomic, copy, readonly) NSString *systemIdentifier;
 
+/** Return a dictionary of @b meta elements with attribute names as the keys that are contained within the document. Note meta */
+@property (nonatomic, strong, readonly) NSDictionary<NSString *, OGElement *>* meta;
+
+/** Returns @b a elements that have name attributes contained within the document */
+@property (nonatomic, strong, readonly) NSArray<OGElement *>* anchors;
+
+/** Returns @b form elements contained within the document */
+@property (nonatomic, strong, readonly) NSArray<OGElement *>* forms;
+
+/** Returns @b img elements contained within the document */
+@property (nonatomic, strong, readonly) NSArray<OGElement *>* images;
+
+/** Returns @b a elements and @b area elements that have an href within the document */
+@property (nonatomic, strong, readonly) NSArray<OGElement *>* links;
+
+/** Returns the head element contained within the document */
+@property (nonatomic, strong, readonly, nullable) OGElement *head;
+
+/** Returns the body element contained within the document */
+@property (nonatomic, strong, readonly, nullable) OGElement *body;
+
 @end
 
 NS_ASSUME_NONNULL_END
