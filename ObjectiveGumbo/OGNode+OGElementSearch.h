@@ -39,14 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
                                          value:(NSString *)value;
 
 /** Returns an array containing elements matching the given HTML tag and attribute */
-- (NSArray<OGElement*> *)elementsWithTag:(GumboTag)tag
+- (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag
                                attribute:(NSString *)attribute;
 
 /** Returns an array containing elements matching the given HTML class name */
 - (NSArray<OGElement*> *)elementsWithClass:(NSString*)className;
 
 /** Returns an array containing elements matching the given HTML tag */
-- (NSArray<OGElement*> *)elementsWithTag:(GumboTag)tag;
+- (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag;
 
 @end
 

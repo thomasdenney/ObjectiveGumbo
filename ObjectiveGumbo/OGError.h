@@ -6,7 +6,6 @@
 //
 //
 
-#import "error.h"
 #import <Foundation/Foundation.h>
 
 extern NSString * const OGErrorDomain;

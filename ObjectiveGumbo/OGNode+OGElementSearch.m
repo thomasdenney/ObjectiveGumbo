@@ -26,7 +26,7 @@
         }
         else
         {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGUtility gumboTagForTag:individualSelector]]];
+            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:OGTagFromNSString(individualSelector)]];
         }
     }
     
@@ -98,7 +98,7 @@
     }];
 }
 
-- (NSArray<OGElement*> *)elementsWithTag:(GumboTag)tag
+- (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag
 {
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
@@ -110,7 +110,7 @@
     }];
 }
 
-- (NSArray<OGElement*> *)elementsWithTag:(GumboTag)tag attribute:(NSString *)attribute
+- (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag attribute:(NSString *)attribute
 {
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])

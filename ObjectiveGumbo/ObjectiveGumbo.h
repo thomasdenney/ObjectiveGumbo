@@ -7,11 +7,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "OGTags.h"
 #import "OGElement.h"
 #import "OGNode.h"
+#import "OGNode+OGElementSearch.h"
 #import "OGDocument.h"
 #import "OGText.h"
-#import "OGNode+OGElementSearch.h"
 #import "OGError.h"
 
 NS_ASSUME_NONNULL_BEGIN

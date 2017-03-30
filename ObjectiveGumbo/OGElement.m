@@ -6,13 +6,12 @@
 //
 
 #import "OGElement.h"
-#import "ObjectiveGumbo.h"
 #import "OGNode+OGElementSearch.h"
 
 @interface OGElement ()
 
-@property (nonatomic, assign) GumboTag tag;
-@property (nonatomic, assign) GumboNamespaceEnum tagNamespace;
+@property (nonatomic, assign) OGTag tag;
+@property (nonatomic, assign) OGNamespace tagNamespace;
 
 @property (nonatomic, strong) NSArray *classes;
 @property (nonatomic, strong) NSDictionary *attributes;
@@ -25,8 +24,8 @@
 - (instancetype)initWithGumboNode:(GumboNode *)gumboNode
 {
     if (self = [super init]) {
-        self.tag = gumboNode->v.element.tag;
-        self.tagNamespace = gumboNode->v.element.tag_namespace;
+        self.tag = OGTagFromGumboTag(gumboNode->v.element.tag);
+        self.tagNamespace = OGNamespaceFromGumboNamespace(gumboNode->v.element.tag_namespace);
         
         NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
         GumboVector * cAttributes = &gumboNode->v.element.attributes;
@@ -94,7 +93,7 @@
 
 - (NSString *)htmlWithIndentation:(int)indentationLevel
 {
-    NSMutableString *html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
+    NSMutableString *html = [NSMutableString stringWithFormat:@"<%@", NSStringFromOGTag(self.tag)];
     for (NSString *attribute in self.attributes)
     {
         [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
@@ -110,7 +109,7 @@
         {
             [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
         }
-        [html appendFormat:@"</%@>\n", [OGUtility tagForGumboTag:self.tag]];
+        [html appendFormat:@"</%@>\n", NSStringFromOGTag(self.tag)];
     }
     return html;
 }
@@ -119,7 +118,7 @@
 {
     NSString *className = NSStringFromClass([self class]);
     NSMutableString *newString = [[NSMutableString alloc] init];
-    [newString appendFormat:@"<%@: %p %@", className, self, [OGUtility tagForGumboTag:self.tag]];
+    [newString appendFormat:@"<%@: %p %@", className, self, NSStringFromOGTag(self.tag)];
     
     NSString *elementID = self.attributes[@"id"];
     if (elementID.length > 0) {
