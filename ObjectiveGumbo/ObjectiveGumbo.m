@@ -8,6 +8,7 @@
 #import "ObjectiveGumbo.h"
 #import "OGNodeProtected.h"
 #import "OGError.h"
+#import "error.h"
 
 typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
     OGParseOptionsParseUseRootNode = 1 << 0, /* If set, ignore the document node and skip straight to next root node */
