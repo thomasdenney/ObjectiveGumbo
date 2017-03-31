@@ -76,7 +76,9 @@
     NSString *debugText = _text;
     if (debugText.length > 0) {
         if (self.isWhitespace) {
-            debugText = @"  ";
+            debugText = [debugText stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+            debugText = [debugText stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+            debugText = [debugText stringByReplacingOccurrencesOfString:@" " withString:@"\\w"];
         }
     }
     
@@ -86,15 +88,22 @@
 
 - (NSString *)htmlWithIndentation:(int)indentationLevel
 {
-    if (self.isText)
+    if (self.isComment)
+    {
+        return [NSString stringWithFormat:@"<!--%@-->", self.text];
+    }
+    else if (self.isWhitespace)
+    {
+        return @"";
+    }
+    else if (self.isText)
+    {
+        return [self.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    else
     {
         return self.text;
     }
-    else if (self.isComment)
-    {
-        return [NSString stringWithFormat:@"<!--%@-->\n", self.text];
-    }
-    return [NSString indentationString:indentationLevel];
 }
 
 @end

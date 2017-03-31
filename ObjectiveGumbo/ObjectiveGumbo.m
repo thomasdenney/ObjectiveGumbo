@@ -158,6 +158,14 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
     for (int i = 0; i < cChildren->length; i++)
     {
         OGNode * childNode = [self objectiveGumboNodeFromGumboNode:cChildren->data[i]];
+        
+        if ([childNode isKindOfClass:[OGText class]]) {
+            OGText *textNode = (OGText *)childNode;
+            if (textNode.isWhitespace) {
+                continue;
+            }
+        }
+        
         childNode.parent = parent;
         childNode.previousSibling = previousSibling;
         [children addObject:childNode];

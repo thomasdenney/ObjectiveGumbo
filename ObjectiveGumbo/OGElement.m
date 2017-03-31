@@ -6,6 +6,7 @@
 //
 
 #import "OGElement.h"
+#import "OGText.h"
 #import "OGNode+OGElementSearch.h"
 
 @interface OGElement ()
@@ -100,16 +101,20 @@
     }
     if (self.children.count == 0)
     {
-        [html appendString:@" />\n"];
+        [html appendString:@" />"];
     }
     else
     {
-        [html appendString:@">\n"];
+        [html appendString:@">"];
         for (OGNode *child in self.children)
         {
-            [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
+            if ([child isKindOfClass:[OGText class]]) {
+                [html appendString:child.html];
+            } else {
+                [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
+            }
         }
-        [html appendFormat:@"</%@>\n", NSStringFromOGTag(self.tag)];
+        [html appendFormat:@"</%@>", NSStringFromOGTag(self.tag)];
     }
     return html;
 }
