@@ -32,6 +32,8 @@ typedef struct OGErrorPosition OGErrorPosition;
  */
 @interface OGParseError : NSError
 @property (nonatomic, assign, readonly) OGErrorPosition position;
+- (instancetype)initWithDomain:(NSErrorDomain)domain code:(NSInteger)code position:(OGErrorPosition)position userInfo:(NSDictionary *)dict;
++ (instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code position:(OGErrorPosition)position userInfo:(nullable NSDictionary *)dict;
 @end
 
 

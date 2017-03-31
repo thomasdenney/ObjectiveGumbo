@@ -14,12 +14,6 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
     OGParseOptionsParseUseRootNode = 1 << 0, /* If set, ignore the document node and skip straight to next root node */
 };
 
-
-@interface OGParseError ()
-@property (nonatomic, assign) OGErrorPosition position;
-@end
-
-
 @interface ObjectiveGumboInternal : NSObject
 
 - (instancetype)initWithString:(NSString *)string;
@@ -78,31 +72,42 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
         return NO;
     }
 
-    
     GumboOutput *output = gumbo_parse(self.string.UTF8String);
     
     if (output->errors.length != 0) {
-        GumboError *error = output->errors.data[0];
-        if (error->type == GUMBO_ERR_PARSER) {
-            GumboParserError parseError = error->v.parser;
+        int error_count = output->errors.length;
+        
+        NSMutableArray *errorObjects = [NSMutableArray arrayWithCapacity:error_count];
+        for (int i = 0; i < error_count; i++) {
             
-            NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-            
-            OGErrorPosition position = {error->position.line, error->position.column, error->position.offset};
-            
-            [userInfo setValue:@"Cannot parse HTML" forKey:NSLocalizedDescriptionKey];
-            
-            OGParseError *error = [OGParseError errorWithDomain:OGErrorDomain
-                                                           code:OGErrorNoContent
-                                                       userInfo:userInfo.copy];
-            error.position = position;
-            self.parseError = error;
-            return NO;
+            GumboError *gumbo_error = output->errors.data[i];
+            if (gumbo_error->type == GUMBO_ERR_PARSER) {
+                GumboParserError gumbo_parse_error = gumbo_error->v.parser;
+                
+                NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+                OGErrorPosition position = {gumbo_error->position.line, gumbo_error->position.column, gumbo_error->position.offset};
+                
+                [userInfo setValue:@"Cannot parse HTML" forKey:NSLocalizedDescriptionKey];
+                
+                OGParseError *parseError = [OGParseError errorWithDomain:OGErrorDomain
+                                                                code:OGErrorParser
+                                                            position:position
+                                                            userInfo:userInfo.copy];
+                
+                [errorObjects addObject:parseError];
+            }
         }
+        
+        NSDictionary *userInfo = @{NSUnderlyingErrorKey: errorObjects};
+        self.parseError = [NSError errorWithDomain:OGErrorDomain code:OGErrorParser userInfo:userInfo];
     }
 
     BOOL useRoot = options & OGParseOptionsParseUseRootNode;
     GumboNode *gumboNode = (useRoot ? output->root : output->document);
+    
+    if (gumboNode->v.element.tag == GUMBO_TAG_UNKNOWN) {
+        return NO;
+    }
     
     OGNode *node = [self objectiveGumboNodeFromGumboNode:gumboNode];
     gumbo_destroy_output(&kGumboDefaultOptions, output);
