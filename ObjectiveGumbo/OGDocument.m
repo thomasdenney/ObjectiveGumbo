@@ -117,7 +117,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (NSDictionary<NSString *, OGElement *>*)meta
 {
     if (_meta == nil) {
-        NSArray<OGElement *> *elements = [self elementsWithTag:GUMBO_TAG_META attribute:@"name"];
+        NSArray<OGElement *> *elements = [self elementsWithTag:OGTagMeta attribute:@"name"];
         NSMutableDictionary *meta = [[NSMutableDictionary alloc] initWithCapacity:elements.count];
         for (OGElement *metaElement in elements) {
             [meta setValue:metaElement forKey:metaElement.attributes[@"name"]];
@@ -130,7 +130,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (NSArray<OGElement *>*)anchors
 {
     if (_anchors == nil) {
-        self.anchors = [self elementsWithTag:GUMBO_TAG_A attribute:@"name"];
+        self.anchors = [self elementsWithTag:OGTagA attribute:@"name"];
     }
     return _anchors;
 }
@@ -138,7 +138,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (NSArray<OGElement *>*)forms
 {
     if (_forms == nil) {
-        self.forms = [self elementsWithTag:GUMBO_TAG_FORM];
+        self.forms = [self elementsWithTag:OGTagForm];
     }
     return _forms;
 }
@@ -146,7 +146,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (NSArray<OGElement *>*)images
 {
     if (_images == nil) {
-        self.images = [self elementsWithTag:GUMBO_TAG_IMG];
+        self.images = [self elementsWithTag:OGTagImg];
     }
     return _images;
 }
@@ -166,7 +166,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
-            if (element.tag == GUMBO_TAG_A || element.tag == GUMBO_TAG_AREA) {
+            if (element.tag == OGTagA || element.tag == OGTagArea) {
                 if (element.attributes[@"href"] != nil) {
                     return YES;
                 }
@@ -179,7 +179,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (OGElement *)head
 {
     if (_head == nil) {
-        self.head = [[self elementsWithTag:GUMBO_TAG_HEAD] firstObject];
+        self.head = [[self elementsWithTag:OGTagHead] firstObject];
     }
     return _head;
 }
@@ -187,7 +187,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 - (OGElement *)body
 {
     if (_body == nil) {
-        self.body = [[self elementsWithTag:GUMBO_TAG_BODY] firstObject];
+        self.body = [[self elementsWithTag:OGTagBody] firstObject];
     }
     return _body;
 }
