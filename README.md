@@ -2,10 +2,6 @@
 
 ObjectiveGumbo is a set of classes that make it easier to interact with Gumbo, Google's HTML5 parsing library (written in C), from Objective-C.
 
-## Examples
-
-Examples were originally packaged with ObjectiveGumbo, however in order to avoid it getting bloated I've moved them into a separate repository. For examples for iOS and OSX please now go to my [OG-Demos repository](https://github.com/programmingthomas/OG-Demos).
-
 ## Compilation
 The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
 
@@ -27,22 +23,25 @@ When you want to use ObjectiveGumbo in your project, simply import the header:
 
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
 ```obj-c
-OGNode *data = [ObjectiveGumbo parseDocumentWithUrl:[NSURL URLWithString:@"http://news.ycombinator.com"]];
+OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"http://news.ycombinator.com"]
+                                  encoding:NSUTF8Encoding
+                                     error:nil];
 NSArray *tableRows = [data elementsWithClass:@"title"];
 for (OGElement *tableRow in tableRows)
 {
 	if (tableRow.children.count > 1)
 	{
-		OGElement * link = tableRow.children[0];
+		OGElement *link = tableRow.children[0];
 		NSLog(@"%@", link.attributes[@"href"]);
 	}
 }
-```
 
 Get the body text of BBC News:
 ```obj-c
-OGNode * data = [ObjectiveGumbo parseDocumentWithUrl:[NSURL URLWithString:@"http://bbc.co.uk/news"]];
-OGElemet * body = [data elementsWithTag:GUMBO_TAG_BODY];
+OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.co.uk/news"]
+                                     encoding:NSUTF8Encoding
+                                        error:nil];
+OGElement *body = doc.body;
 NSLog(@"%@", body.text);
 ```
 
