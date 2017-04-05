@@ -24,7 +24,7 @@ When you want to use ObjectiveGumbo in your project, simply import the header:
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
 ```obj-c
 OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"http://news.ycombinator.com"]
-                                  encoding:NSUTF8Encoding
+                                  encoding:NSUTF8StringEncoding
                                      error:nil];
 NSArray *tableRows = [data elementsWithClass:@"title"];
 for (OGElement *tableRow in tableRows)
@@ -40,11 +40,33 @@ for (OGElement *tableRow in tableRows)
 Get the body text of BBC News:
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.co.uk/news"]
-                                     encoding:NSUTF8Encoding
+                                     encoding:NSUTF8StringEncoding
                                         error:nil];
 OGElement *body = doc.body;
 NSLog(@"%@", body.text);
 ```
+
+Use basic CSS selectors to extract elements
+```obj-c
+OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.reddit.com"]
+                                     encoding:NSUTF8StringEncoding
+                                        error:nil];
+NSArray *storyLinks = doc[@".entry a.title"];
+
+for (OGElement *link in storyLinks) {
+    NSLog(@"Link Text: %@", link.attributes[@"href"]);
+}
+```
+
+Extract Facebook Open Graph Tags
+```obj-c
+OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.facebook.com"]
+                                     encoding:NSUTF8StringEncoding
+                                        error:nil];
+OGElement *imageElement = [doc firstElementForRDFaProperty:@"og:image"];
+NSLog(@"Image URL: %@", imageElement.attributes[@"content"]);
+```
+
 
 ## Why use this over the plain C API?
 This has been written with object-orientation and Cocoa in mind to make it a lot easier to interact with from Objective-C, which also gains the benefits of not having to worry about C-style pointers and releasing memory. Furthermore, it also uses 'native' Objective-C paradigms such as dictionaries and arrays rather than the Vector implementation provided Gumbo. It also reduces the amount of code you have to write by allowing you to quickly fetch tags based on tag, ID or class (like jQuery). 

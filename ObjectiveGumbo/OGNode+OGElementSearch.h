@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
  @interface OGNode (OGElementSearch)
 
+- (NSArray *)objectForKeyedSubscript:(NSString *)key;
+
 /** Returns an array of nodes matching the given CSS selector e.g. #name for ID, .name for class or name for tag */
 - (NSArray<OGNode *> *)select:(NSString*)selector;
 
@@ -47,6 +49,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Returns an array containing elements matching the given HTML tag */
 - (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag;
+
+- (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag
+                                   class:(NSString*)className;
+
+
+/** Returns all the element that matches a given RDFa property */
+- (NSArray<OGElement*> *)elementsForRDFaProperty:(NSString *)property;
+
+/** Returns the first element that matches a given RDFa property */
+- (nullable OGElement *)firstElementForRDFaProperty:(NSString *)property;
+
+/** Returns the RDFa property value of a given element */
+@property (nonatomic, readonly, nullable) NSString *RDFaProperty;
 
 @end
 
