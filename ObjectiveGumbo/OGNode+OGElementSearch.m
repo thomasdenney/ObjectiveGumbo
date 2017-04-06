@@ -14,8 +14,26 @@
 
 
 @interface NSString (OGElementSearch)
+
+/**
+ Useful for extracting groups of CSS selectors seperated by a , e.g. ".header, .footer"
+ */
 - (NSArray<NSString *> *)selectorGroups;
+
+/**
+ Useful for extracting individual CSS selectors in a selector group string such as ".header div.intro"
+ */
 - (NSArray<NSString *> *)individualSelectors;
+
+/**
+ Split up and return valid class selectors
+ */
+- (NSArray<NSString *> *)classSelectors;
+
+/**
+ Split a string in two parts when it encounters the string parameter
+ */
+- (NSArray<NSString *> *)componentsChoppedByString:(NSString *)string;
 @end
 
 
@@ -39,6 +57,57 @@
 - (NSArray<NSString *> *)individualSelectors
 {
     return [[self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsSeparatedByString:@" "];
+}
+// p.test = @"p" "test"
+// .test = @"", "test"
+// .test.info = @"", @"test.info"
+- (NSArray<NSString *> *)componentsChoppedByString:(NSString *)string
+{
+    // Always return an array with two strings in even if it has empty last part
+    NSRange range = [self rangeOfString:string];
+    
+    // chop mark string not found, return empty strings
+    if (range.location == NSNotFound)
+    {
+        return [NSArray arrayWithObjects:self, @""];
+    }
+    // chop mark string at the beginning, move everything into second string
+    else if (range.location == 0) {
+        NSString *secondPart = [self substringFromIndex:range.location + 1];
+        return [NSArray arrayWithObjects:@"", secondPart, nil];
+    } else {
+        NSString *firstPart = [self substringToIndex:range.location];
+        NSString *secondPart = [self substringFromIndex:range.location + 1];
+        return [NSArray arrayWithObjects:firstPart, secondPart, nil];
+    }
+}
+- (NSArray<NSString *> *)classSelectors
+{
+    NSMutableArray *selectors = [NSMutableArray array];
+    
+    NSUInteger i = 0, stringLength = self.length;
+    
+    NSRange selectorRange, searchRange, dotRange;
+    while (i < stringLength) {
+        searchRange = NSMakeRange(i, stringLength - i);
+        dotRange = [self rangeOfString:@"." options:NULL range:searchRange];
+        
+        if (dotRange.location != NSNotFound) {
+            selectorRange = NSMakeRange(i, (dotRange.location - i));
+        } else {
+            // Handle case where we are at the end of the string with no more .'s
+            selectorRange = searchRange;
+        }
+        
+        // Only ensure whole selectors get added
+        if (selectorRange.length > 0) {
+            NSString *selector = [self substringWithRange:selectorRange];
+            [selectors addObject:selector];
+        }
+        i += selectorRange.length + dotRange.length;
+    }
+    
+    return selectors.copy;
 }
 @end
 
@@ -89,13 +158,14 @@
     if ([selector hasPrefix:@"#"]) {
         elements = @[[element elementWithID:[selector substringFromIndex:1]]];
     }
-    else if ([selector hasPrefix:@"."])
-    {
-        elements = [element elementsWithClass:[selector substringFromIndex:1]];
-    }
     else if ([selector containsString:@"."]) {
-        NSArray *selectorParts = [selector componentsSeparatedByString:@"."];
-        elements = [element elementsWithTag:OGTagFromNSString(selectorParts[0]) class:selectorParts[1]];
+        NSArray<NSString *> *selectorParts = [selector componentsChoppedByString:@"."];
+        
+        if ([selectorParts[0] isEqualToString:@""]) {
+            elements = [element elementsWithClass:[selector substringFromIndex:1]];
+        } else {
+            elements = [element elementsWithTag:OGTagFromNSString(selectorParts[0]) class:selectorParts[1]];
+        }
     }
     else if ([selector hasPrefix:@"*"])
     {
@@ -155,17 +225,21 @@
 
 - (NSArray<OGElement*> *)elementsWithClass:(NSString*)className
 {
+    NSArray<NSString *>* targetClasses = [className classSelectors];
+    if (targetClasses.count == 0) {
+        return [NSArray array];
+    }
+    
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
-            for (NSString * classes in element.classes)
-            {
-                if ([classes isEqualToString:className])
-                {
-                    return YES;
+            for (NSString *targetClassName in targetClasses) {
+                if (![element.classes containsObject:targetClassName]) {
+                    return NO;
                 }
             }
+            return YES;
         }
         return NO;
     }];
@@ -173,6 +247,11 @@
 
 - (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag class:(NSString*)className
 {
+    NSArray<NSString *>* targetClasses = [className classSelectors];
+    if (targetClasses.count == 0) {
+        return [NSArray array];
+    }
+    
     return [self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
@@ -181,13 +260,12 @@
                 return NO;
             }
             
-            for (NSString * classes in element.classes)
-            {
-                if ([classes isEqualToString:className])
-                {
-                    return YES;
+            for (NSString *targetClassName in targetClasses) {
+                if (![element.classes containsObject:targetClassName]) {
+                    return NO;
                 }
             }
+            return YES;
         }
         return NO;
     }];
