@@ -70,7 +70,7 @@
         if (block(child)) {
             return child;
         } else {
-            return [child selectWithBlock:block];
+            return [[child selectWithBlock:block] firstObject];
         }
     }
     return nil;

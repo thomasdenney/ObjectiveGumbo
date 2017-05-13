@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * const OGErrorDomain;
 
 typedef NS_ENUM(NSInteger, OGError) {
@@ -36,4 +38,4 @@ typedef struct OGErrorPosition OGErrorPosition;
 + (instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code position:(OGErrorPosition)position userInfo:(nullable NSDictionary *)dict;
 @end
 
-
+NS_ASSUME_NONNULL_END

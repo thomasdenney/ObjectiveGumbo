@@ -69,7 +69,7 @@
     // chop mark string not found, return empty strings
     if (range.location == NSNotFound)
     {
-        return [NSArray arrayWithObjects:self, @""];
+        return [NSArray arrayWithObjects:self, @"", nil];
     }
     // chop mark string at the beginning, move everything into second string
     else if (range.location == 0) {
@@ -90,7 +90,7 @@
     NSRange selectorRange, searchRange, dotRange;
     while (i < stringLength) {
         searchRange = NSMakeRange(i, stringLength - i);
-        dotRange = [self rangeOfString:@"." options:NULL range:searchRange];
+        dotRange = [self rangeOfString:@"." options:0 range:searchRange];
         
         if (dotRange.location != NSNotFound) {
             selectorRange = NSMakeRange(i, (dotRange.location - i));
@@ -121,7 +121,7 @@
 
 - (NSArray<OGNode *> *)select:(NSString *)selectInput
 {
-    NSString *selectorGroups = [selectInput selectorGroups];
+    NSArray<NSString *>* selectorGroups = [selectInput selectorGroups];
 
     NSMutableArray *allElements = [NSMutableArray array];
     
@@ -154,7 +154,7 @@
 + (NSArray<OGElement*>*)filteredElementsUsingSelector:(NSString *)selector
                                           fromElement:(OGElement *)element
 {
-    NSMutableArray *elements = [NSMutableArray array];
+    NSArray<OGElement*>* elements = [NSArray array];
     if ([selector hasPrefix:@"#"]) {
         elements = @[[element elementWithID:[selector substringFromIndex:1]]];
     }
@@ -169,7 +169,7 @@
     }
     else if ([selector hasPrefix:@"*"])
     {
-        elements = element.children;
+        elements = (NSArray<OGElement*>*)element.children;
     }
     else
     {
@@ -201,7 +201,7 @@
 
 - (NSArray<OGElement*> *)elementsWithAttribute:(NSString *)attribute
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
@@ -213,7 +213,7 @@
 
 - (NSArray<OGElement*> *)elementsWithAttribute:(NSString *)attribute value:(NSString *)value
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
@@ -230,7 +230,7 @@
         return [NSArray array];
     }
     
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
@@ -252,7 +252,7 @@
         return [NSArray array];
     }
     
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
@@ -273,7 +273,7 @@
 
 - (nullable OGElement *)elementWithID:(NSString *)elementId
 {
-    return [self selectFirstWithBlock:^BOOL(id node) {
+    return (OGElement*)[self selectFirstWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]]) {
             OGElement * element = (OGElement *)node;
             return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
@@ -284,7 +284,7 @@
 
 - (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;
@@ -296,7 +296,7 @@
 
 - (NSArray<OGElement*> *)elementsWithTag:(OGTag)tag attribute:(NSString *)attribute
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement*> *)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;

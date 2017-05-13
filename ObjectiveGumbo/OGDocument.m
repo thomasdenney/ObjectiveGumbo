@@ -162,7 +162,7 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 /** Private method that returns @b a or @b area tags that have href attributes on them */
 - (NSArray<OGElement *>*)elementsContainingLinks
 {
-    return [self selectWithBlock:^BOOL(id node) {
+    return (NSArray<OGElement *>*)[self selectWithBlock:^BOOL(id node) {
         if ([node isKindOfClass:[OGElement class]])
         {
             OGElement * element = (OGElement*)node;

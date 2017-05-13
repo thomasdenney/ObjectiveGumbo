@@ -81,9 +81,7 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
         for (int i = 0; i < error_count; i++) {
             
             GumboError *gumbo_error = output->errors.data[i];
-            if (gumbo_error->type == GUMBO_ERR_PARSER) {
-                GumboParserError gumbo_parse_error = gumbo_error->v.parser;
-                
+            if (gumbo_error->type == GUMBO_ERR_PARSER) {                
                 NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
                 OGErrorPosition position = {gumbo_error->position.line, gumbo_error->position.column, gumbo_error->position.offset};
                 
@@ -185,7 +183,7 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
 #pragma mark - Private internal methods
 //* For returning two types of nodes from the internal gumbo object */
 
-+ (nullable OGNode *)documentFromGumboInternal:(ObjectiveGumboInternal *)gumbo error:(NSError **)error
++ (nullable OGDocument *)documentFromGumboInternal:(ObjectiveGumboInternal *)gumbo error:(NSError **)error
 {
     BOOL success = [gumbo parseWithOptions:0];
     if (success) {
@@ -218,7 +216,7 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
                                     error:(NSError **)error
 {
     ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithData:data encoding:enc];
-    return [ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
+    return (OGDocument *)[ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
 }
 
 + (nullable OGNode *)nodeWithData:(NSData *)data
@@ -233,7 +231,7 @@ typedef NS_OPTIONS(NSUInteger, OGParseOptions) {
                                       error:(NSError **)error
 {
     ObjectiveGumboInternal *gumbo = [[ObjectiveGumboInternal alloc] initWithString:string];
-    return [ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
+    return (OGDocument *)[ObjectiveGumbo documentFromGumboInternal:gumbo error:error];
 }
 
 + (nullable OGNode *)nodeWithString:(NSString *)string

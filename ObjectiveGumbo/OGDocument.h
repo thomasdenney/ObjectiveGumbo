@@ -8,6 +8,8 @@
 #import "OGNode.h"
 #import "OGElement.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Indicates quirks mode that should be triggered based on provided doctype
  * See https://en.wikipedia.org/wiki/Quirks_mode for more info
@@ -21,7 +23,6 @@ typedef NS_ENUM(NSInteger, OGDocumentDocType) {
 /** Converts OGDocType enum to an NSString for use in logging to the console */
 NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode);
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface OGDocument : OGElement
 

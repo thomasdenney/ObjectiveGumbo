@@ -8,11 +8,12 @@
 #import <Foundation/Foundation.h>
 #import "NSString+OGString.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef BOOL(^SelectorBlock)(id node);
 
 @class OGDocument;
 
-NS_ASSUME_NONNULL_BEGIN
 
 /**
  Super class the DOM tree nodes are built from. This is an abstract class that doesn't get implemented directly but sets up the relationships between the other nodes.
