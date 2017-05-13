@@ -19,11 +19,14 @@ When you want to use ObjectiveGumbo in your project, simply import the header:
 #import <ObjectiveGumbo.h>
 ```
 
+If you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging header to your project and import as above. You can then use ObjectiveGumbo as normal.
+
+
 ## Example usage
 
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
 ```obj-c
-OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"http://news.ycombinator.com"]
+OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"https://news.ycombinator.com"]
                                   encoding:NSUTF8StringEncoding
                                      error:nil];
 NSArray *tableRows = [data elementsWithClass:@"title"];
@@ -36,6 +39,18 @@ for (OGElement *tableRow in tableRows)
 	}
 }
 ```
+```swift
+let data = try! ObjectiveGumbo.document(with: URL(string:"https://news.ycombinator.com")!,
+                                        encoding: String.Encoding.utf8.rawValue)
+let tableRows = data.elements(withClass: "title")
+for tableRow in tableRows {
+    if (tableRow.children.count > 1),
+        let link = tableRow.children.first as? OGElement,
+        let href = link.attributes["href"] {
+        print(href)
+    }
+}
+```
 
 Get the body text of BBC News:
 ```obj-c
@@ -45,10 +60,18 @@ OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.
 OGElement *body = doc.body;
 NSLog(@"%@", body.text);
 ```
+```swift
+let doc = try! ObjectiveGumbo.document(with: URL(string:"http://bbc.co.uk/news")!,
+                                        encoding: String.Encoding.utf8.rawValue)
+if let body = doc.body {
+    print(body.text)
+}
+```
+
 
 Use basic CSS selectors to extract elements
 ```obj-c
-OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.reddit.com"]
+OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.reddit.com/"]
                                      encoding:NSUTF8StringEncoding
                                         error:nil];
 NSArray *storyLinks = doc[@".entry a.title"];
@@ -57,14 +80,31 @@ for (OGElement *link in storyLinks) {
     NSLog(@"Link Text: %@", link.attributes[@"href"]);
 }
 ```
+```swift
+let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.reddit.com/")!,
+                                        encoding: String.Encoding.utf8.rawValue)
+let storyLinks = doc[".entry a.title"] as! [OGElement]
+for link in storyLinks {
+    if let linkText = link.attributes["href"] {
+        print("Link Text: \(linkText)")
+    }
+}
+```
 
 Extract Facebook Open Graph Tags
 ```obj-c
-OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.facebook.com"]
+OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.facebook.com/"]
                                      encoding:NSUTF8StringEncoding
                                         error:nil];
 OGElement *imageElement = [doc firstElementForRDFaProperty:@"og:image"];
 NSLog(@"Image URL: %@", imageElement.attributes[@"content"]);
+```
+```swift
+let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.facebook.com/")!,
+                                        encoding: String.Encoding.utf8.rawValue)
+let imageElement = doc.firstElement(forRDFaProperty: "og:image")!
+let imageURLString = imageElement.attributes["content"] as! String
+print("Image URL: \(imageURLString)")
 ```
 
 
