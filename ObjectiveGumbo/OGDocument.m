@@ -52,7 +52,11 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
 @property (nonatomic, copy) NSString *systemIdentifier;
 @property (nonatomic, copy) NSString *publicIdentifier;
 
-@property (nonatomic, strong) NSDictionary<NSString *, OGElement *>* meta;
+@property (nonatomic, copy, nullable) NSString *title;
+
+@property (nonatomic, strong) NSDictionary<NSString *, OGElement *>* namedMetas;
+@property (nonatomic, strong) NSArray<OGElement *>* metas;
+
 @property (nonatomic, strong) NSArray<OGElement *>* anchors;
 @property (nonatomic, strong) NSArray<OGElement *>* forms;
 @property (nonatomic, strong) NSArray<OGElement *>* images;
@@ -114,17 +118,56 @@ NSString* NSStringFromOGDocType(OGDocumentDocType quirksMode)
     return html;
 }
 
-- (NSDictionary<NSString *, OGElement *>*)meta
+- (NSString *)title
 {
-    if (_meta == nil) {
-        NSArray<OGElement *> *elements = [self elementsWithTag:OGTagMeta attribute:@"name"];
+    if (_title == nil) {
+        OGElement *titleTag = self.head[@"title"].firstObject;
+        _title = titleTag.text;
+    }
+    return _title;
+}
+
+- (NSArray<NSString *>*)allMetaNames
+{
+    __block NSMutableSet *allKeys = [NSMutableSet set];
+    __block NSMutableArray *nameKeys = [NSMutableArray array];
+    
+    NSArray<OGElement *> *elements = [self.head elementsWithTag:OGTagMeta attribute:@"name"];
+    [elements enumerateObjectsUsingBlock:^(OGElement * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *key = obj.attributes[@"name"];
+        
+        if(key.length > 0 && ![allKeys containsObject:key]) {
+            [nameKeys addObject:key];
+            [allKeys addObject:key];
+        }
+    }];
+    
+    return nameKeys.copy;
+}
+
+- (NSDictionary<NSString *, OGElement *>*)namedMetas
+{
+    if (_namedMetas == nil) {
+        NSArray<OGElement *> *elements = [self.head elementsWithTag:OGTagMeta attribute:@"name"];
         NSMutableDictionary *meta = [[NSMutableDictionary alloc] initWithCapacity:elements.count];
         for (OGElement *metaElement in elements) {
-            [meta setValue:metaElement forKey:metaElement.attributes[@"name"]];
+            NSString *name = metaElement.attributes[@"name"];
+            
+            if (![meta objectForKey:name]) {
+                [meta setValue:metaElement forKey:name];
+            }
         }
-        self.meta = meta.copy;
+        self.namedMetas = meta.copy;
     }
-    return _meta;
+    return _namedMetas;
+}
+
+- (NSArray<OGElement *>*)metas
+{
+    if (_metas == nil) {
+        self.metas = [self.head elementsWithTag:OGTagMeta];
+    }
+    return _metas;
 }
 
 - (NSArray<OGElement *>*)anchors
