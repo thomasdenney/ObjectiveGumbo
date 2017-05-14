@@ -9,13 +9,13 @@
 @import XCTest;
 #import <ObjectiveGumbo/ObjectiveGumbo.h>
 
-@interface Tests : XCTestCase
+@interface TestOGDocument : XCTestCase
 
 @property (nonatomic, strong) OGDocument *document;
 
 @end
 
-@implementation Tests
+@implementation TestOGDocument
 
 - (void)setUp
 {

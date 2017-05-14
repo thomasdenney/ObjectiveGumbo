@@ -119,6 +119,11 @@
     return html;
 }
 
+- (BOOL)hasClassNamed:(NSString *)className
+{
+    return [self.classes containsObject:className];
+}
+
 - (NSString *)description
 {
     NSString *className = NSStringFromClass([self class]);

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSArray *classes;
 @property (nonatomic, strong, readonly) NSDictionary *attributes;
 
+- (BOOL)hasClassNamed:(NSString *)className;
+
 @end
 
 NS_ASSUME_NONNULL_END
