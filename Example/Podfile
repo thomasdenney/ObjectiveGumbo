@@ -1,0 +1,10 @@
+
+target 'ObjectiveGumbo_Example' do
+  pod 'ObjectiveGumbo', :path => '../'
+
+  target 'ObjectiveGumbo_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

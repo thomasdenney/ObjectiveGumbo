@@ -9,7 +9,6 @@
 #import "OGError.h"
 #import "error.h"
 
-
 NSString * const OGErrorDomain = @"OGErrorDomain";
 
 @interface OGParseError ()
