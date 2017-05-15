@@ -145,7 +145,8 @@
 {
     NSMutableArray *filteredElements = [NSMutableArray array];
     for (OGElement *element in elements) {
-        [filteredElements addObjectsFromArray:[OGNode filteredElementsUsingSelector:selector fromElement:element]];
+        NSArray *array = [OGNode filteredElementsUsingSelector:selector fromElement:element];
+         [filteredElements addObjectsFromArray:array];
     }
     
     return filteredElements.copy;
@@ -156,7 +157,17 @@
 {
     NSArray<OGElement*>* elements = [NSArray array];
     if ([selector hasPrefix:@"#"]) {
-        elements = @[[element elementWithID:[selector substringFromIndex:1]]];
+        
+        // Chop off any class selectors
+        NSRange range = [selector rangeOfString:@"."];
+        if (range.location != NSNotFound) {
+            selector = [selector substringToIndex:range.location];
+        }
+        
+        OGElement *newElement = [element elementWithID:[selector substringFromIndex:1]];
+        if (newElement) {
+            elements = @[newElement];
+        }
     }
     else if ([selector containsString:@"."]) {
         NSArray<NSString *> *selectorParts = [selector componentsChoppedByString:@"."];

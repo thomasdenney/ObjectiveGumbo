@@ -62,7 +62,29 @@
     NSString *dataSettings = divElement.attributes[@"data-settings"];
     XCTAssertNotNil(dataSettings);
     
-    XCTAssert([dataSettings isEqualToString:@" minimize scroll-always expand"]);
+    XCTAssert([dataSettings isEqualToString:@" minimize scroll-always  expand"]);
+}
+
+- (void)testSubscriptingSearch
+{
+//    OGElement *elementOne = [self.document[@"#main"] firstObject];
+//    XCTAssert(elementOne.tag == OGTagDiv);
+//    XCTAssert(elementOne.tagNamespace == OGNamespaceHTML);
+//    
+//    OGElement *elementTwo = [self.document[@".site-main"] firstObject];
+//    OGElement *elementThree = [self.document[@"#primary"] firstObject];
+//    
+//    XCTAssert(elementOne == elementTwo, @"These should be same objects");
+//    XCTAssertFalse(elementOne == elementThree, @"These should be different objects");
+//    
+//    OGElement *heading = [self.document[@"article h1"] firstObject];
+//    XCTAssertNotNil(heading);
+//    XCTAssert(heading.tag == OGTagH1);
+    
+    OGElement *header = [self.document[@"#masthead.site-header"] firstObject];
+    XCTAssertNotNil(header);
+    XCTAssert(header.tag == OGTagHeader);
+    
 }
 
 @end

@@ -383,9 +383,9 @@ typedef enum {
 
   /**
    * A flag for nodes that are converted from their end tag equivalents.  For
-   * example, </p> when no paragraph is open implies that the parser should
-   * create a <p> tag and immediately close it, while </br> means the same thing
-   * as <br>.
+   * example, < /p > when no paragraph is open implies that the parser should
+   * create a < p > tag and immediately close it, while < / br > means the same thing
+   * as < br >.
    */
   GUMBO_INSERTION_CONVERTED_FROM_END_TAG = 1 << 4,
 
