@@ -50,6 +50,12 @@ typedef BOOL(^SelectorBlock)(id node);
 /** If this is a child node and there are other children then it is the previous node in the sequence or nil */
 @property (nonatomic, weak, readonly, nullable) OGNode *previousSibling;
 
+/** Returns YES if node is a descendant of the receiver i.e. the receiver underneath node in the tree  */
+- (BOOL)isDescendantOfNode:(OGNode *)node;
+
+/** Returns YES if node is a ancestor of the receiver i.e. one of the receiver's children equals or contains node */
+- (BOOL)isAncestorOfNode:(OGNode *)node;
+
 - (NSString *)htmlWithIndentation:(int)indentationLevel;
 
 @end

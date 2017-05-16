@@ -38,6 +38,27 @@
     return [self.children lastObject];
 }
 
+- (BOOL)isDescendantOfNode:(OGNode *)node
+{
+    return [node isAncestorOfNode:self];
+}
+
+- (BOOL)isAncestorOfNode:(OGNode *)node
+{
+    
+    if (node == nil || node == self) {
+        return NO;
+    }
+    
+    OGNode *target = node;
+    while( (target = (OGElement *)target.parent) ) {
+        if (target == self) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (NSString *)description
 {
     NSString *className = NSStringFromClass([self class]);
