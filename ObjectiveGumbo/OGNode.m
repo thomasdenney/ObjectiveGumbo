@@ -2,83 +2,67 @@
 //  OGNode.m
 //  ObjectiveGumbo
 //
-//  Copyright (c) 2013 Programming Thomas. All rights reserved.
+//  Copyright (c) 2017 Richard Warrender. All rights reserved.
 //
 
 #import "OGNode.h"
+#import "OGNodePrivate.h"
 
 @implementation OGNode
 
--(NSString*)text
+- (instancetype)initWithGumboNode:(GumboNode *)gumboNode
 {
-    return @"";
+    if (self = [super init]) {
+        // This is really an abstract class
+    }
+    return self;
 }
 
--(NSString*)html
+- (NSString *)html
 {
     return [self htmlWithIndentation:0];
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
+- (NSString *)htmlWithIndentation:(int)indentationLevel
 {
     return @"";
 }
 
--(NSArray*)select:(NSString *)selector
+- (OGNode *)first
 {
-    NSArray * selectors = [selector componentsSeparatedByString:@" "];
-    NSMutableArray * allMatchingObjects = [NSMutableArray new];
-    for (NSString * individualSelector in selectors)
-    {
-        if ([individualSelector hasPrefix:@"#"])
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithID:[individualSelector substringFromIndex:1]]];
-        }
-        else if ([individualSelector hasPrefix:@"."])
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithClass:[individualSelector substringFromIndex:1]]];
-        }
-        else
-        {
-            [allMatchingObjects addObjectsFromArray:[self elementsWithTag:[OGUtility gumboTagForTag:individualSelector]]];
-        }
+    return [self.children firstObject];
+}
+
+- (OGNode *)last
+{
+    return [self.children lastObject];
+}
+
+- (BOOL)isDescendantOfNode:(OGNode *)node
+{
+    return [node isAncestorOfNode:self];
+}
+
+- (BOOL)isAncestorOfNode:(OGNode *)node
+{
+    
+    if (node == nil || node == self) {
+        return NO;
     }
     
-    //Remove duplicates
-    NSOrderedSet * set = [[NSOrderedSet alloc] initWithArray:allMatchingObjects];
-    allMatchingObjects = [[NSMutableArray alloc] initWithArray:[set array]];
-    
-    return allMatchingObjects;
+    OGNode *target = node;
+    while( (target = (OGElement *)target.parent) ) {
+        if (target == self) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
+- (NSString *)description
 {
-    return [NSArray new];
-}
-
--(OGNode*)first:(NSString *)selector
-{
-    return [[self select:selector] firstObject];
-}
-
--(OGNode*)last:(NSString *)selector
-{
-    return [[self select:selector] lastObject];
-}
-
--(NSArray*)elementsWithClass:(NSString*)class
-{
-    return [NSArray new];
-}
-
--(NSArray*)elementsWithID:(NSString *)id
-{
-    return [NSArray new];
-}
-
--(NSArray*)elementsWithTag:(GumboTag)tag
-{
-    return [NSArray new];
+    NSString *className = NSStringFromClass([self class]);
+    return [NSString stringWithFormat:@"<%@: %p>", className, self];
 }
 
 @end

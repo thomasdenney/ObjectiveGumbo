@@ -6,43 +6,78 @@
 //
 
 #import "OGElement.h"
+#import "OGText.h"
+#import "OGNode+OGElementSearch.h"
+#import "OGTagsPrivate.h"
+
+@interface OGElement ()
+
+@property (nonatomic, assign) OGTag tag;
+@property (nonatomic, assign) OGNamespace tagNamespace;
+
+@property (nonatomic, strong) NSArray *classes;
+@property (nonatomic, strong) NSDictionary *attributes;
+
+@end
+
 
 @implementation OGElement
 
--(NSString*)text
+- (instancetype)initWithGumboNode:(GumboNode *)gumboNode
+{
+    if (self = [super init]) {
+        self.tag = OGTagFromGumboTag(gumboNode->v.element.tag);
+        self.tagNamespace = OGNamespaceFromGumboNamespace(gumboNode->v.element.tag_namespace);
+        
+        NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
+        GumboVector * cAttributes = &gumboNode->v.element.attributes;
+        
+        for (int i = 0; i < cAttributes->length; i++)
+        {
+            GumboAttribute *cAttribute = (GumboAttribute*)cAttributes->data[i];
+            
+            const char *cName = cAttribute->name;
+            const char *cValue = cAttribute->value;
+            
+            NSString *name = [[NSString alloc] initWithUTF8String:cName];
+            NSString *value = [[NSString alloc] initWithUTF8String:cValue];
+            
+            [attributes setValue:value forKey:name];
+            
+            if ([name isEqualToString:@"class"]) {
+                self.classes = [value componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            }
+        }
+        
+        self.attributes = attributes;
+    }
+    return self;
+}
+
+- (NSString *)text
 {
     NSMutableString * text = [NSMutableString new];
-    for (OGNode * child in self.children)
+    for (OGNode *child in self.children)
     {
-        [text appendString:[child text]];
+        [text appendString:child.text];
     }
     return text;
 }
 
--(NSString*)htmlWithIndentation:(int)indentationLevel
+- (nullable OGNode *)selectFirstWithBlock:(SelectorBlock)block
 {
-    NSMutableString * html = [NSMutableString stringWithFormat:@"<%@", [OGUtility tagForGumboTag:self.tag]];
-    for (NSString * attribute in self.attributes)
+    for (OGNode *child in self.children)
     {
-        [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
-    }
-    if (self.children.count == 0)
-    {
-        [html appendString:@" />\n"];
-    }
-    else
-    {
-        [html appendString:@">\n"];
-        for (OGNode * child in self.children)
-        {
-            [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
+        if (block(child)) {
+            return child;
+        } else {
+            return [[child selectWithBlock:block] firstObject];
         }
-        [html appendFormat:@"</%@>\n", [OGUtility tagForGumboTag:self.tag]];
     }
-    return html;
+    return nil;
 }
 
--(NSArray*)selectWithBlock:(SelectorBlock)block
+- (NSArray<OGNode *> *)selectWithBlock:(SelectorBlock)block
 {
     NSMutableArray * matchingChildren = [NSMutableArray new];
     for (OGNode * child in self.children)
@@ -56,57 +91,59 @@
     return matchingChildren;
 }
 
--(NSArray*)elementsWithAttribute:(NSString *)attribute andValue:(NSString *)value
-{
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
-            OGElement * element = (OGElement*)node;
-            return [element.attributes[attribute] isEqualToString:value];
-        }
-        return NO;
-    }];
-}
+#pragma mark - Debugging
 
--(NSArray*)elementsWithClass:(NSString*)class
+- (NSString *)htmlWithIndentation:(int)indentationLevel
 {
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
+    NSMutableString *html = [NSMutableString stringWithFormat:@"<%@", NSStringFromOGTag(self.tag)];
+    for (NSString *attribute in self.attributes)
+    {
+        [html appendFormat:@" %@=\"%@\"", attribute, [self.attributes[attribute]  escapedString]];
+    }
+    if (self.children.count == 0)
+    {
+        [html appendString:@" />"];
+    }
+    else
+    {
+        [html appendString:@">"];
+        for (OGNode *child in self.children)
         {
-            OGElement * element = (OGElement*)node;
-            for (NSString * classes in element.classes)
-            {
-                if ([classes isEqualToString:class])
-                {
-                    return YES;
-                }
+            if ([child isKindOfClass:[OGText class]]) {
+                [html appendString:child.html];
+            } else {
+                [html appendString:[child htmlWithIndentation:indentationLevel + 1]];
             }
         }
-        return NO;
-    }];
+        [html appendFormat:@"</%@>", NSStringFromOGTag(self.tag)];
+    }
+    return html;
 }
 
--(NSArray*)elementsWithID:(NSString *)elementId
+- (BOOL)hasClassNamed:(NSString *)className
 {
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]]) {
-            OGElement * element = (OGElement*)node;
-            return [(NSString*)element.attributes[@"id"] isEqualToString:elementId];
-        }
-        return NO;
-    }];
+    return [self.classes containsObject:className];
 }
 
--(NSArray*)elementsWithTag:(GumboTag)tag
+- (NSString *)description
 {
-    return [self selectWithBlock:^BOOL(id node) {
-        if ([node isKindOfClass:[OGElement class]])
-        {
-            OGElement * element = (OGElement*)node;
-            return element.tag == tag;
+    NSString *className = NSStringFromClass([self class]);
+    NSMutableString *newString = [[NSMutableString alloc] init];
+    [newString appendFormat:@"<%@: %p %@", className, self, NSStringFromOGTag(self.tag)];
+    
+    NSString *elementID = self.attributes[@"id"];
+    if (elementID.length > 0) {
+        [newString appendFormat:@"#%@", elementID];
+    }
+    
+    if (self.classes.count > 0) {
+        for (NSString *className in self.classes) {
+            [newString appendFormat:@".%@", className];
         }
-        return NO;
-    }];
+    }
+    [newString appendString:@">"];
+         
+    return newString;
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @interface NSString (OGString)
 
--(NSString*)escapedString;
-+(NSString*)indentationString:(int)indentationLevel;
+- (NSString*)escapedString;
++ (NSString*)indentationString:(int)indentationLevel;
 
 @end
