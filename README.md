@@ -1,27 +1,24 @@
 # ObjectiveGumbo
 
-ObjectiveGumbo is a library that makes it easier and safer to interact with the data inside HTML content. Rather than use Regex to extract some data, ObjectiveGumbo uses Gumbo - Google's fast HTML5 parsing library (written in C). Gumbo mimics how a browser parses HTML including when tags are missing or the HTML is not properly formed. ObjectiveGumbo full abstracts aways the C Gumbo data-structures to provide an easy-to-understand interface for use in Objective-C and Swift. 
+ObjectiveGumbo is a library that makes it easier and safer to interact with the data inside HTML content. Rather than use Regex to extract some data, ObjectiveGumbo uses Gumbo - Google's fast HTML5 parsing library (written in C). Gumbo mimics how a browser parses HTML including when tags are missing or the HTML is not properly formed. ObjectiveGumbo fully abstracts aways the C Gumbo data-structures to provide an easy-to-understand modern interface for use in Objective-C and Swift.
 
-## Compilation
-The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
+## Uses
+Why not just use a WebView? ObjectiveGumbo is headless in this sense - it is just a lightweight HTML data model that is similar to HTML DOM(https://en.wikipedia.org/wiki/Document_Object_Model). 
 
-	platform :ios, '9.0'
-	pod "ObjectiveGumbo", :git => 'https://github.com/rwarrender/ObjectiveGumbo.git'
+This means it can be used to create linters, validators, converters, etc. Other possibile uses include:
 
-When you want to use ObjectiveGumbo in your project, simply import the header:
-
-```obj-c
-#import <ObjectiveGumbo.h>
-```
-
-If you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging header to your project and import as above. You can then use ObjectiveGumbo as normal.
-
+* Extracting Facebook OpenGraph tags from a URL
+* Extracting links from a URL
+* Extracting the text content of a webpage
+* Validating a webpage's structure
+* Ensuring certain meta tags exist on a webpage
+* Transforming HTML to a new format
 
 ## Example usage
 
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
 
-Objective-C
+_Objective-C_
 ```obj-c
 OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"https://news.ycombinator.com"]
                                   encoding:NSUTF8StringEncoding
@@ -37,7 +34,7 @@ for (OGElement *tableRow in tableRows)
 }
 ```
 
-Swift
+_Swift_
 ```swift
 let data = try! ObjectiveGumbo.document(with: URL(string:"https://news.ycombinator.com")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -53,7 +50,7 @@ for tableRow in tableRows {
 
 Get the body text of BBC News:
 
-Objective-C
+_Objective-C_
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.co.uk/news"]
                                      encoding:NSUTF8StringEncoding
@@ -62,7 +59,7 @@ OGElement *body = doc.body;
 NSLog(@"%@", body.text);
 ```
 
-Swift
+_Swift_
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"http://bbc.co.uk/news")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -74,7 +71,7 @@ if let body = doc.body {
 
 Use basic CSS selectors to extract elements
 
-Objective-C
+_Objective-C_
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.reddit.com/"]
                                      encoding:NSUTF8StringEncoding
@@ -86,7 +83,7 @@ for (OGElement *link in storyLinks) {
 }
 ```
 
-Swift
+_Swift_
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.reddit.com/")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -100,7 +97,7 @@ for link in storyLinks {
 
 Extract Facebook Open Graph Tags
 
-Objective-C
+_Objective-C_
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.facebook.com/"]
                                      encoding:NSUTF8StringEncoding
@@ -109,7 +106,7 @@ OGElement *imageElement = [doc firstElementForRDFaProperty:@"og:image"];
 NSLog(@"Image URL: %@", imageElement.attributes[@"content"]);
 ```
 
-Swift
+_Swift_
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.facebook.com/")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -117,7 +114,6 @@ let imageElement = doc.firstElement(forRDFaProperty: "og:image")!
 let imageURLString = imageElement.attributes["content"] as! String
 print("Image URL: \(imageURLString)")
 ```
-
 
 ## Why use this over the plain C API?
 This has been written with object-orientation and Cocoa in mind to make it a lot easier to interact with from Objective-C, which also gains the benefits of not having to worry about C-style pointers and releasing memory. Furthermore, it also uses 'native' Objective-C paradigms such as dictionaries and arrays rather than the Vector implementation provided Gumbo. It also reduces the amount of code you have to write by allowing you to quickly fetch tags based on tag, ID or class (like jQuery). 
@@ -150,11 +146,19 @@ A subclass of OGElement that includes DOCTYPE information.
 ### OGText
 A subclass of OGNode that represents some plain text. Note that all OGNodes have a -(NSString*)text function, however OGElement recursively searches its children.
 
-## Future aims
+## Compilation
+The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
 
-* Progress in line with Gumbo
-* Once Gumbo reaches final release port the majority of the code over to Objective-C or rewrite non-trivial parts using Cocoa classes (NSString, NSArray, NSDictionary, etc)
-* Add more jQuery like selection features
+	platform :ios, '9.0'
+	pod "ObjectiveGumbo", :git => 'https://github.com/rwarrender/ObjectiveGumbo.git'
 
-## Contact
-If you are using ObjectiveGumbo in your projects or want to ask specific support questions feel free to email at programmingthomas [at] gmail [dot] com. Submitting issues is an equally good way to reach me
+When you want to use ObjectiveGumbo in your project, simply import the header:
+
+```obj-c
+#import <ObjectiveGumbo.h>
+```
+
+If you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging header to your project and import as above. You can then use ObjectiveGumbo as normal.
+
+## Additional Notes
+It is a fork of https://github.com/thomasdenney/ObjectiveGumbo
