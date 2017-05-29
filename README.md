@@ -1,17 +1,12 @@
 # ObjectiveGumbo
 
-ObjectiveGumbo is a set of classes that make it easier to interact with Gumbo, Google's HTML5 parsing library (written in C), from Objective-C.
+ObjectiveGumbo is a library that makes it easier and safer to interact with the data inside HTML content. Rather than use Regex to extract some data, ObjectiveGumbo uses Gumbo - Google's fast HTML5 parsing library (written in C). Gumbo mimics how a browser parses HTML including when tags are missing or the HTML is not properly formed. ObjectiveGumbo full abstracts aways the C Gumbo data-structures to provide an easy-to-understand interface for use in Objective-C and Swift. 
 
 ## Compilation
 The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
 
 	platform :ios, '9.0'
-	pod "ObjectiveGumbo", "0.1"
-
-Alternatively if you are working with OSX or don't wish to use CocoaPods, you can do the following:
-
-* Get a local copy of this repository
-* Add the ObjectiveGumbo directory to your Xcode project or alternatively add your project to the ObjectiveGumbo workspace. This directory also contains the source code for Gumbo
+	pod "ObjectiveGumbo", :git => 'https://github.com/rwarrender/ObjectiveGumbo.git'
 
 When you want to use ObjectiveGumbo in your project, simply import the header:
 
@@ -25,6 +20,8 @@ If you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging he
 ## Example usage
 
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
+
+Objective-C
 ```obj-c
 OGNode *data = [ObjectiveGumbo nodeWithURL:[NSURL URLWithString:@"https://news.ycombinator.com"]
                                   encoding:NSUTF8StringEncoding
@@ -39,6 +36,8 @@ for (OGElement *tableRow in tableRows)
 	}
 }
 ```
+
+Swift
 ```swift
 let data = try! ObjectiveGumbo.document(with: URL(string:"https://news.ycombinator.com")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -53,6 +52,8 @@ for tableRow in tableRows {
 ```
 
 Get the body text of BBC News:
+
+Objective-C
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.co.uk/news"]
                                      encoding:NSUTF8StringEncoding
@@ -60,6 +61,8 @@ OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"http://bbc.
 OGElement *body = doc.body;
 NSLog(@"%@", body.text);
 ```
+
+Swift
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"http://bbc.co.uk/news")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -70,6 +73,8 @@ if let body = doc.body {
 
 
 Use basic CSS selectors to extract elements
+
+Objective-C
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.reddit.com/"]
                                      encoding:NSUTF8StringEncoding
@@ -80,6 +85,8 @@ for (OGElement *link in storyLinks) {
     NSLog(@"Link Text: %@", link.attributes[@"href"]);
 }
 ```
+
+Swift
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.reddit.com/")!,
                                         encoding: String.Encoding.utf8.rawValue)
@@ -92,6 +99,8 @@ for link in storyLinks {
 ```
 
 Extract Facebook Open Graph Tags
+
+Objective-C
 ```obj-c
 OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www.facebook.com/"]
                                      encoding:NSUTF8StringEncoding
@@ -99,6 +108,8 @@ OGNode *doc = [ObjectiveGumbo documentWithURL:[NSURL URLWithString:@"https://www
 OGElement *imageElement = [doc firstElementForRDFaProperty:@"og:image"];
 NSLog(@"Image URL: %@", imageElement.attributes[@"content"]);
 ```
+
+Swift
 ```swift
 let doc = try! ObjectiveGumbo.document(with: URL(string:"https://www.facebook.com/")!,
                                         encoding: String.Encoding.utf8.rawValue)
