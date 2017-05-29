@@ -3,7 +3,7 @@
 ObjectiveGumbo is a library that makes it easier and safer to interact with the data inside HTML content. Rather than use Regex to extract some data, ObjectiveGumbo uses Gumbo - Google's fast HTML5 parsing library (written in C). Gumbo mimics how a browser parses HTML including when tags are missing or the HTML is not properly formed. ObjectiveGumbo fully abstracts aways the C Gumbo data-structures to provide an easy-to-understand modern interface for use in Objective-C and Swift.
 
 ## Uses
-Why not just use a WebView? ObjectiveGumbo is headless in this sense - it is just a lightweight HTML data model that is similar to HTML DOM(https://en.wikipedia.org/wiki/Document_Object_Model). 
+Why not just use a WebView? ObjectiveGumbo is headless in this sense - it is just a lightweight HTML data model that is similar to [HTML DOM](https://en.wikipedia.org/wiki/Document_Object_Model). 
 
 This means it can be used to create linters, validators, converters, etc. Other possibile uses include:
 
