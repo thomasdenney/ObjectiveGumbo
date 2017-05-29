@@ -14,6 +14,9 @@ This means it can be used to create linters, validators, converters, etc. Other 
 * Ensuring certain meta tags exist on a webpage
 * Transforming HTML to a new format
 
+## Installation
+Via CocoaPods - see [installation instructions](#installation).
+
 ## Example usage
 
 Fetch all of the links from the [Hacker News](http://news.ycombinator.com) homepage and log them (see the Hacker News example for a more advanced method):
@@ -28,7 +31,7 @@ for (OGElement *tableRow in tableRows)
 {
 	if (tableRow.children.count > 1)
 	{
-		OGElement *link = tableRow.children[0];
+		OGElement *link = (OGElement *)tableRow.children[0];
 		NSLog(@"%@", link.attributes[@"href"]);
 	}
 }
@@ -47,6 +50,7 @@ for tableRow in tableRows {
     }
 }
 ```
+
 
 Get the body text of BBC News:
 
@@ -95,6 +99,7 @@ for link in storyLinks {
 }
 ```
 
+
 Extract Facebook Open Graph Tags
 
 _Objective-C_
@@ -133,9 +138,12 @@ All tags and pieces of text get converted to an OGNode (and its subclasses). So 
 
 OGNode provides a variety of utility functions such as fetching the plaintext content and finding child nodes quickly:
 
-* elementsWithClass allows you to quickly find all elements with the given class
-* elementsWithID returns an array of all elements with a matching ID
-* elementsWithTag finds all tags of a certain type (such as links)
+* elementWithID: returns an element with the given matching ID
+* elementsWithClass: allows you to quickly find all elements with the given class
+* elementsWithTag: finds all elements of a certain type (such as links)
+* elementsWithTag:class: finds all elements of a certain type (such as links) that contain a given CSS class attribute
+* elementsWithAttribute:value: find all elements with a particular HTML attribute that contains the given value
+* elementsForRDFaProperty: finds all elements that match a given RDFa property name e.g. og:image
 
 ### OGElement
 A subclass of OGNode that provides an array of child elements, a dictionary of attributes and an array of classes.
@@ -146,19 +154,27 @@ A subclass of OGElement that includes DOCTYPE information.
 ### OGText
 A subclass of OGNode that represents some plain text. Note that all OGNodes have a -(NSString*)text function, however OGElement recursively searches its children.
 
-## Compilation
+## Installation
 The current recommended method for adding ObjectiveGumbo to your iOS project (currently not supported for OSX) is to install it via [CocoaPods](http://cocoapods.org/). You can do that by adding the following to your Podfile and running `pod install`:
 
-	platform :ios, '9.0'
-	pod "ObjectiveGumbo", :git => 'https://github.com/rwarrender/ObjectiveGumbo.git'
+
+	target 'AppName' do
+	  	use_frameworks!
+		pod "ObjectiveGumbo", :git => 'https://github.com/rwarrender/ObjectiveGumbo.git'
+	end
 
 When you want to use ObjectiveGumbo in your project, simply import the header:
 
 ```obj-c
-#import <ObjectiveGumbo.h>
+@import ObjectiveGumbo; // If using use_frameworks! option in podfile
 ```
 
-If you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging header to your project and import as above. You can then use ObjectiveGumbo as normal.
+If you don't want to use dynamic frameworks then import the header like so:
+```obj-c
+#import "ObjectiveGumbo/ObjectiveGumbo.h"; // If not using use_frameworks! option in podfile
+```
+
+Alternatively if you'd like to use ObjectiveGumbo with Swift, you'll need to add a bridging header to your project and import as above. You can then use ObjectiveGumbo as normal.
 
 ## Additional Notes
 It is a fork of https://github.com/thomasdenney/ObjectiveGumbo
