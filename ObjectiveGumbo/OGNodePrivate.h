@@ -2,7 +2,7 @@
 //  OGNodePrivate.h
 //  ObjectiveGumbo
 //
-//  Created by Richard Warrender on 24/03/2017.
+//  Copyright (c) 2017 Richard Warrender. All rights reserved.
 //
 //
 

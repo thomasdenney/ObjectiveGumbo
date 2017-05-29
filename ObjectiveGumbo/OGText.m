@@ -2,7 +2,7 @@
 //  OGText.m
 //  ObjectiveGumbo
 //
-//  Copyright (c) 2013 Programming Thomas. All rights reserved.
+//  Copyright (c) 2013 Programming Thomas, 2017 Richard Warrender. All rights reserved.
 //
 
 #import "OGText.h"

@@ -1,8 +1,8 @@
 //
 //  OGParseError.h
-//  Pods
+//  ObjectiveGumbo
 //
-//  Created by Richard Warrender on 28/03/2017.
+//  Copyright (c) 2017 Richard Warrender. All rights reserved.
 //
 //
 
