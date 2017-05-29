@@ -6,7 +6,7 @@
 //
 
 #import "OGNode.h"
-#import "OGNodeProtected.h"
+#import "OGNodePrivate.h"
 
 @implementation OGNode
 

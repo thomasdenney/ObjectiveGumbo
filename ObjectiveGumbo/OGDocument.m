@@ -8,6 +8,7 @@
 #import "OGDocument.h"
 #import "OGText.h"
 #import "OGNode+OGElementSearch.h"
+#import "gumbo.h"
 
 OGDocumentDocType OGDocTypeFromGumboDocType(GumboQuirksModeEnum quirksMode)
 {

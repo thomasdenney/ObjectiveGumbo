@@ -1,12 +1,13 @@
 //
-//  OGNode_OGNodeProtected.h
-//  Pods
+//  OGNodePrivate.h
+//  ObjectiveGumbo
 //
 //  Created by Richard Warrender on 24/03/2017.
 //
 //
 
 #import "ObjectiveGumbo.h"
+#import "gumbo.h"
 
 // This header is only for classes that wish to mutate the non-mutable nodes, not recommended unless you know what you're doing!
 

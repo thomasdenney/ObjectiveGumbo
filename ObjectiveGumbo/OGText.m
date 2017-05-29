@@ -7,6 +7,7 @@
 
 #import "OGText.h"
 #import "OGTags.h"
+#import "OGTagsPrivate.h"
 
 @interface OGText ()
 

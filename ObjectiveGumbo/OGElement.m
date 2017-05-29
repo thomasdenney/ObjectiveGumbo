@@ -8,6 +8,7 @@
 #import "OGElement.h"
 #import "OGText.h"
 #import "OGNode+OGElementSearch.h"
+#import "OGTagsPrivate.h"
 
 @interface OGElement ()
 

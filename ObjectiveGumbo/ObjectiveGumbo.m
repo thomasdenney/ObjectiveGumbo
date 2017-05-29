@@ -6,7 +6,7 @@
 //
 
 #import "ObjectiveGumbo.h"
-#import "OGNodeProtected.h"
+#import "OGNodePrivate.h"
 #import "OGError.h"
 #import "error.h"
 

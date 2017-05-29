@@ -1,5 +1,6 @@
 
 target 'ObjectiveGumbo_Example' do
+  use_frameworks!
   pod 'ObjectiveGumbo', :path => '../'
 
   target 'ObjectiveGumbo_Tests' do
