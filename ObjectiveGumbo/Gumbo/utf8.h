@@ -81,8 +81,7 @@ bool utf8_is_invalid_code_point(int c);
 
 // Initializes a new Utf8Iterator from the given byte buffer.  The source does
 // not have to be NUL-terminated, but the length must be passed in explicitly.
-void utf8iterator_init(
-    struct GumboInternalParser* parser, const char* source,
+void utf8iterator_init(struct GumboInternalParser* parser, const char* source,
     size_t source_length, Utf8Iterator* iter);
 
 // Advances the current position by one code point.
@@ -97,6 +96,12 @@ void utf8iterator_get_position(
 
 // Retrieves a character pointer to the start of the current character.
 const char* utf8iterator_get_char_pointer(const Utf8Iterator* iter);
+
+// Retrieves a character pointer to 1 past the end of the buffer.  This is
+// necessary for certain state machines and string comparisons that would like
+// to look directly for ASCII text in the buffer without going through the
+// decoder.
+const char* utf8iterator_get_end_pointer(const Utf8Iterator* iter);
 
 // If the upcoming text in the buffer matches the specified prefix (which has
 // length 'length'), consume it and return true.  Otherwise, return false with

@@ -1,0 +1,16 @@
+PODS:
+  - ObjectiveGumbo (0.2)
+
+DEPENDENCIES:
+  - ObjectiveGumbo (from `../`)
+
+EXTERNAL SOURCES:
+  ObjectiveGumbo:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ObjectiveGumbo: 91e2fe246d2f338362984accd74e67215ae9b513
+
+PODFILE CHECKSUM: 98339704aacbeb920e80626c05715bab36df6258
+
+COCOAPODS: 1.2.1

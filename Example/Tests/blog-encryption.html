@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html itemscope="itemscope" itemtype="http://schema.org/Article" lang="en-GB" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="pingback" href="https://richardwarrender.com/xmlrpc.php" />
+        <!--[if lt IE 9]>
+         <script src="https://richardwarrender.com/wp-content/themes/independent-publisher/js/html5.js" type="text/javascript"></script>
+         <![endif]-->
+        <title>Encrypt data using AES and 256-bit keys - Richard Warrender</title>
+        
+        <!-- This site is optimized with the Yoast SEO plugin v4.2.1 - https://yoast.com/wordpress/plugins/seo/ -->
+        <meta name="description" content="Discover how to use AES 256-bit key encryption to protect user data on iOS and learn about why Initialisation Vectors are important."/>
+        <meta name="robots" content="noodp"/>
+        <link rel="canonical" href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/" />
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Encrypt data using AES and 256-bit keys - Richard Warrender" />
+        <meta property="og:description" content="Discover how to use AES 256-bit key encryption to protect user data on iOS and learn about why Initialisation Vectors are important." />
+        <meta property="og:url" content="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/" />
+        <meta property="og:site_name" content="Richard Warrender" />
+        <meta property="article:tag" content="AES" />
+        <meta property="article:tag" content="AES-256" />
+        <meta property="article:tag" content="C" />
+        <meta property="article:tag" content="CommonCrypto" />
+        <meta property="article:tag" content="encryption" />
+        <meta property="article:tag" content="iOS" />
+        <meta property="article:tag" content="Mac OS X" />
+        <meta property="article:tag" content="Objective-C" />
+        <meta property="article:tag" content="openssl" />
+        <meta property="article:tag" content="programming" />
+        <meta property="article:section" content="Encryption" />
+        <meta property="article:published_time" content="2016-04-27T20:06:29+01:00" />
+        <meta property="article:modified_time" content="2016-05-04T10:04:51+01:00" />
+        <meta property="og:updated_time" content="2016-05-04T10:04:51+01:00" />
+        <meta property="fb:app_id" content="1590557064586270" />
+        <meta property="og:image" content="https://richardwarrender.com/wp-content/uploads/2016/11/Richard.Warrender-2.jpg" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:description" content="Discover how to use AES 256-bit key encryption to protect user data on iOS and learn about why Initialisation Vectors are important." />
+        <meta name="twitter:title" content="Encrypt data using AES and 256-bit keys - Richard Warrender" />
+        <meta name="twitter:site" content="@rcwarrender" />
+        <meta name="twitter:image" content="https://richardwarrender.com/wp-content/uploads/2016/11/Richard.Warrender-2.jpg" />
+        <meta name="twitter:creator" content="@rcwarrender" />
+        <!-- / Yoast SEO plugin. -->
+        
+        <link rel='dns-prefetch' href='//s.w.org' />
+        <link rel="alternate" type="application/rss+xml" title="Richard Warrender &raquo; Feed" href="https://richardwarrender.com/feed/" />
+        <link rel="alternate" type="application/rss+xml" title="Richard Warrender &raquo; Comments Feed" href="https://richardwarrender.com/comments/feed/" />
+        <link rel="alternate" type="application/rss+xml" title="Richard Warrender &raquo; Encrypt data using AES and 256-bit keys Comments Feed" href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/feed/" />
+        <script type="text/javascript">
+            window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/richardwarrender.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.4"}};
+            !function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+            </script>
+        <style type="text/css">
+            img.wp-smiley,
+            img.emoji {
+                display: inline !important;
+                border: none !important;
+                box-shadow: none !important;
+                height: 1em !important;
+                width: 1em !important;
+                margin: 0 .07em !important;
+                vertical-align: -0.1em !important;
+                background: none !important;
+                padding: 0 !important;
+            }
+        </style>
+        <link rel='stylesheet' id='crayon-css'  href='https://richardwarrender.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+            <link rel='stylesheet' id='crayon-theme-xcode-css'  href='https://richardwarrender.com/wp-content/uploads/crayon-syntax-highlighter/themes/xcode/xcode.css?ver=_2.7.2_beta' type='text/css' media='all' />
+            <link rel='stylesheet' id='crayon-font-liberation-mono-css'  href='https://richardwarrender.com/wp-content/plugins/crayon-syntax-highlighter/fonts/liberation-mono.css?ver=_2.7.2_beta' type='text/css' media='all' />
+            <link rel='stylesheet' id='genericons-css'  href='https://richardwarrender.com/wp-content/themes/independent-publisher/fonts/genericons/genericons.css?ver=3.1' type='text/css' media='all' />
+            <link rel='stylesheet' id='independent-publisher-style-css'  href='https://richardwarrender.com/wp-content/themes/independent-publisher/style.css?ver=4.7.4' type='text/css' media='all' />
+            <link rel='stylesheet' id='customizer-css'  href='https://richardwarrender.com/wp-admin/admin-ajax.php?action=independent_publisher_customizer_css&#038;ver=1.7' type='text/css' media='all' />
+            <!-- This site uses the Google Analytics by MonsterInsights plugin v5.5.4 - Universal disabled - https://www.monsterinsights.com/ -->
+            <script type="text/javascript">
+            
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-375977-6']);
+            _gaq.push(['_gat._forceSSL']);
+            _gaq.push(['_trackPageview']);
+            
+            (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+            })();
+            
+            </script>
+            <!-- / Google Analytics by MonsterInsights -->
+            <script type='text/javascript' src='https://richardwarrender.com/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+            <script type='text/javascript' src='https://richardwarrender.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+            <script type='text/javascript'>
+            /* <![CDATA[ */
+            var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/richardwarrender.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+            var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+            /* ]]> */
+            </script>
+            <script type='text/javascript' src='https://richardwarrender.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+            <script type='text/javascript' src='https://richardwarrender.com/wp-content/themes/independent-publisher/js/fade-post-title.js?ver=4.7.4'></script>
+            <script type='text/javascript' src='https://richardwarrender.com/wp-content/themes/independent-publisher/js/enhanced-comment-form.js?ver=1.0'></script>
+            <link rel='https://api.w.org/' href='https://richardwarrender.com/wp-json/' />
+            <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://richardwarrender.com/xmlrpc.php?rsd" />
+            <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://richardwarrender.com/wp-includes/wlwmanifest.xml" />
+            <meta name="generator" content="WordPress 4.7.4" />
+            <link rel='shortlink' href='https://richardwarrender.com/?p=936' />
+            <link rel="alternate" type="application/json+oembed" href="https://richardwarrender.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Frichardwarrender.com%2F2016%2F04%2Fencrypt-data-using-aes-and-256-bit-keys%2F" />
+            <link rel="alternate" type="text/xml+oembed" href="https://richardwarrender.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Frichardwarrender.com%2F2016%2F04%2Fencrypt-data-using-aes-and-256-bit-keys%2F&#038;format=xml" />
+            </head>
+            
+            <body class="post-template-default single single-post postid-936 single-format-standard" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+            
+            
+            
+            <div id="page" class="site">
+            <header id="masthead" class="site-header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+            
+            <div class="site-header-info">
+            <a class="site-logo" href="https://richardwarrender.com/" title="Richard Warrender" rel="home">
+            <img class="no-grav" src="https://richardwarrender.com/wp-content/uploads/2016/11/cropped-Richard.Warrender-2-2.jpg" height="1500" width="1500" alt="Richard Warrender" />
+            </a>
+            <h1 class="site-title">
+            <a href="https://richardwarrender.com/" title="Richard Warrender" rel="home">Richard Warrender</a>
+            </h1>
+            <h2 class="site-description">Notes of a Developer (iPhone &amp; iPad)</h2>
+            </div>
+            
+            
+            </header>
+            <!-- #masthead .site-header -->
+            
+            <div id="main" class="site-main">
+            
+            <div id="primary" class="content-area">
+            <main id="content" class="site-content" role="main">
+            
+            
+            <a name="test">Test</a>
+            <article id="post-936" class="post-936 post type-post status-publish format-standard hentry category-encryption category-objective-c category-programming tag-aes tag-aes-256 tag-c tag-commoncrypto tag-encryption tag-ios tag-mac-os-x tag-objective-c tag-openssl tag-programming-2" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+            <header class="entry-header">
+            <h2 class="entry-title-meta">
+            <span class="entry-title-meta-author">
+            <span class="byline"><span class="author p-author vcard h-card"><a class="u-url url fn n" href="https://richardwarrender.com" title="View all posts by Richard Warrender" rel="author">Richard Warrender</a></span></span>			</span>
+            in <a href="https://richardwarrender.com/category/programming/encryption/" rel="category tag">Encryption</a>, <a href="https://richardwarrender.com/category/programming/objective-c/" rel="category tag">Objective-C</a>, <a href="https://richardwarrender.com/category/programming/" rel="category tag">Programming</a>				<span class="entry-title-meta-post-date">
+            <span class="sep"> | </span>
+            <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/" title="Encrypt data using AES and 256-bit keys" rel="bookmark"><time class="entry-date dt-published" datetime="2016-04-27T20:06:29+0100" itemprop="datePublished" pubdate="pubdate">April 27, 2016</time></a>			</span>
+            </h2>
+            <h1 class="entry-title p-name" itemprop="name">Encrypt data using AES and 256-bit keys</h1>
+            </header>
+            <!-- .entry-header -->
+            <div class="entry-content e-content" itemprop="mainContentOfPage">
+            <p>AES stands for Advanced Encryption Standard and is an industry-standard algorithm for encrypting data symmetrically which even the US government has approved for SECRET documents. If you don&#8217;t know what symmetrical encryption is, it means that you use the same key or password to encrypt the data as you do to unencrypt it. So you need to keep the key extremely secret however it&#8217;s still incredibly useful. I&#8217;ll show you how to use <a href="https://www.openssl.org/docs/manmaster/apps/openssl.html">openssl</a> to encrypt some data and decrypt it using the <a href="https://developer.apple.com/library/mac/documentation/Security/Conceptual/cryptoservices/GeneralPurposeCrypto/GeneralPurposeCrypto.html">Common Crypto libraries</a> on iOS.<br />
+            <span id="more-936"></span></p>
+            <h2>AES Key Size</h2>
+            <p>First a bit about key size&#8230; a key can be considered a password to decrypt the data with except with a password you are limited to characters you can type, to keep it simple lets say this was 26 letters + 10 numbers or 36 characters, if you had a password that was 1 character long you&#8217;d have 36 possible combinations to try to un-encrypt your data with. If you had a 2 character password you&#8217;d have 36 x 36 (36<sup>2</sup>) which would be 1,296 combinations, and 3 characters would mean 36 x 36 x 36 (36<sup>3</sup>) or 46,656 combinations. This increases exponentially with the length of the password.</p>
+            <p>Now characters are just represented as numbers on most computers these days so why not just skip straight to numbers? If you had a key which was one bit long (2<sup>1</sup>), you&#8217;d have 2 combinations as it could just be a 0 or a 1. If you had a key which was 2 bits long (2<sup>2</sup>) you&#8217;d have 4 combinations, 3 bits long (2<sup>3 </sup>) so with a 128 bit key you&#8217;d have (2<sup>128</sup>) 340,282,366,920,938,463,463,374,607,431,768,211,456 combinations. To put that into perspective, it&#8217;s estimated the whole world has 5,000,000,000,000,000,000,000 grains of sand and with a 128-bit key you&#8217;d still have to search every grain of sand on 68,000,000,000,000,000 earth-like planets. That means 128-bit keys are pretty secure if someone was to try every single combination (a brute force attack). Now imagine how many combinations there must be for a 256-bit key&#8230; yes basically 2<sup>256</sup> possible combinations and don&#8217;t forget that even going from a 128-bit key to a 129-bit key would not just double the combinations, it would increase it exponentially! In summary if you&#8217;re going for key size, a 128-bit key would be more than enough and a 256-bit key would be so huge it would probably slow down even a quantum brute-force attack&#8230; <em>probably</em>! However bigger isn&#8217;t always better and a 256-bit key uses more processing power so it&#8217;s something to think about&#8230;</p>
+            <h2>IV &#8211; the bit twister</h2>
+            <p>It gets a bit complicated but the CommonCrypto library defaults to using <a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation">Cipher Block Chaining</a> (CBC) for the Block Cipher Mode. Without going into too much detail, the plaintext you&#8217;d like to encrypt gets broken up into small blocks of data and starting with the first block of data the AES algorithm gets applied and used in the calculation for encrypting the next block. That means each block is dependant on the previous block being calculated &#8211; hence the &#8220;chaining&#8221; of blocks. However this exposes a problem: if you have two pieces of data you encrypt using the same key and the first few blocks are the same you&#8217;ll find that with the two encrypted pieces of data the beginning of both pieces are the same. This might not seem like a big deal at first but an attacker will know you used the same key and could use this to work out statistical differences with each block and in turn predict the contents and/or work out the key.</p>
+            <p>For AES, regardless of key size the block size is 128-bits long which if we assume 8-bits per character would mean each block is 16 characters in length. Enough theory, lets see it in action with OpenSSL in the terminal on Mac OS X!</p>
+            <p>We use a key of <em>secretpassword</em> and use interactive mode which allows Ctrl+D to finish and output the encrypted cipher text in Base64 format.</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf79456063252" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always  expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            $ openssl enc -aes128 -k secretpassword -a -p -nosalt -iv 00
+            key=2034F6E32958647FDFF75D265B455EBF
+            Hello Mr Warrender, This is good news
+            
+            VVklkPrL5fczxmu4vZ93BkAsVA64MLd5uah+zTVzr0XlOONVgDEd7ZunyIIzhpAo</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf79456063252-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf79456063252-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bf79456063252-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf79456063252-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bf79456063252-5">5</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf79456063252-1">$ openssl enc -aes128 -k secretpassword -a -p -nosalt -iv 00</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf79456063252-2">key=2034F6E32958647FDFF75D265B455EBF</div><div class="crayon-line" id="crayon-5917e4208bf79456063252-3">Hello Mr Warrender, This is good news</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf79456063252-4">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bf79456063252-5">VVklkPrL5fczxmu4vZ93BkAsVA64MLd5uah+zTVzr0XlOONVgDEd7ZunyIIzhpAo</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p> </p>
+            <p>Now lets try another message using the same settings:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf8a910921529" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            $ openssl enc -aes128 -k secretpassword -a -p -nosalt -iv 00
+            key=2034F6E32958647FDFF75D265B455EBF
+            Hello Mr Warrender, I have some terrible news
+            
+            VVklkPrL5fczxmu4vZ93BnfBBpU8BWK1IQhHF6JRKSNZJ7PvpcaE8K/Mkbx1xgHa</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf8a910921529-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf8a910921529-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bf8a910921529-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf8a910921529-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bf8a910921529-5">5</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf8a910921529-1">$ openssl enc -aes128 -k secretpassword -a -p -nosalt -iv 00</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf8a910921529-2">key=2034F6E32958647FDFF75D265B455EBF</div><div class="crayon-line" id="crayon-5917e4208bf8a910921529-3">Hello Mr Warrender, I have some terrible news</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf8a910921529-4">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bf8a910921529-5">VVklkPrL5fczxmu4vZ93BnfBBpU8BWK1IQhHF6JRKSNZJ7PvpcaE8K/Mkbx1xgHa</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p>By comparing the two ciphertexts above you can see the beginning block &#8216;VVklkPrL5fczxmu4vZ93B&#8217; is the same:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf8f806318264" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            VVklkPrL5fczxmu4vZ93BkAsVA64MLd5uah+zTVzr0XlOONVgDEd7ZunyIIzhpAo
+            VVklkPrL5fczxmu4vZ93BnfBBpU8BWK1IQhHF6JRKSNZJ7PvpcaE8K/Mkbx1xgHa</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="show">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf8f806318264-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf8f806318264-2">2</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf8f806318264-1">VVklkPrL5fczxmu4vZ93BkAsVA64MLd5uah+zTVzr0XlOONVgDEd7ZunyIIzhpAo</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf8f806318264-2">VVklkPrL5fczxmu4vZ93BnfBBpU8BWK1IQhHF6JRKSNZJ7PvpcaE8K/Mkbx1xgHa</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p>If we knew the contents of one of the messages, perhaps lets say from a captured U-Boat, we could work out when a message was addressed to Mr Warrender without ever knowing the key! The same principle holds true for file formats, transfer protocols and other data you encrypt but how do you fix it?</p>
+            <p>The solution is to use a unique Initialisation Vector or an IV with CBC mode. This adjusts the initial plaintext block by a certain amount and since each block is chained, every subsequent block is different every time even if you encrypt the same message twice. As long as you use a different IV for every message it will result in a completely different ciphertext.</p>
+            <p>Typically for AES the IV is the size of a block so the IV is 128-bits long. With openssl you can specify the IV using hex.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf94470263142" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            $ openssl enc -aes256 -k secretpassword -a -p -nosalt
+            key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C
+            iv =AD0ACC568C88C116D57B273D98FB92C0
+            Hello Mr Warrender, This is good news
+            
+            9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf94470263142-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf94470263142-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bf94470263142-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf94470263142-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bf94470263142-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf94470263142-6">6</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf94470263142-1">$ openssl enc -aes256 -k secretpassword -a -p -nosalt</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf94470263142-2">key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C</div><div class="crayon-line" id="crayon-5917e4208bf94470263142-3">iv =AD0ACC568C88C116D57B273D98FB92C0</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf94470263142-4">Hello Mr Warrender, This is good news </div><div class="crayon-line" id="crayon-5917e4208bf94470263142-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf94470263142-6">9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf99262467056" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            $ openssl enc -aes256 -k secretpassword -a -p -nosalt -iv 0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF
+            key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C
+            iv =0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF00
+            Hello Mr Warrender, This is good news
+            
+            S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf99262467056-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf99262467056-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bf99262467056-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf99262467056-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bf99262467056-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf99262467056-6">6</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf99262467056-1">$ openssl enc -aes256 -k secretpassword -a -p -nosalt -iv 0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf99262467056-2">key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C</div><div class="crayon-line" id="crayon-5917e4208bf99262467056-3">iv =0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF00</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf99262467056-4">Hello Mr Warrender, This is good news </div><div class="crayon-line" id="crayon-5917e4208bf99262467056-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf99262467056-6">S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p></p>
+            <p>By comparing the results with the same message, same key and different IV we can see the blocks don&#8217;t match which is just what we wanted!</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bf9e185514304" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG
+            S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="show">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bf9e185514304-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bf9e185514304-2">2</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bf9e185514304-1">9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bf9e185514304-2">S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p></p>
+            <p>Now you can store the IV with the key or prepend it to the encrypted payload, it doesn&#8217;t matter too much as long as you use the same IV to decrypt with and obviously the key should always remain private. However make sure you use a unique IV for each message!</p>
+            <h2>Wait&#8230; The IV is not a key!</h2>
+            <p>It&#8217;s tempting to think that the IV is an extra layer of encryption except it isn&#8217;t. In-fact you don&#8217;t even need the IV to decrypt the majority of a message. Remember how block chaining worked? You took the ciphertext from the current block and used that to help you encrypt the plaintext for the next block&#8230;</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfa3241993517" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            Block 1:
+            (Plaintext + IV) &gt; Encrypt &gt; Ciphertext
+            
+            Block 2:
+            (Plaintext + Block 1 Ciphertext) &gt; Encrypt &gt; Ciphertext
+            
+            Block 3:
+            (Plaintext + Block 2 Ciphertext) &gt; Encrypt &gt; Ciphertext</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-1">1</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-3">3</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-5">5</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-6">6</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-7">7</div><div class="crayon-num" data-line="crayon-5917e4208bfa3241993517-8">8</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfa3241993517-1">Block 1:</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-2">(Plaintext + IV) &gt; Encrypt &gt; Ciphertext</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-3">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-4">Block 2:</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-5">(Plaintext + Block 1 Ciphertext) &gt; Encrypt &gt; Ciphertext</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-6">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-7">Block 3:</div><div class="crayon-line" id="crayon-5917e4208bfa3241993517-8">(Plaintext + Block 2 Ciphertext) &gt; Encrypt &gt; Ciphertext</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p></p>
+            <p>When decrypting we work backwards and because we used the adjacent ciphertext block before encrypting, we need to remove it. However as you can see below, we already have the ciphertext because we&#8217;re decrypting! Hence only block 1 gets corrupted because we don&#8217;t know the IV to remove.</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfa8064681932" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            Block 3:
+            Ciphertext &gt; Decrypt &gt; (Result - Block 2 Ciphertext) &gt; Plaintext
+            
+            Block 2:
+            Ciphertext &gt; Decrypt &gt; (Result - Block 1 Ciphertext) &gt; Plaintext
+            
+            Block 1:
+            Ciphertext &gt; Decrypt &gt; (Result - Missing IV) &gt; Corrupted</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-1">1</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-3">3</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-5">5</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-6">6</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-7">7</div><div class="crayon-num" data-line="crayon-5917e4208bfa8064681932-8">8</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfa8064681932-1">Block 3:</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-2">Ciphertext &gt; Decrypt &gt; (Result - Block 2 Ciphertext) &gt; Plaintext</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-3">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-4">Block 2:</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-5">Ciphertext &gt; Decrypt &gt; (Result - Block 1 Ciphertext) &gt; Plaintext</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-6">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-7">Block 1:</div><div class="crayon-line" id="crayon-5917e4208bfa8064681932-8">Ciphertext &gt; Decrypt &gt; (Result - Missing IV) &gt; Corrupted</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p> </p>
+            <h2>Decrypting AES in iOS</h2>
+            <p>So you have your hex-encoded AES 256-bit key:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfad658798049" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C </textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfad658798049-1">1</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfad658798049-1">2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C </div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p></p>
+            <p>You have your hex-encoded IV and your Base64-encoded ciphertext:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfb1639646854" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            IV: AD0ACC568C88C116D57B273D98FB92C0
+            Ciphertext: 9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="hide">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfb1639646854-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb1639646854-2">2</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfb1639646854-1">IV: AD0ACC568C88C116D57B273D98FB92C0</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb1639646854-2">Ciphertext: 9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG</div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p></p>
+            <p>Now to decrypt it&#8230; place the following code into a category named NSData+AES256Encryption.</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfb6781492309" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+            
+            <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+            #import &lt;CommonCrypto/CommonDigest.h&gt;
+            #import &lt;CommonCrypto/CommonCryptor.h&gt;
+            
+            @interface NSData (AES256Encryption)
+            - (NSData *)encryptedDataWithHexKey:(NSString*)hexKey hexIV:(NSString *)hexIV;
+            - (NSData *)originalDataWithHexKey:(NSString*)hexKey hexIV:(NSString *)hexIV;
+            @end
+            
+            @implementation NSData (AES256Encryption)
+            
+            + (NSData *)dataFromHexString:(NSString *)string
+            {
+            string = string.lowercaseString;
+            NSMutableData *data = [[NSMutableData alloc] initWithCapacity:string.length/2];
+            unsigned char whole_byte;
+            char byte_chars[3] = {'\0','\0','\0'};
+            int i = 0;
+            NSUInteger length = string.length;
+            while (i &lt; length-1) {
+            char c = [string characterAtIndex:i++];
+            if (c &lt; '0' || (c &gt; '9' &amp;&amp; c &lt; 'a') || c &gt; 'f')
+            continue;
+            byte_chars[0] = c;
+            byte_chars[1] = [string characterAtIndex:i++];
+            whole_byte = strtol(byte_chars, NULL, 16);
+            [data appendBytes:&amp;whole_byte length:1];
+            }
+            return data;
+            }
+            
+            + (void)fillDataArray:(char **)dataPtr length:(NSUInteger)length usingHexString:(NSString *)hexString
+            {
+            NSData *data = [NSData dataFromHexString:hexString];
+            NSAssert((data.length + 1) == length, @"The hex provided didn't decode to match length");
+            
+            *dataPtr = malloc(length * sizeof(char));
+            bzero(*dataPtr, sizeof(*dataPtr));
+            memcpy(*dataPtr, data.bytes, data.length);
+            }
+            
+            - (NSData *)encryptedDataWithHexKey:(NSString*)hexKey hexIV:(NSString *)hexIV
+            {
+            // Fetch key data and put into C string array padded with \0
+            char *keyPtr;
+            [NSData fillDataArray:&amp;keyPtr length:kCCKeySizeAES256+1 usingHexString:hexKey];
+            
+            // Fetch iv data and put into C string array padded with \0
+            char *ivPtr;
+            [NSData fillDataArray:&amp;ivPtr length:kCCKeySizeAES128+1 usingHexString:hexIV];
+            
+            // For block ciphers, the output size will always be less than or equal to the input size plus the size of one block because we add padding.
+            // That's why we need to add the size of one block here
+            NSUInteger dataLength = self.length;
+            size_t bufferSize = dataLength + kCCBlockSizeAES128;
+            void *buffer = malloc( bufferSize );
+            
+            size_t numBytesEncrypted = 0;
+            CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt, kCCAlgorithmAES, kCCOptionPKCS7Padding,
+            keyPtr, kCCKeySizeAES256,
+            ivPtr /* initialization vector */,
+            [self bytes], [self length], /* input */
+            buffer, bufferSize, /* output */
+            &amp;numBytesEncrypted);
+            free(keyPtr);
+            free(ivPtr);
+            
+            if(cryptStatus == kCCSuccess) {
+            return [NSData dataWithBytesNoCopy:buffer length:numBytesEncrypted];
+            }
+            
+            free(buffer);
+            return nil;
+            }
+            
+            - (NSData *)originalDataWithHexKey:(NSString*)hexKey hexIV:(NSString *)hexIV
+            {
+            // Fetch key data and put into C string array padded with \0
+            char *keyPtr;
+            [NSData fillDataArray:&amp;keyPtr length:kCCKeySizeAES256+1 usingHexString:hexKey];
+            
+            // Fetch iv data and put into C string array padded with \0
+            char *ivPtr;
+            [NSData fillDataArray:&amp;ivPtr length:kCCKeySizeAES128+1 usingHexString:hexIV];
+            
+            // For block ciphers, the output size will always be less than or equal to the input size plus the size of one block because we add padding.
+            // That's why we need to add the size of one block here
+            NSUInteger dataLength = self.length;
+            size_t bufferSize = dataLength + kCCBlockSizeAES128;
+            void *buffer = malloc( bufferSize );
+            
+            size_t numBytesDecrypted = 0;
+            CCCryptorStatus cryptStatus = CCCrypt( kCCDecrypt, kCCAlgorithmAES, kCCOptionPKCS7Padding,
+            keyPtr, kCCKeySizeAES256,
+            ivPtr,
+            [self bytes], dataLength, /* input */
+            buffer, bufferSize, /* output */
+            &amp;numBytesDecrypted );
+            free(keyPtr);
+            free(ivPtr);
+            
+            if( cryptStatus == kCCSuccess )
+            {
+            // The returned NSData takes ownership of the buffer and will free it on deallocation
+            return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];
+            }
+            
+            free(buffer);
+            return nil;
+            }
+            @end</textarea></div>
+            <div class="crayon-main" style="">
+            <table class="crayon-table">
+            <tr class="crayon-row">
+            <td class="crayon-nums " data-settings="show">
+            <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-6">6</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-8">8</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-10">10</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-12">12</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-14">14</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-16">16</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-18">18</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-20">20</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-22">22</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-24">24</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-26">26</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-28">28</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-30">30</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-32">32</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-34">34</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-36">36</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-38">38</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-40">40</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-42">42</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-44">44</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-46">46</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-48">48</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-49">49</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-50">50</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-51">51</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-52">52</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-53">53</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-54">54</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-55">55</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-56">56</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-57">57</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-58">58</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-59">59</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-60">60</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-61">61</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-62">62</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-63">63</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-64">64</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-65">65</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-66">66</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-67">67</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-68">68</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-69">69</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-70">70</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-71">71</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-72">72</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-73">73</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-74">74</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-75">75</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-76">76</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-77">77</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-78">78</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-79">79</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-80">80</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-81">81</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-82">82</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-83">83</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-84">84</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-85">85</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-86">86</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-87">87</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-88">88</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-89">89</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-90">90</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-91">91</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-92">92</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-93">93</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-94">94</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-95">95</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-96">96</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-97">97</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-98">98</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-99">99</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-100">100</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-101">101</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-102">102</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-103">103</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-104">104</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-105">105</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-106">106</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-107">107</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-108">108</div><div class="crayon-num" data-line="crayon-5917e4208bfb6781492309-109">109</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfb6781492309-110">110</div></div>
+            </td>
+            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfb6781492309-1"><span class="crayon-p">#import &lt;CommonCrypto/CommonDigest.h&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-2"><span class="crayon-p">#import &lt;CommonCrypto/CommonCryptor.h&gt;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-4"><span class="crayon-st">@interface</span><span class="crayon-h"> </span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">AES256Encryption</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-5"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-e ">encryptedDataWithHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-6"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-e ">originalDataWithHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-7"><span class="crayon-st">@end</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-8">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-9"><span class="crayon-st">@implementation</span><span class="crayon-h"> </span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">AES256Encryption</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-10">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-11"><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-e ">dataFromHexString</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">string</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-12"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">string</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">string</span><span class="crayon-sy">.</span><span class="crayon-v">lowercaseString</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSMutableData</span><span class="crayon-h"> </span><span class="crayon-v">*data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-t">NSMutableData</span><span class="crayon-h"> </span><span class="crayon-r">alloc</span><span class="crayon-sy">]</span><span class="crayon-e "> initWithCapacity</span><span class="crayon-v">:string</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-o">/</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">unsigned</span><span class="crayon-h"> </span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">whole_byte</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">byte_chars</span><span class="crayon-sy">[</span><span class="crayon-cn">3</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'\0'</span><span class="crayon-sy">,</span><span class="crayon-s">'\0'</span><span class="crayon-sy">,</span><span class="crayon-s">'\0'</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">int</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSUInteger</span><span class="crayon-h"> </span><span class="crayon-v">length</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">string</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">while</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">length</span><span class="crayon-o">-</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">string</span><span class="crayon-e "> characterAtIndex</span><span class="crayon-v">:i</span><span class="crayon-o">++</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-s">'0'</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-s">'9'</span><span class="crayon-h"> </span><span class="crayon-o">&amp;&amp;</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-s">'a'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">||</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-s">'f'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">continue</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">byte_chars</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">byte_chars</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">string</span><span class="crayon-e "> characterAtIndex</span><span class="crayon-v">:i</span><span class="crayon-o">++</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">whole_byte</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">strtol</span><span class="crayon-sy">(</span><span class="crayon-v">byte_chars</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">NULL</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">16</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-v">data</span><span class="crayon-e "> appendBytes</span><span class="crayon-o">:</span><span class="crayon-o">&amp;</span><span class="crayon-v">whole</span><span class="crayon-sy">_</span><span class="crayon-v">byte</span><span class="crayon-e "> length</span><span class="crayon-o">:</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-29"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-30">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-31"><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">void</span><span class="crayon-sy">)</span><span class="crayon-e ">fillDataArray</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">dataPtr</span><span class="crayon-e "> length</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSUInteger</span><span class="crayon-sy">)</span><span class="crayon-v">length</span><span class="crayon-e "> usingHexString</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexString</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-32"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-v">*data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> dataFromHexString</span><span class="crayon-v">:hexString</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-34"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSAssert</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-v">length</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">@"The hex provided didn't decode to match length"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-35"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-36"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">*dataPtr</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">malloc</span><span class="crayon-sy">(</span><span class="crayon-t ">length </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-t">char</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-37"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">bzero</span><span class="crayon-sy">(</span><span class="crayon-v">*dataPtr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-r">sizeof</span><span class="crayon-sy">(</span><span class="crayon-v">*dataPtr</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-38"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">memcpy</span><span class="crayon-sy">(</span><span class="crayon-v">*dataPtr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-v">bytes</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-39"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-40">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-41"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-e ">encryptedDataWithHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-42"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-43"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Fetch key data and put into C string array padded with \0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-44"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">*keyPtr</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> fillDataArray</span><span class="crayon-o">:</span><span class="crayon-o">&amp;</span><span class="crayon-v">keyPtr</span><span class="crayon-e "> length</span><span class="crayon-v">:kCCKeySizeAES256</span><span class="crayon-o">+</span><span class="crayon-cn">1</span><span class="crayon-e "> usingHexString</span><span class="crayon-v">:hexKey</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-46"><span class="crayon-h">&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Fetch iv data and put into C string array padded with \0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">*ivPtr</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-49"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> fillDataArray</span><span class="crayon-o">:</span><span class="crayon-o">&amp;</span><span class="crayon-v">ivPtr</span><span class="crayon-e "> length</span><span class="crayon-v">:kCCKeySizeAES128</span><span class="crayon-o">+</span><span class="crayon-cn">1</span><span class="crayon-e "> usingHexString</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-50">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-51"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// For block ciphers, the output size will always be less than or equal to the input size plus the size of one block because we add padding.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-52"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// That's why we need to add the size of one block here</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-53"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSUInteger</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-54"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">size_t </span><span class="crayon-v">bufferSize</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">kCCBlockSizeAES128</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-55"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-v">*buffer</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">malloc</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">bufferSize</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-56"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-57"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">size_t </span><span class="crayon-v">numBytesEncrypted</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-58"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">CCCryptorStatus</span><span class="crayon-h"> </span><span class="crayon-v">cryptStatus</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">CCCrypt</span><span class="crayon-sy">(</span><span class="crayon-v">kCCEncrypt</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCAlgorithmAES</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCOptionPKCS7Padding</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-59"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">keyPtr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCKeySizeAES256</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-60"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">ivPtr</span><span class="crayon-h"> </span><span class="crayon-c">/* initialization vector */</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-61"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-h"> </span><span class="crayon-v">bytes</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-h"> </span><span class="crayon-v">length</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* input */</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-62"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">buffer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">bufferSize</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* output */</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-63"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&amp;</span><span class="crayon-v">numBytesEncrypted</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-64"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">keyPtr</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-65"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">ivPtr</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-66"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-67"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span><span class="crayon-v">cryptStatus</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-v">kCCSuccess</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-68"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> dataWithBytesNoCopy</span><span class="crayon-v">:buffer</span><span class="crayon-e "> length</span><span class="crayon-v">:numBytesEncrypted</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-69"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-70"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-71"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">buffer</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-72"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-t">nil</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-73"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-74">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-75"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-e ">originalDataWithHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-76"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-77"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Fetch key data and put into C string array padded with \0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-78"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">*keyPtr</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-79"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> fillDataArray</span><span class="crayon-o">:</span><span class="crayon-o">&amp;</span><span class="crayon-v">keyPtr</span><span class="crayon-e "> length</span><span class="crayon-v">:kCCKeySizeAES256</span><span class="crayon-o">+</span><span class="crayon-cn">1</span><span class="crayon-e "> usingHexString</span><span class="crayon-v">:hexKey</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-80"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-81"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Fetch iv data and put into C string array padded with \0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-82"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">char</span><span class="crayon-h"> </span><span class="crayon-v">*ivPtr</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-83"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> fillDataArray</span><span class="crayon-o">:</span><span class="crayon-o">&amp;</span><span class="crayon-v">ivPtr</span><span class="crayon-e "> length</span><span class="crayon-v">:kCCKeySizeAES128</span><span class="crayon-o">+</span><span class="crayon-cn">1</span><span class="crayon-e "> usingHexString</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-84"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-85"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// For block ciphers, the output size will always be less than or equal to the input size plus the size of one block because we add padding.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-86"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// That's why we need to add the size of one block here</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-87"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSUInteger</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">length</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-88"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">size_t </span><span class="crayon-v">bufferSize</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">kCCBlockSizeAES128</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-89"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-v">*buffer</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">malloc</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">bufferSize</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-90"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-91"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">size_t </span><span class="crayon-v">numBytesDecrypted</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-92"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">CCCryptorStatus</span><span class="crayon-h"> </span><span class="crayon-v">cryptStatus</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">CCCrypt</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">kCCDecrypt</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCAlgorithmAES</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCOptionPKCS7Padding</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-93"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">keyPtr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCKeySizeAES256</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-94"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">ivPtr</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-95"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-h"> </span><span class="crayon-v">bytes</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* input */</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-96"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">buffer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">bufferSize</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* output */</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-97"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&amp;</span><span class="crayon-v">numBytesDecrypted</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-98"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">keyPtr</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-99"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">ivPtr</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-100"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-101"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">cryptStatus</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-v">kCCSuccess</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-102"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-103"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// The returned NSData takes ownership of the buffer and will free it on deallocation</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-104"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-e "> dataWithBytesNoCopy</span><span class="crayon-v">:buffer</span><span class="crayon-e "> length</span><span class="crayon-v">:numBytesDecrypted</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-105"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-106"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-107"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">free</span><span class="crayon-sy">(</span><span class="crayon-v">buffer</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-108"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-t">nil</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfb6781492309-109"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfb6781492309-110"><span class="crayon-st">@end</span></div></div></td>
+            </tr>
+            </table>
+            </div>
+            </div>
+            <!-- [Format Time: 0.0209 seconds] -->
+            <p></p>
+            <p>Now in your view controller or wherever you want to decrypt place the following code:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfbf352976146" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+                
+                <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+                    - (void)runMe
+                    {
+                    NSString *hexKey = @"2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C";
+                    NSString *cipherText = nil;
+                    NSString *hexIV = nil;
+                    
+                    cipherText = @"9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG";
+                    hexIV = @"AD0ACC568C88C116D57B273D98FB92C0";
+                    [self decodeAndPrintCipherBase64Data:cipherText usingHexKey:hexKey hexIV:hexIV];
+                    
+                    cipherText = @"S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg";
+                    hexIV = @"0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF00";
+                    [self decodeAndPrintCipherBase64Data:cipherText usingHexKey:hexKey hexIV:hexIV];
+                    
+                    NSString *plainText = @"Thank you Mr Warrender, Reinforcements have arrived! Send biscuits";
+                    hexIV = @"010932650CDD998833CC0AFF9AFF00FF";
+                    [self encodeAndPrintPlainText:plainText usingHexKey:hexKey hexIV:hexIV];
+                    }
+                    
+                    - (void)decodeAndPrintCipherBase64Data:(NSString *)cipherText
+                    usingHexKey:(NSString *)hexKey
+                    hexIV:(NSString *)hexIV
+                    {
+                    NSData *data = [[NSData alloc] initWithBase64EncodedString:cipherText options:0];
+                    NSAssert(data != nil, @"Couldn't base64 decode cipher text");
+                    
+                    NSData *decryptedPayload = [data originalDataWithHexKey:hexKey
+                    hexIV:hexIV];
+                    
+                    if (decryptedPayload) {
+                    NSString *plainText = [[NSString alloc] initWithData:decryptedPayload encoding:NSUTF8StringEncoding];
+                    NSLog(@"Decrypted Result: %@", plainText);
+                    }
+                    }
+                    
+                    - (void)encodeAndPrintPlainText:(NSString *)plainText
+                    usingHexKey:(NSString *)hexKey
+                    hexIV:(NSString *)hexIV
+                    {
+                    NSData *data = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+                    
+                    NSData *encryptedPayload = [data encryptedDataWithHexKey:hexKey
+                    hexIV:hexIV];
+                    
+                    if (encryptedPayload) {
+                    NSString *cipherText = [encryptedPayload base64EncodedStringWithOptions:0];
+                    NSLog(@"Encryped Result: %@", cipherText);
+                    }
+                    }</textarea></div>
+                <div class="crayon-main" style="">
+                    <table class="crayon-table">
+                        <tr class="crayon-row">
+                            <td class="crayon-nums " data-settings="show">
+                                <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-6">6</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-8">8</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-10">10</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-12">12</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-14">14</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-16">16</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-18">18</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-20">20</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-22">22</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-24">24</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-26">26</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-28">28</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-30">30</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-32">32</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-34">34</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-36">36</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-38">38</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-40">40</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-41">41</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-42">42</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-43">43</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-44">44</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-45">45</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-46">46</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-47">47</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfbf352976146-48">48</div><div class="crayon-num" data-line="crayon-5917e4208bfbf352976146-49">49</div></div>
+                            </td>
+                            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfbf352976146-1"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">void</span><span class="crayon-sy">)</span><span class="crayon-v">runMe</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-2"><span class="crayon-sy">{</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*hexKey</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*cipherText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">nil</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*hexIV</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">nil</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">cipherText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"9/0FGE21YYBl8NvlCp1Ft8j1V7BiIpCIlNa/zbYwL5LWyemd/7QEu0tkVz9/f0JG"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">hexIV</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"AD0ACC568C88C116D57B273D98FB92C0"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-e "> decodeAndPrintCipherBase64Data</span><span class="crayon-v">:cipherText</span><span class="crayon-e "> usingHexKey</span><span class="crayon-v">:hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">cipherText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"S6flMkdMeC77p/7pokXZkHT0is7Lp57Zgkokg/O99puZloTB/ZUzp0FwH8sWFekg"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">hexIV</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"0F0AFF0F0AFF0F0AFF0F0AFF0F0AFF00"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-e "> decodeAndPrintCipherBase64Data</span><span class="crayon-v">:cipherText</span><span class="crayon-e "> usingHexKey</span><span class="crayon-v">:hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*plainText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"Thank you Mr Warrender, Reinforcements have arrived! Send biscuits"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">hexIV</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">@"010932650CDD998833CC0AFF9AFF00FF"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-e "> encodeAndPrintPlainText</span><span class="crayon-v">:plainText</span><span class="crayon-e "> usingHexKey</span><span class="crayon-v">:hexKey</span><span class="crayon-e "> hexIV</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-18"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-19">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-20"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">void</span><span class="crayon-sy">)</span><span class="crayon-e ">decodeAndPrintCipherBase64Data</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">cipherText</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-21"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; usingHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-22"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-23"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-v">*data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-r">alloc</span><span class="crayon-sy">]</span><span class="crayon-e "> initWithBase64EncodedString</span><span class="crayon-v">:cipherText</span><span class="crayon-e "> options</span><span class="crayon-o">:</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSAssert</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">!=</span><span class="crayon-h"> </span><span class="crayon-t">nil</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">@"Couldn't base64 decode cipher text"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-v">*decryptedPayload</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">data</span><span class="crayon-e "> originalDataWithHexKey</span><span class="crayon-v">:hexKey</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-28"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexIV</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-30"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">decryptedPayload</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-31"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*plainText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-r">alloc</span><span class="crayon-sy">]</span><span class="crayon-e "> initWithData</span><span class="crayon-v">:decryptedPayload</span><span class="crayon-e "> encoding</span><span class="crayon-v">:NSUTF8StringEncoding</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-32"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSLog</span><span class="crayon-sy">(</span><span class="crayon-s">@"Decrypted Result: %@"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">plainText</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-33"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-34"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-35">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-36"><span class="crayon-o">-</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">void</span><span class="crayon-sy">)</span><span class="crayon-e ">encodeAndPrintPlainText</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">plainText</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-37"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;usingHexKey</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexKey</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-38"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexIV</span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-t ">*</span><span class="crayon-sy">)</span><span class="crayon-v">hexIV</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-39"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-40"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-v">*data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">plainText</span><span class="crayon-e "> dataUsingEncoding</span><span class="crayon-v">:NSUTF8StringEncoding</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-41"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-42"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSData</span><span class="crayon-h"> </span><span class="crayon-v">*encryptedPayload</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">data</span><span class="crayon-e "> encryptedDataWithHexKey</span><span class="crayon-v">:hexKey</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-43"><span class="crayon-e ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; hexIV</span><span class="crayon-v">:hexIV</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-44"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-45"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">encryptedPayload</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-46"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSString</span><span class="crayon-h"> </span><span class="crayon-v">*cipherText</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">encryptedPayload</span><span class="crayon-e "> base64EncodedStringWithOptions</span><span class="crayon-o">:</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-47"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">NSLog</span><span class="crayon-sy">(</span><span class="crayon-s">@"Encryped Result: %@"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">cipherText</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfbf352976146-48"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5917e4208bfbf352976146-49"><span class="crayon-sy">}</span></div></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- [Format Time: 0.0084 seconds] -->
+            <p></p>
+            <p>As you can see in the code we set the ciphertext, key and IV examples we created using openssl earlier and decoded them. Run the code and you should see &#8220;Decrypted Result: Hello Mr Warrender, This is good news&#8221; printed twice in the console. Congratulations, you just decoded encrypted text using AES-256 encryption!</p>
+            <p>CommonCrypto&#8217;s CCCrypt C function looks very scary but it&#8217;s actually really easy to use. Most of the code in the category involves getting the raw bits from the hex strings and putting them into C byte arrays. As we&#8217;re using C functions we have to calculate how long our arrays are since we just pass around pointers to them. </p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfc6281424248" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+                
+                <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+                    CCCrypt( kCCDecrypt, kCCAlgorithmAES, kCCOptionPKCS7Padding,
+                    keyPtr, kCCKeySizeAES256,
+                    ivPtr,
+                    [self bytes], dataLength, /* input */
+                    buffer, bufferSize, /* output */
+                    &amp;numBytesDecrypted );</textarea></div>
+                <div class="crayon-main" style="">
+                    <table class="crayon-table">
+                        <tr class="crayon-row">
+                            <td class="crayon-nums " data-settings="show">
+                                <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfc6281424248-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfc6281424248-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfc6281424248-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfc6281424248-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfc6281424248-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfc6281424248-6">6</div></div>
+                            </td>
+                            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfc6281424248-1"><span class="crayon-e">CCCrypt</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">kCCDecrypt</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCAlgorithmAES</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCOptionPKCS7Padding</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfc6281424248-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">keyPtr</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">kCCKeySizeAES256</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5917e4208bfc6281424248-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">ivPtr</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfc6281424248-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-sy">[</span><span class="crayon-r">self</span><span class="crayon-h"> </span><span class="crayon-v">bytes</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">dataLength</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* input */</span></div><div class="crayon-line" id="crayon-5917e4208bfc6281424248-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">buffer</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">bufferSize</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">/* output */</span></div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfc6281424248-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-o">&amp;</span><span class="crayon-i">numBytesDecrypted</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- [Format Time: 0.0013 seconds] -->
+            <p> </p>
+            <p>The <em>1st parameter</em> is a constant to tell the CCCrypt function to decrypt your text.</p>
+            <p>The <em>2nd parameter</em> is a const which specifies which algorithm to use &#8211; that&#8217;s where you specify to use the AES cipher. </p>
+            <p>The <em>3rd parameter</em> needs some explaining, this specifies we want to use PKCS #7 Padding. AES is a block cipher because we break our plaintext up into blocks, however if our data doesn&#8217;t evenly fit into a block we&#8217;ll have to pad it with null characters which would work for printing simple C strings because a null character indicates the end of a string but for images or other data this isn&#8217;t what we want. Instead we specify to use the <a href="https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS7">PKCS #7 padding algorithm</a> to pad the block and get back the same data we encrypted. <strong>Note: openssl uses PKCS #5 padding algorithm but they are basically the same, that might save you a few hours!</strong></p>
+            <p>The <em>4th parameter</em> is a pointer containing your raw key byte array. </p>
+            <p>The <em>5th parameter</em> specifies how long your key is &#8211; you can use AES256 or AES128 enum consts here.</p>
+            <p>The <em>6th parameter</em> is the raw IV byte array pointer. You don&#8217;t need a size/length here because it will always be the same as the block size.</p>
+            <p>The <em>7th and 8th parameters</em> are the raw byte array pointer and array size of the ciphertext.</p>
+            <p>The <em>9th and 10th parameters</em> are the buffer byte pointer and buffer size of where the plaintext will go.</p>
+            <p>The <em>11th parameter</em> is an size pointer that will be populated with the size of the data that was decrypted.</p>
+            <h2>Encrypting AES in iOS</h2>
+            <p>Lets test the encryption from the iOS code. Now to ensure everything is correct, we encrypted a message back using a new IV but with the same details. Cut and paste the following from the console and paste into a file called test.enc.</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfcc825533451" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+                
+                <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+                    JKKBz4s4mvJJkDALfY5F84mrT0Y/VphISHe1f3qDmvHmpf8DHZXqvB93yLoboU7OkV6zfcfsbLw/xOnbqiIUY8RojXg3vLrjzBFCqisDDc8=</textarea></div>
+                <div class="crayon-main" style="">
+                    <table class="crayon-table">
+                        <tr class="crayon-row">
+                            <td class="crayon-nums " data-settings="show">
+                                <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfcc825533451-1">1</div></div>
+                            </td>
+                            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfcc825533451-1">JKKBz4s4mvJJkDALfY5F84mrT0Y/VphISHe1f3qDmvHmpf8DHZXqvB93yLoboU7OkV6zfcfsbLw/xOnbqiIUY8RojXg3vLrjzBFCqisDDc8=</div></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- [Format Time: 0.0001 seconds] -->
+            <p></p>
+            <p>Now we&#8217;ll use the -d (switch to decrypt) and -in (load a file) options of the openssl enc command to decrypt the message stored in test.enc using our previous key. Note we&#8217;re using a different IV!</p>
+            <p>Type the following into the terminal:</p>
+            <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+            
+            <div id="crayon-5917e4208bfd1954430479" class="crayon-syntax crayon-theme-xcode crayon-font-liberation-mono crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-always expand" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+                
+                <div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+                    $ openssl enc -aes256 -k secretpassword -p -iv 010932650CDD998833CC0AFF9AFF00FF -nosalt -base64 -d -in test.enc
+                    key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C
+                    iv =010932650CDD998833CC0AFF9AFF00FF
+                    
+                    Thank you Mr Warrender, Reinforcements have arrived! Send biscuits</textarea></div>
+                <div class="crayon-main" style="">
+                    <table class="crayon-table">
+                        <tr class="crayon-row">
+                            <td class="crayon-nums " data-settings="show">
+                                <div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5917e4208bfd1954430479-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfd1954430479-2">2</div><div class="crayon-num" data-line="crayon-5917e4208bfd1954430479-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5917e4208bfd1954430479-4">4</div><div class="crayon-num" data-line="crayon-5917e4208bfd1954430479-5">5</div></div>
+                            </td>
+                            <td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5917e4208bfd1954430479-1">$ openssl enc -aes256 -k secretpassword -p -iv 010932650CDD998833CC0AFF9AFF00FF -nosalt -base64 -d -in test.enc </div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfd1954430479-2">key=2034F6E32958647FDFF75D265B455EBF40C80E6D597092B3A802B3E5863F878C</div><div class="crayon-line" id="crayon-5917e4208bfd1954430479-3">iv =010932650CDD998833CC0AFF9AFF00FF</div><div class="crayon-line crayon-striped-line" id="crayon-5917e4208bfd1954430479-4">&nbsp;</div><div class="crayon-line" id="crayon-5917e4208bfd1954430479-5">Thank you Mr Warrender, Reinforcements have arrived! Send biscuits</div></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- [Format Time: 0.0002 seconds] -->
+            <p></p>
+            <p>Awesome, that&#8217;s great! We&#8217;ve successfully decoded our message using openssl we encrypted using iOS. Hopefully that&#8217;s shown you how to encrypt and decrypt AES protected data with 256-bit keys. You should also now understand about keys, block cipher modes and a bit about why IVs help protect data. Have fun and good luck protecting your user data.</p>
+            
+            
+            </div>
+            <!-- .entry-content -->
+            
+            
+            <footer class="entry-meta">
+                
+                <div id="share-comment-button">
+                    <button>
+                        <i class="share-comment-icon"></i>Write a Comment				</button>
+                </div>
+                
+            </footer>
+            <!-- .entry-meta -->
+            
+            </article><!-- #post-936 -->
+            
+            
+            <div id="commentform-top"></div> <!-- do not remove; used by jQuery to move the comment reply form here -->
+            <div id="respond" class="comment-respond">
+                <h3 id="reply-title" class="comment-reply-title"> <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2016/04/encrypt-data-using-aes-and-256-bit-keys/" style="display:none;">Cancel Reply</a></small></h3>			<form action="https://richardwarrender.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+                    <div id="main-reply-title"><h3>Write a Comment</h3></div><div class="comment-form-reply-title"><p>Comment</p></div><p class="comment-form-comment" id="comment-form-field"><textarea id="comment" name="comment" cols="60" rows="6" aria-required="true"></textarea></p><p class="comment-form-author"><label for="author">Name</label><input id="author" name="author" type="text" value="" /></p>
+                    <p class="comment-form-email"><label for="email">Email</label><input id="email" name="email" type="text" value="" /></p>
+                    <p class="comment-form-url"><label for="url">Website</label><input id="url" name="url" type="text" value="" /></p>
+                    <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit Comment" /> <input type='hidden' name='comment_post_ID' value='936' id='comment_post_ID' />
+                    <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                    </p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="44e79cf88c" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="71"/></p>			</form>
+            </div><!-- #respond -->
+            
+            
+            <div id="comments" class="comments-area">
+                
+                
+                
+                <ol class="commentlist">
+                    <li class="comment even thread-even depth-1" id="li-comment-78540">
+                        <article id="comment-78540" class="comment">
+                            <footer>
+                                <div class="comment-author vcard">
+                                    <img alt='' src='https://secure.gravatar.com/avatar/?s=48&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/?s=96&amp;d=retro&amp;r=g 2x' class='avatar avatar-48 photo avatar-default' height='48' width='48' />					<cite class="fn">Anonymous</cite>									</div>
+                                        <!-- .comment-author .vcard -->
+                                        <div class="comment-meta commentmetadata">
+                                        <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/#comment-78540">
+                                        <time pubdate datetime="2017-01-05T06:11:55+00:00">
+                                        January 5, 2017						</time>
+                                        </a>
+                                        </div>
+                                        <!-- .comment-meta .commentmetadata -->
+                                        </footer>
+                                        
+                                        <div class="comment-content "><p>In this situation when we get success in either encrypting or decrypting data<br />
+                                        if( cryptStatus == kCCSuccess )<br />
+                                        {<br />
+                                        // The returned NSData takes ownership of the buffer and will free it on deallocation<br />
+                                        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];<br />
+                                        }<br />
+                                        We did not free the buffer. Why?</p>
+                                        </div>
+                                        
+                                        <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link' href='https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/?replytocom=78540#respond' onclick='return addComment.moveForm( "comment-78540", "78540", "respond", "936" )' aria-label='Reply to Anonymous to '>Reply to Anonymous</a>			</div>
+                                        <!-- .reply -->
+                                        </article><!-- #comment-## -->
+                                        <ul class="children">
+                                        <li class="comment byuser comment-author-richard bypostauthor odd alt depth-2" id="li-comment-78542">
+                                        <article id="comment-78542" class="comment">
+                                        <footer>
+                                        <div class="comment-author vcard">
+                                        <img alt='' src='https://secure.gravatar.com/avatar/864aa23d93a81f1ed097c7cd190d6f29?s=48&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/864aa23d93a81f1ed097c7cd190d6f29?s=96&amp;d=retro&amp;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' />					<cite class="fn">Richard Warrender</cite>									</div>
+                                        <!-- .comment-author .vcard -->
+                                        <div class="comment-meta commentmetadata">
+                                        <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/#comment-78542">
+                                        <time pubdate datetime="2017-01-05T16:33:25+00:00">
+                                        January 5, 2017						</time>
+                                        </a>
+                                        </div>
+                                        <!-- .comment-meta .commentmetadata -->
+                                        </footer>
+                                        
+                                        <div class="comment-content "><p>In the <a href="https://developer.apple.com/reference/foundation/nsdata/1547229-datawithbytesnocopy?language=objc" rel="nofollow">NSData docs</a> under <em>Discussion</em> it says <strong>[NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted]</strong> takes ownership of the bytes pointer and frees it on deallocation. Hence it only needs to be freed if the cryptStatus fails.</p>
+                                        <p>In other words once we wrap the bytes up in NSData we can let the system free it. Hope that helps!</p>
+                                        </div>
+                                        
+                                        <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link' href='https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/?replytocom=78542#respond' onclick='return addComment.moveForm( "comment-78542", "78542", "respond", "936" )' aria-label='Reply to Richard to Richard Warrender'>Reply to Richard</a>			</div>
+                                        <!-- .reply -->
+                                        </article><!-- #comment-## -->
+                                        </li><!-- #comment-## -->
+                                        </ul><!-- .children -->
+                                        </li><!-- #comment-## -->
+                                        <li class="comment even thread-odd thread-alt depth-1" id="li-comment-78560">
+                                        <article id="comment-78560" class="comment">
+                                        <footer>
+                                        <div class="comment-author vcard">
+                                        <img alt='' src='https://secure.gravatar.com/avatar/03ab4a7ae5d9eb4b0d42b57cf4e0f4f1?s=48&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/03ab4a7ae5d9eb4b0d42b57cf4e0f4f1?s=96&amp;d=retro&amp;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' />					<cite class="fn">kumar</cite>									</div>
+                                        <!-- .comment-author .vcard -->
+                                        <div class="comment-meta commentmetadata">
+                                        <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/#comment-78560">
+                                        <time pubdate datetime="2017-01-30T07:06:59+00:00">
+                                        January 30, 2017						</time>
+                                        </a>
+                                        </div>
+                                        <!-- .comment-meta .commentmetadata -->
+                                        </footer>
+                                        
+                                        <div class="comment-content "><p>Hi i am getting error  &#8220;The hex provided didn&#8217;t decode to match length&#8221; i have key and iv can you please help</p>
+                                        </div>
+                                        
+                                        <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link' href='https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/?replytocom=78560#respond' onclick='return addComment.moveForm( "comment-78560", "78560", "respond", "936" )' aria-label='Reply to kumar to kumar'>Reply to kumar</a>			</div>
+                                        <!-- .reply -->
+                                        </article><!-- #comment-## -->
+                                        </li><!-- #comment-## -->
+                                        <li class="comment odd alt thread-even depth-1" id="li-comment-78561">
+                                        <article id="comment-78561" class="comment">
+                                        <footer>
+                                        <div class="comment-author vcard">
+                                        <img alt='' src='https://secure.gravatar.com/avatar/03ab4a7ae5d9eb4b0d42b57cf4e0f4f1?s=48&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/03ab4a7ae5d9eb4b0d42b57cf4e0f4f1?s=96&amp;d=retro&amp;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' />					<cite class="fn">kumar</cite>									</div>
+                                        <!-- .comment-author .vcard -->
+                                        <div class="comment-meta commentmetadata">
+                                        <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/#comment-78561">
+                                        <time pubdate datetime="2017-01-30T07:40:21+00:00">
+                                        January 30, 2017						</time>
+                                        </a>
+                                        </div>
+                                        <!-- .comment-meta .commentmetadata -->
+                                        </footer>
+                                        
+                                        <div class="comment-content "><p>my key and iv are of 16 bytes</p>
+                                        </div>
+                                        
+                                        <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link' href='https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/?replytocom=78561#respond' onclick='return addComment.moveForm( "comment-78561", "78561", "respond", "936" )' aria-label='Reply to kumar to kumar'>Reply to kumar</a>			</div>
+                                        <!-- .reply -->
+                                        </article><!-- #comment-## -->
+                                        </li><!-- #comment-## -->
+                                        <li class="comment even thread-odd thread-alt depth-1" id="li-comment-78563">
+                                        <article id="comment-78563" class="comment">
+                                        <footer>
+                                        <div class="comment-author vcard">
+                                        <img alt='' src='https://secure.gravatar.com/avatar/c5d46bdf7048dd6205138f1e1ec9da3e?s=48&#038;d=retro&#038;r=g' srcset='https://secure.gravatar.com/avatar/c5d46bdf7048dd6205138f1e1ec9da3e?s=96&amp;d=retro&amp;r=g 2x' class='avatar avatar-48 photo' height='48' width='48' />					<cite class="fn">sumit magdum</cite>									</div>
+                                        <!-- .comment-author .vcard -->
+                                        <div class="comment-meta commentmetadata">
+                                        <a href="https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/#comment-78563">
+                                        <time pubdate datetime="2017-02-01T10:34:07+00:00">
+                                        February 1, 2017						</time>
+                                        </a>
+                                        </div>
+                                        <!-- .comment-meta .commentmetadata -->
+                                        </footer>
+                                        
+                                        <div class="comment-content "><p>why getting garbage data after decryption<br />
+                                        if( cryptStatus == kCCSuccess )<br />
+                                        {<br />
+                                        // The returned NSData takes ownership of the buffer and will free it on deallocation<br />
+                                        return [NSData dataWithBytesNoCopy:buffer length:numBytesDecrypted];<br />
+                                        }</p>
+                                        </div>
+                                        
+                                        <div class="reply">
+                                        <a rel='nofollow' class='comment-reply-link' href='https://richardwarrender.com/2016/04/encrypt-data-using-aes-and-256-bit-keys/?replytocom=78563#respond' onclick='return addComment.moveForm( "comment-78563", "78563", "respond", "936" )' aria-label='Reply to sumit to sumit magdum'>Reply to sumit</a>			</div>
+                                        <!-- .reply -->
+                                        </article><!-- #comment-## -->
+                                        </li><!-- #comment-## -->
+                                        </ol><!-- .commentlist -->
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <div id="share-comment-button-bottom">
+                                        <button>
+                                        <i class="share-comment-icon"></i>Write a Comment				</button>
+                                        </div>
+                                        <div id="commentform-bottom"></div> <!-- do not remove; used by jQuery to move the comment reply form here -->
+                                        
+                                        
+                                        
+                                        </div><!-- #comments .comments-area -->
+                                        
+                                        
+                                        
+                                        <div id="taglist">
+                                        <ul class="taglist"><li class="taglist-title">Related Content by Tag</li><li><a href="https://richardwarrender.com/tag/aes/" rel="tag">AES</a></li><li><a href="https://richardwarrender.com/tag/aes-256/" rel="tag">AES-256</a></li><li><a href="https://richardwarrender.com/tag/c/" rel="tag">C</a></li><li><a href="https://richardwarrender.com/tag/commoncrypto/" rel="tag">CommonCrypto</a></li><li><a href="https://richardwarrender.com/tag/encryption/" rel="tag">encryption</a></li><li><a href="https://richardwarrender.com/tag/ios/" rel="tag">iOS</a></li><li><a href="https://richardwarrender.com/tag/mac-os-x/" rel="tag">Mac OS X</a></li><li><a href="https://richardwarrender.com/tag/objective-c/" rel="tag">Objective-C</a></li><li><a href="https://richardwarrender.com/tag/openssl/" rel="tag">openssl</a></li><li><a href="https://richardwarrender.com/tag/programming-2/" rel="tag">programming</a></li></ul>					</div>
+                                        
+                                        
+                                        </main>
+                                        <!-- #content .site-content -->
+                                        </div><!-- #primary .content-area -->
+                                        
+                                        <div id="secondary" class="widget-area" role="complementary">
+                                        </div><!-- #secondary .widget-area -->
+                                        
+                                        </div><!-- #main .site-main -->
+                                        
+                                        <footer id="colophon" class="site-footer" itemscope="itemscope" itemtype="http://schema.org/WPFooter" role="contentinfo">
+                                        <div class="site-info">
+                                        <a href="http://independentpublisher.me" rel="designer" title="Independent Publisher: A beautiful reader-focused WordPress theme, for you.">Independent Publisher</a> empowered by <a href="http://wordpress.org/" rel="generator" title="WordPress: A free open-source publishing platform">WordPress</a>	</div>
+                                        <!-- .site-info -->
+                                        </footer><!-- #colophon .site-footer -->
+                                        </div><!-- #page .hfeed .site -->
+                                        
+                                        <script type='text/javascript' src='https://richardwarrender.com/wp-content/plugins/akismet/_inc/form.js?ver=3.2'></script>
+                                        <script type='text/javascript' src='https://richardwarrender.com/wp-content/themes/independent-publisher/js/skip-link-focus-fix.js?ver=20130115'></script>
+                                        <script type='text/javascript' src='https://richardwarrender.com/wp-includes/js/comment-reply.min.js?ver=4.7.4'></script>
+                                        <script type='text/javascript' src='https://richardwarrender.com/wp-includes/js/wp-embed.min.js?ver=4.7.4'></script>
+                                        
+                                        </body>
+                                        </html>
+                                        
+                                        <!-- Dynamic page generated in 0.251 seconds. -->
+                                        <!-- Cached page generated by WP-Super-Cache on 2017-05-14 05:59:12 -->
+                                        
+                                        <!-- Compression = gzip -->

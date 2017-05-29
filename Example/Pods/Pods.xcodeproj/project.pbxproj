@@ -1,0 +1,909 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0148062D832BCF9D7DD4BEF71B16DD19 /* NSString+OGString.m in Sources */ = {isa = PBXBuildFile; fileRef = 338753EE62E6A950A5444D7BFFFA44EB /* NSString+OGString.m */; };
+		06AAE9402FDDDF2E40D5E75B896959C7 /* OGTags.m in Sources */ = {isa = PBXBuildFile; fileRef = ACD86BABDDCF8FC78C11BEB2067ED87B /* OGTags.m */; };
+		0735E25D97ED7E8CCA27313880B9CCE3 /* ObjectiveGumbo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88B082EB70E62CDE1EF980EE353C8382 /* ObjectiveGumbo-dummy.m */; };
+		07963CEB81F5865977C86E1C8C25C398 /* ObjectiveGumbo.m in Sources */ = {isa = PBXBuildFile; fileRef = A911F1390F506E5120668CFB021E85E7 /* ObjectiveGumbo.m */; };
+		0AF7C42D7ADDB8067AD172915EE42A49 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		0F79FB248D42FAFBE56DC65087E0CA73 /* OGDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = CEDFFD006F0C2603E289240B718D67FE /* OGDocument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1189DCE4A1B89589F668804CDE1DB496 /* OGNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FDE1AF6477FF2C13A648B65358BE91 /* OGNode.m */; };
+		1655C65B3479940CF4E39962387F7897 /* OGError.h in Headers */ = {isa = PBXBuildFile; fileRef = F76517EA77DFCBF1ACBCDF2A7EFAD232 /* OGError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1CB86A16B242CA0DF083EFF615B60279 /* string_piece.h in Headers */ = {isa = PBXBuildFile; fileRef = 875E79E5280F79EBD80A66FE9764EFDB /* string_piece.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		2266486B83F827378878A940AFFDE384 /* char_ref.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EE9B43B7350EAECFF141A13A7201CF8 /* char_ref.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		22C449322C3801B20BDCCB3834AC851C /* token_type.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A1219E905AC681059BF7C8596EDF036 /* token_type.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		26994D6E9D12FF08CEAEE7C63E3FC1A6 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = FC25006D3916D08E39FB6E552F54519B /* tokenizer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		322D833994B25ED70168F35EEADA41A7 /* tag_strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 71B396E435CC4881C61C356942A720FB /* tag_strings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3331410F97436C2D833DE33E8EB5780B /* Pods-ObjectiveGumbo_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B20C07F54598F34E5CC92925DC6E4C7C /* Pods-ObjectiveGumbo_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34B7378385AD33D90DD22BA24B9EB44A /* ObjectiveGumbo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 47A4151395C51F2C7047F1C923594CDF /* ObjectiveGumbo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A3F18E380D42FC4F72069887AF3DBC1 /* OGTagsPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 55ABE0DE50A405D50C2E9E69E2E9E824 /* OGTagsPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		41BEC61604A68AF646E2AFEB735EA613 /* tag_sizes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F847B5F3AE9CA5C978C02306F39FEE7 /* tag_sizes.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		43D3E6F388C8E107BC587175021BDD74 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 70FE0DB11F167E3E5EE2FC6516E77A36 /* error.c */; };
+		46927D32D2D79CA17276B5F798F13E33 /* Pods-ObjectiveGumbo_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1F4E8F7B8B947242284DD4D4EA9F58 /* Pods-ObjectiveGumbo_Example-dummy.m */; };
+		4ED3A82870A5A23CEFF5CD42F76B7DA9 /* OGNodePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D05B04C5CA13690F7B7329FF8C6F8308 /* OGNodePrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		57E4432F1C7C265CCC21E33BC836E999 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AFF1F51907EB6BF5AD1FD5F9CA0A73E /* vector.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6080E0384F32732D40323CAAAAE09747 /* tag_enum.h in Headers */ = {isa = PBXBuildFile; fileRef = 8DE2CD72CA1FDEA205A1408BD56358FF /* tag_enum.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6273FEF580865CCBDA53628F4EC27967 /* char_ref.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DB39DFB2958217091727789E2575C /* char_ref.c */; };
+		6612EE2F5BA2816591BDA7C7A034663A /* insertion_mode.h in Headers */ = {isa = PBXBuildFile; fileRef = B58437D28F54291C100BAB79C94F86EF /* insertion_mode.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6889E5E992F35C00AFEEE0CE88AA78E0 /* tag.c in Sources */ = {isa = PBXBuildFile; fileRef = 216C3CCA4E3F4EBD4D45BD396D4027BD /* tag.c */; };
+		706FAB5AF1C22D132C20482C434BA636 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		734F70B9910CC3A42C5933952D3239BD /* attribute.h in Headers */ = {isa = PBXBuildFile; fileRef = F81858C1EFAFA62BFF54A0ACB05FC522 /* attribute.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		74C16EB1576B14020D590122E53D53E0 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 39DF5DDE254E72804B08E529FB9B9050 /* utf8.c */; };
+		7576112FBD524F1F38290204D97D6CA0 /* tokenizer_states.h in Headers */ = {isa = PBXBuildFile; fileRef = 735C3ACB7806A06E54F0D27DC4DA0FF6 /* tokenizer_states.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7C4ADB9E250CC12502ECA53D6419A51D /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = E6CC561A7D054921F7F161AC87D2084A /* parser.c */; };
+		7D573A5B75E82DA5806CC08CCA7DD29F /* OGNode+OGElementSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = 770F207566A143F1E941492C7FA6F5C4 /* OGNode+OGElementSearch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D7F909CB0B5561D5B5F50285ED55960 /* util.c in Sources */ = {isa = PBXBuildFile; fileRef = A5C4CA43E29B38D1970C20D4146CB2B0 /* util.c */; };
+		7DB4CA70E12147116F83B57404DDE638 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 440519860F444EA131E0675E2FD19900 /* vector.c */; };
+		80B05693A3E7827CF070B29C913707A4 /* ObjectiveGumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = D208DF010FEA2DB8F02A83D411E975E5 /* ObjectiveGumbo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85510FA86422368E12169D91F2639414 /* OGNode+OGElementSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E91D2CFBFCFFBE392FC4E0C6261577 /* OGNode+OGElementSearch.m */; };
+		8638A8C81DDAC4895A4107F3AF86D398 /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DE5424619C1F7D68A89DBBAB850EE7D /* parser.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		876E77B7F1078DA441D4F1766AE0F4E8 /* tag_gperf.h in Headers */ = {isa = PBXBuildFile; fileRef = D3D1EB17F5A6523B43F41000C13E2CF7 /* tag_gperf.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8878B84A42BDBB01C6CB6006239816C5 /* Pods-ObjectiveGumbo_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6629977B3218915B514D591874AAD9 /* Pods-ObjectiveGumbo_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8ADC0A45AEAA41C68D8369E83A35FAC0 /* gumbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D3C1EAC057148D998D3957F1E40C52F /* gumbo.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9031A6948B2E2AB22BB181E0B384553C /* NSString+OGString.h in Headers */ = {isa = PBXBuildFile; fileRef = A32B87E5F43117C8D6FBDF2494C8B88C /* NSString+OGString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		91DEC9E8770D1949A1690DBDA54C198F /* string_piece.c in Sources */ = {isa = PBXBuildFile; fileRef = 28CA89A90D170B51A911F1039B13055E /* string_piece.c */; };
+		93C54536FD3767E8E06E5198265F3AA0 /* OGNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E54B96DA3F4881D87F940DBC953A9B1 /* OGNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A78FD17C177503734F37A8499E343E6 /* OGText.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCD7D9F6CC48DCFE35E744D3642CDE3 /* OGText.m */; };
+		A8C69517BCB582ECFF5A99773B99BDFB /* OGElement.h in Headers */ = {isa = PBXBuildFile; fileRef = D837FE4BFA8EAB6C91681B22AB04FD3D /* OGElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B08EF083D88EC56B9B33BFCE22BECE8B /* utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = AAD7C8E18F2BA89012ABDA24F5CF153A /* utf8.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		C0BCEEBA7E258F3FE6049404578FBDE0 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B882B61AAD8170849D05F811B59627F /* util.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D2B449A0AC3618384C7FD773B6CF2720 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
+		D4F2EF8162F86B929957EFAE8FA55BF8 /* tokenizer.c in Sources */ = {isa = PBXBuildFile; fileRef = 2566E574A7443A215F2DEC4055F9B299 /* tokenizer.c */; };
+		DC982F5801B55FC2112AFB85366EFBDA /* OGElement.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B02D111838A311A04CCA6A1E3D4A7C /* OGElement.m */; };
+		DCB6EC376473F7F481AF0C392A3F63CA /* OGError.m in Sources */ = {isa = PBXBuildFile; fileRef = 70DFCF5E1D5C66AA4F37E1C5A12CED8C /* OGError.m */; };
+		DD49AD132AD80446575665BA933BEFB5 /* OGText.h in Headers */ = {isa = PBXBuildFile; fileRef = A8B2F13295F1F0FCDC93D6AD84FB9842 /* OGText.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E34F3B3AFB57B24F2F2E62F048023C19 /* string_buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5479030D834511B2B463F1F13C8F4E1C /* string_buffer.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		EACEE60E07595FA8F0C1CF3AB08E58F0 /* string_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = ECBD46F136FD48DF1791187065DD1A93 /* string_buffer.c */; };
+		F166EB885245EDE646E27E1EE9E1DE70 /* OGTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 0953550ACB3E35678CD8A8E4AD5E5C9F /* OGTags.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F178C21A09CEB5F6C10B1F8A52A98B31 /* OGDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = EDE598E1E1285E5EF3B7FF59DB382E68 /* OGDocument.m */; };
+		F1E53FBEE4A41EAC698D52107A26D840 /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FD538C82F8AECF78149073B8970E51 /* error.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F7045AB599730DB377B81BA2027164DE /* attribute.c in Sources */ = {isa = PBXBuildFile; fileRef = B32BC4A86ABF6A716999E9413A3CE108 /* attribute.c */; };
+		FA38598304242E0CB72A8DC5F476B2EE /* Pods-ObjectiveGumbo_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB965014289FAFBF5087F83EA7CC9CB /* Pods-ObjectiveGumbo_Tests-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3A2A1AD8DF177072AE7929F905808C63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 613EB3E2F38C07510507665409E7F072;
+			remoteInfo = ObjectiveGumbo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02A18BFC9ACEF12638E35AD6419B3184 /* ObjectiveGumbo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ObjectiveGumbo.xcconfig; sourceTree = "<group>"; };
+		073B8BC8A03F05FDF59736A507244AE6 /* Pods-ObjectiveGumbo_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ObjectiveGumbo_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		0953550ACB3E35678CD8A8E4AD5E5C9F /* OGTags.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGTags.h; sourceTree = "<group>"; };
+		0AFF1F51907EB6BF5AD1FD5F9CA0A73E /* vector.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
+		14F645743DEF96F85362780131FED0A3 /* Pods-ObjectiveGumbo_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ObjectiveGumbo_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1B882B61AAD8170849D05F811B59627F /* util.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		1D0F355F921FDA4D43EE9EB82E120B5D /* Pods-ObjectiveGumbo_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ObjectiveGumbo_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		1DE5424619C1F7D68A89DBBAB850EE7D /* parser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		1EE9B43B7350EAECFF141A13A7201CF8 /* char_ref.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = char_ref.h; sourceTree = "<group>"; };
+		216C3CCA4E3F4EBD4D45BD396D4027BD /* tag.c */ = {isa = PBXFileReference; includeInIndex = 1; path = tag.c; sourceTree = "<group>"; };
+		2566E574A7443A215F2DEC4055F9B299 /* tokenizer.c */ = {isa = PBXFileReference; includeInIndex = 1; path = tokenizer.c; sourceTree = "<group>"; };
+		25D42225B876126501628D6723129511 /* Pods-ObjectiveGumbo_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ObjectiveGumbo_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		28CA89A90D170B51A911F1039B13055E /* string_piece.c */ = {isa = PBXFileReference; includeInIndex = 1; path = string_piece.c; sourceTree = "<group>"; };
+		28F60C0C3918C144598CCB3CD715862D /* Pods-ObjectiveGumbo_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ObjectiveGumbo_Example.modulemap"; sourceTree = "<group>"; };
+		338753EE62E6A950A5444D7BFFFA44EB /* NSString+OGString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+OGString.m"; sourceTree = "<group>"; };
+		39DF5DDE254E72804B08E529FB9B9050 /* utf8.c */ = {isa = PBXFileReference; includeInIndex = 1; path = utf8.c; sourceTree = "<group>"; };
+		3FCD7D9F6CC48DCFE35E744D3642CDE3 /* OGText.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGText.m; sourceTree = "<group>"; };
+		440519860F444EA131E0675E2FD19900 /* vector.c */ = {isa = PBXFileReference; includeInIndex = 1; path = vector.c; sourceTree = "<group>"; };
+		460AD835D86D43D80FD30C80DFA6C96F /* Pods-ObjectiveGumbo_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ObjectiveGumbo_Example.release.xcconfig"; sourceTree = "<group>"; };
+		47A4151395C51F2C7047F1C923594CDF /* ObjectiveGumbo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjectiveGumbo-umbrella.h"; sourceTree = "<group>"; };
+		48155DD08F68303E7D652838CB4A4C80 /* Pods_ObjectiveGumbo_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ObjectiveGumbo_Example.framework; path = "Pods-ObjectiveGumbo_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48FDE1AF6477FF2C13A648B65358BE91 /* OGNode.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGNode.m; sourceTree = "<group>"; };
+		4E54B96DA3F4881D87F940DBC953A9B1 /* OGNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGNode.h; sourceTree = "<group>"; };
+		51FD6C895209EBCB31DC37C9C11054EF /* Pods-ObjectiveGumbo_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ObjectiveGumbo_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5479030D834511B2B463F1F13C8F4E1C /* string_buffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = string_buffer.h; sourceTree = "<group>"; };
+		54C3B8E5C7589D3CFC941E97DA892DE4 /* Pods-ObjectiveGumbo_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ObjectiveGumbo_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		55ABE0DE50A405D50C2E9E69E2E9E824 /* OGTagsPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGTagsPrivate.h; sourceTree = "<group>"; };
+		5A1219E905AC681059BF7C8596EDF036 /* token_type.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = token_type.h; sourceTree = "<group>"; };
+		60D3AC1F3CB48298C328FAC7EB66F951 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62FD538C82F8AECF78149073B8970E51 /* error.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = error.h; sourceTree = "<group>"; };
+		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		66F779E2F1AD71E0DCCC8D64797BBB25 /* Pods_ObjectiveGumbo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ObjectiveGumbo_Tests.framework; path = "Pods-ObjectiveGumbo_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		70DFCF5E1D5C66AA4F37E1C5A12CED8C /* OGError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGError.m; sourceTree = "<group>"; };
+		70FE0DB11F167E3E5EE2FC6516E77A36 /* error.c */ = {isa = PBXFileReference; includeInIndex = 1; path = error.c; sourceTree = "<group>"; };
+		71B396E435CC4881C61C356942A720FB /* tag_strings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tag_strings.h; sourceTree = "<group>"; };
+		735C3ACB7806A06E54F0D27DC4DA0FF6 /* tokenizer_states.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tokenizer_states.h; sourceTree = "<group>"; };
+		770F207566A143F1E941492C7FA6F5C4 /* OGNode+OGElementSearch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OGNode+OGElementSearch.h"; sourceTree = "<group>"; };
+		778404F42137AC8DA53C06941473811A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C2DB39DFB2958217091727789E2575C /* char_ref.c */ = {isa = PBXFileReference; includeInIndex = 1; path = char_ref.c; sourceTree = "<group>"; };
+		7D3C1EAC057148D998D3957F1E40C52F /* gumbo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = gumbo.h; sourceTree = "<group>"; };
+		875E79E5280F79EBD80A66FE9764EFDB /* string_piece.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = string_piece.h; sourceTree = "<group>"; };
+		88B082EB70E62CDE1EF980EE353C8382 /* ObjectiveGumbo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ObjectiveGumbo-dummy.m"; sourceTree = "<group>"; };
+		8DE2CD72CA1FDEA205A1408BD56358FF /* tag_enum.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tag_enum.h; sourceTree = "<group>"; };
+		8FC34F56D7CCFF7D2F6CA380F0A58B60 /* ObjectiveGumbo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjectiveGumbo-prefix.pch"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F6629977B3218915B514D591874AAD9 /* Pods-ObjectiveGumbo_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjectiveGumbo_Tests-umbrella.h"; sourceTree = "<group>"; };
+		9F847B5F3AE9CA5C978C02306F39FEE7 /* tag_sizes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tag_sizes.h; sourceTree = "<group>"; };
+		A32B87E5F43117C8D6FBDF2494C8B88C /* NSString+OGString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+OGString.h"; sourceTree = "<group>"; };
+		A4724716423DD1618FBD687B74A53272 /* Pods-ObjectiveGumbo_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ObjectiveGumbo_Example-frameworks.sh"; sourceTree = "<group>"; };
+		A5C4CA43E29B38D1970C20D4146CB2B0 /* util.c */ = {isa = PBXFileReference; includeInIndex = 1; path = util.c; sourceTree = "<group>"; };
+		A8B2F13295F1F0FCDC93D6AD84FB9842 /* OGText.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGText.h; sourceTree = "<group>"; };
+		A911F1390F506E5120668CFB021E85E7 /* ObjectiveGumbo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ObjectiveGumbo.m; sourceTree = "<group>"; };
+		A9B24B8B930B2E00B7127C17DBD4230C /* Pods-ObjectiveGumbo_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ObjectiveGumbo_Example-resources.sh"; sourceTree = "<group>"; };
+		AAD7C8E18F2BA89012ABDA24F5CF153A /* utf8.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		ACD86BABDDCF8FC78C11BEB2067ED87B /* OGTags.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGTags.m; sourceTree = "<group>"; };
+		B1F7818D9F238ED3E2F4BDE02D7E761B /* Pods-ObjectiveGumbo_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ObjectiveGumbo_Tests.modulemap"; sourceTree = "<group>"; };
+		B20C07F54598F34E5CC92925DC6E4C7C /* Pods-ObjectiveGumbo_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ObjectiveGumbo_Example-umbrella.h"; sourceTree = "<group>"; };
+		B32BC4A86ABF6A716999E9413A3CE108 /* attribute.c */ = {isa = PBXFileReference; includeInIndex = 1; path = attribute.c; sourceTree = "<group>"; };
+		B58437D28F54291C100BAB79C94F86EF /* insertion_mode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = insertion_mode.h; sourceTree = "<group>"; };
+		B7307D52053FC07E6ACE68CD669B7A8D /* Pods-ObjectiveGumbo_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ObjectiveGumbo_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		B7CBB2A933F0A52F11A6BD61C9FE93EF /* Pods-ObjectiveGumbo_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ObjectiveGumbo_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		BCB965014289FAFBF5087F83EA7CC9CB /* Pods-ObjectiveGumbo_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ObjectiveGumbo_Tests-dummy.m"; sourceTree = "<group>"; };
+		C09D0FF0F70A1BE34DFA061B53D9BBD8 /* ObjectiveGumbo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObjectiveGumbo.framework; path = ObjectiveGumbo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2B02D111838A311A04CCA6A1E3D4A7C /* OGElement.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGElement.m; sourceTree = "<group>"; };
+		C9887E1B3228FF3927F0A2A1F720D316 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEDFFD006F0C2603E289240B718D67FE /* OGDocument.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGDocument.h; sourceTree = "<group>"; };
+		D05B04C5CA13690F7B7329FF8C6F8308 /* OGNodePrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGNodePrivate.h; sourceTree = "<group>"; };
+		D208DF010FEA2DB8F02A83D411E975E5 /* ObjectiveGumbo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ObjectiveGumbo.h; sourceTree = "<group>"; };
+		D3D1EB17F5A6523B43F41000C13E2CF7 /* tag_gperf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tag_gperf.h; sourceTree = "<group>"; };
+		D5B8E07879ACFC7C6AED5A2A7E001090 /* ObjectiveGumbo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ObjectiveGumbo.modulemap; sourceTree = "<group>"; };
+		D837FE4BFA8EAB6C91681B22AB04FD3D /* OGElement.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGElement.h; sourceTree = "<group>"; };
+		DA1F4E8F7B8B947242284DD4D4EA9F58 /* Pods-ObjectiveGumbo_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ObjectiveGumbo_Example-dummy.m"; sourceTree = "<group>"; };
+		E11AE22389880B6C28D274100442CC1F /* Pods-ObjectiveGumbo_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ObjectiveGumbo_Tests-resources.sh"; sourceTree = "<group>"; };
+		E6CC561A7D054921F7F161AC87D2084A /* parser.c */ = {isa = PBXFileReference; includeInIndex = 1; path = parser.c; sourceTree = "<group>"; };
+		E8E91D2CFBFCFFBE392FC4E0C6261577 /* OGNode+OGElementSearch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OGNode+OGElementSearch.m"; sourceTree = "<group>"; };
+		ECBD46F136FD48DF1791187065DD1A93 /* string_buffer.c */ = {isa = PBXFileReference; includeInIndex = 1; path = string_buffer.c; sourceTree = "<group>"; };
+		EDE598E1E1285E5EF3B7FF59DB382E68 /* OGDocument.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OGDocument.m; sourceTree = "<group>"; };
+		F76517EA77DFCBF1ACBCDF2A7EFAD232 /* OGError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OGError.h; sourceTree = "<group>"; };
+		F81858C1EFAFA62BFF54A0ACB05FC522 /* attribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = attribute.h; sourceTree = "<group>"; };
+		FC25006D3916D08E39FB6E552F54519B /* tokenizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tokenizer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		201D750FD04AE1E58860D3E84FF3672E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				706FAB5AF1C22D132C20482C434BA636 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7E4D05AA36BB3935C5BAC593F23141A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2B449A0AC3618384C7FD773B6CF2720 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB12765003D102924979251CACEC4208 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AF7C42D7ADDB8067AD172915EE42A49 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0FB5061E60D064AAD8DD5388389A3F6B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C8B0B366ABD54EB537D9E0E3123BED9 /* Pods-ObjectiveGumbo_Example */,
+				5AA9F0AA67AFB4AF101E04D5C0BEB32F /* Pods-ObjectiveGumbo_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		5AA9F0AA67AFB4AF101E04D5C0BEB32F /* Pods-ObjectiveGumbo_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				60D3AC1F3CB48298C328FAC7EB66F951 /* Info.plist */,
+				B1F7818D9F238ED3E2F4BDE02D7E761B /* Pods-ObjectiveGumbo_Tests.modulemap */,
+				51FD6C895209EBCB31DC37C9C11054EF /* Pods-ObjectiveGumbo_Tests-acknowledgements.markdown */,
+				54C3B8E5C7589D3CFC941E97DA892DE4 /* Pods-ObjectiveGumbo_Tests-acknowledgements.plist */,
+				BCB965014289FAFBF5087F83EA7CC9CB /* Pods-ObjectiveGumbo_Tests-dummy.m */,
+				B7307D52053FC07E6ACE68CD669B7A8D /* Pods-ObjectiveGumbo_Tests-frameworks.sh */,
+				E11AE22389880B6C28D274100442CC1F /* Pods-ObjectiveGumbo_Tests-resources.sh */,
+				9F6629977B3218915B514D591874AAD9 /* Pods-ObjectiveGumbo_Tests-umbrella.h */,
+				B7CBB2A933F0A52F11A6BD61C9FE93EF /* Pods-ObjectiveGumbo_Tests.debug.xcconfig */,
+				25D42225B876126501628D6723129511 /* Pods-ObjectiveGumbo_Tests.release.xcconfig */,
+			);
+			name = "Pods-ObjectiveGumbo_Tests";
+			path = "Target Support Files/Pods-ObjectiveGumbo_Tests";
+			sourceTree = "<group>";
+		};
+		5C8B0B366ABD54EB537D9E0E3123BED9 /* Pods-ObjectiveGumbo_Example */ = {
+			isa = PBXGroup;
+			children = (
+				C9887E1B3228FF3927F0A2A1F720D316 /* Info.plist */,
+				28F60C0C3918C144598CCB3CD715862D /* Pods-ObjectiveGumbo_Example.modulemap */,
+				14F645743DEF96F85362780131FED0A3 /* Pods-ObjectiveGumbo_Example-acknowledgements.markdown */,
+				1D0F355F921FDA4D43EE9EB82E120B5D /* Pods-ObjectiveGumbo_Example-acknowledgements.plist */,
+				DA1F4E8F7B8B947242284DD4D4EA9F58 /* Pods-ObjectiveGumbo_Example-dummy.m */,
+				A4724716423DD1618FBD687B74A53272 /* Pods-ObjectiveGumbo_Example-frameworks.sh */,
+				A9B24B8B930B2E00B7127C17DBD4230C /* Pods-ObjectiveGumbo_Example-resources.sh */,
+				B20C07F54598F34E5CC92925DC6E4C7C /* Pods-ObjectiveGumbo_Example-umbrella.h */,
+				073B8BC8A03F05FDF59736A507244AE6 /* Pods-ObjectiveGumbo_Example.debug.xcconfig */,
+				460AD835D86D43D80FD30C80DFA6C96F /* Pods-ObjectiveGumbo_Example.release.xcconfig */,
+			);
+			name = "Pods-ObjectiveGumbo_Example";
+			path = "Target Support Files/Pods-ObjectiveGumbo_Example";
+			sourceTree = "<group>";
+		};
+		7476F9A2E3552D05559CCF4BE0C5D3E2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				778404F42137AC8DA53C06941473811A /* Info.plist */,
+				D5B8E07879ACFC7C6AED5A2A7E001090 /* ObjectiveGumbo.modulemap */,
+				02A18BFC9ACEF12638E35AD6419B3184 /* ObjectiveGumbo.xcconfig */,
+				88B082EB70E62CDE1EF980EE353C8382 /* ObjectiveGumbo-dummy.m */,
+				8FC34F56D7CCFF7D2F6CA380F0A58B60 /* ObjectiveGumbo-prefix.pch */,
+				47A4151395C51F2C7047F1C923594CDF /* ObjectiveGumbo-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/ObjectiveGumbo";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				8BC1E57E2312A2B58B1520FB03163406 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				EFC016331D9A5F3444B5005FD76C18FA /* Products */,
+				0FB5061E60D064AAD8DD5388389A3F6B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8BC1E57E2312A2B58B1520FB03163406 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E56CEF578BF78475F6E68A6CEA8E94BC /* ObjectiveGumbo */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		9B1DFD0BAC62C0C87AE5421731E27934 /* ObjectiveGumbo */ = {
+			isa = PBXGroup;
+			children = (
+				A32B87E5F43117C8D6FBDF2494C8B88C /* NSString+OGString.h */,
+				338753EE62E6A950A5444D7BFFFA44EB /* NSString+OGString.m */,
+				D208DF010FEA2DB8F02A83D411E975E5 /* ObjectiveGumbo.h */,
+				A911F1390F506E5120668CFB021E85E7 /* ObjectiveGumbo.m */,
+				CEDFFD006F0C2603E289240B718D67FE /* OGDocument.h */,
+				EDE598E1E1285E5EF3B7FF59DB382E68 /* OGDocument.m */,
+				D837FE4BFA8EAB6C91681B22AB04FD3D /* OGElement.h */,
+				C2B02D111838A311A04CCA6A1E3D4A7C /* OGElement.m */,
+				F76517EA77DFCBF1ACBCDF2A7EFAD232 /* OGError.h */,
+				70DFCF5E1D5C66AA4F37E1C5A12CED8C /* OGError.m */,
+				4E54B96DA3F4881D87F940DBC953A9B1 /* OGNode.h */,
+				48FDE1AF6477FF2C13A648B65358BE91 /* OGNode.m */,
+				770F207566A143F1E941492C7FA6F5C4 /* OGNode+OGElementSearch.h */,
+				E8E91D2CFBFCFFBE392FC4E0C6261577 /* OGNode+OGElementSearch.m */,
+				D05B04C5CA13690F7B7329FF8C6F8308 /* OGNodePrivate.h */,
+				0953550ACB3E35678CD8A8E4AD5E5C9F /* OGTags.h */,
+				ACD86BABDDCF8FC78C11BEB2067ED87B /* OGTags.m */,
+				55ABE0DE50A405D50C2E9E69E2E9E824 /* OGTagsPrivate.h */,
+				A8B2F13295F1F0FCDC93D6AD84FB9842 /* OGText.h */,
+				3FCD7D9F6CC48DCFE35E744D3642CDE3 /* OGText.m */,
+				D688F25EB29728D340AC5838815F798A /* Gumbo */,
+			);
+			name = ObjectiveGumbo;
+			path = ObjectiveGumbo;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D688F25EB29728D340AC5838815F798A /* Gumbo */ = {
+			isa = PBXGroup;
+			children = (
+				B32BC4A86ABF6A716999E9413A3CE108 /* attribute.c */,
+				F81858C1EFAFA62BFF54A0ACB05FC522 /* attribute.h */,
+				7C2DB39DFB2958217091727789E2575C /* char_ref.c */,
+				1EE9B43B7350EAECFF141A13A7201CF8 /* char_ref.h */,
+				70FE0DB11F167E3E5EE2FC6516E77A36 /* error.c */,
+				62FD538C82F8AECF78149073B8970E51 /* error.h */,
+				7D3C1EAC057148D998D3957F1E40C52F /* gumbo.h */,
+				B58437D28F54291C100BAB79C94F86EF /* insertion_mode.h */,
+				E6CC561A7D054921F7F161AC87D2084A /* parser.c */,
+				1DE5424619C1F7D68A89DBBAB850EE7D /* parser.h */,
+				ECBD46F136FD48DF1791187065DD1A93 /* string_buffer.c */,
+				5479030D834511B2B463F1F13C8F4E1C /* string_buffer.h */,
+				28CA89A90D170B51A911F1039B13055E /* string_piece.c */,
+				875E79E5280F79EBD80A66FE9764EFDB /* string_piece.h */,
+				216C3CCA4E3F4EBD4D45BD396D4027BD /* tag.c */,
+				8DE2CD72CA1FDEA205A1408BD56358FF /* tag_enum.h */,
+				D3D1EB17F5A6523B43F41000C13E2CF7 /* tag_gperf.h */,
+				9F847B5F3AE9CA5C978C02306F39FEE7 /* tag_sizes.h */,
+				71B396E435CC4881C61C356942A720FB /* tag_strings.h */,
+				5A1219E905AC681059BF7C8596EDF036 /* token_type.h */,
+				2566E574A7443A215F2DEC4055F9B299 /* tokenizer.c */,
+				FC25006D3916D08E39FB6E552F54519B /* tokenizer.h */,
+				735C3ACB7806A06E54F0D27DC4DA0FF6 /* tokenizer_states.h */,
+				39DF5DDE254E72804B08E529FB9B9050 /* utf8.c */,
+				AAD7C8E18F2BA89012ABDA24F5CF153A /* utf8.h */,
+				A5C4CA43E29B38D1970C20D4146CB2B0 /* util.c */,
+				1B882B61AAD8170849D05F811B59627F /* util.h */,
+				440519860F444EA131E0675E2FD19900 /* vector.c */,
+				0AFF1F51907EB6BF5AD1FD5F9CA0A73E /* vector.h */,
+			);
+			name = Gumbo;
+			path = Gumbo;
+			sourceTree = "<group>";
+		};
+		E56CEF578BF78475F6E68A6CEA8E94BC /* ObjectiveGumbo */ = {
+			isa = PBXGroup;
+			children = (
+				9B1DFD0BAC62C0C87AE5421731E27934 /* ObjectiveGumbo */,
+				7476F9A2E3552D05559CCF4BE0C5D3E2 /* Support Files */,
+			);
+			name = ObjectiveGumbo;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		EFC016331D9A5F3444B5005FD76C18FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C09D0FF0F70A1BE34DFA061B53D9BBD8 /* ObjectiveGumbo.framework */,
+				48155DD08F68303E7D652838CB4A4C80 /* Pods_ObjectiveGumbo_Example.framework */,
+				66F779E2F1AD71E0DCCC8D64797BBB25 /* Pods_ObjectiveGumbo_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		028B839746EC7C3F062A4586B609690B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8878B84A42BDBB01C6CB6006239816C5 /* Pods-ObjectiveGumbo_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B97BA752356D4AD41AE5497CB473ADD5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				734F70B9910CC3A42C5933952D3239BD /* attribute.h in Headers */,
+				2266486B83F827378878A940AFFDE384 /* char_ref.h in Headers */,
+				F1E53FBEE4A41EAC698D52107A26D840 /* error.h in Headers */,
+				8ADC0A45AEAA41C68D8369E83A35FAC0 /* gumbo.h in Headers */,
+				6612EE2F5BA2816591BDA7C7A034663A /* insertion_mode.h in Headers */,
+				9031A6948B2E2AB22BB181E0B384553C /* NSString+OGString.h in Headers */,
+				34B7378385AD33D90DD22BA24B9EB44A /* ObjectiveGumbo-umbrella.h in Headers */,
+				80B05693A3E7827CF070B29C913707A4 /* ObjectiveGumbo.h in Headers */,
+				0F79FB248D42FAFBE56DC65087E0CA73 /* OGDocument.h in Headers */,
+				A8C69517BCB582ECFF5A99773B99BDFB /* OGElement.h in Headers */,
+				1655C65B3479940CF4E39962387F7897 /* OGError.h in Headers */,
+				7D573A5B75E82DA5806CC08CCA7DD29F /* OGNode+OGElementSearch.h in Headers */,
+				93C54536FD3767E8E06E5198265F3AA0 /* OGNode.h in Headers */,
+				4ED3A82870A5A23CEFF5CD42F76B7DA9 /* OGNodePrivate.h in Headers */,
+				F166EB885245EDE646E27E1EE9E1DE70 /* OGTags.h in Headers */,
+				3A3F18E380D42FC4F72069887AF3DBC1 /* OGTagsPrivate.h in Headers */,
+				DD49AD132AD80446575665BA933BEFB5 /* OGText.h in Headers */,
+				8638A8C81DDAC4895A4107F3AF86D398 /* parser.h in Headers */,
+				E34F3B3AFB57B24F2F2E62F048023C19 /* string_buffer.h in Headers */,
+				1CB86A16B242CA0DF083EFF615B60279 /* string_piece.h in Headers */,
+				6080E0384F32732D40323CAAAAE09747 /* tag_enum.h in Headers */,
+				876E77B7F1078DA441D4F1766AE0F4E8 /* tag_gperf.h in Headers */,
+				41BEC61604A68AF646E2AFEB735EA613 /* tag_sizes.h in Headers */,
+				322D833994B25ED70168F35EEADA41A7 /* tag_strings.h in Headers */,
+				22C449322C3801B20BDCCB3834AC851C /* token_type.h in Headers */,
+				26994D6E9D12FF08CEAEE7C63E3FC1A6 /* tokenizer.h in Headers */,
+				7576112FBD524F1F38290204D97D6CA0 /* tokenizer_states.h in Headers */,
+				B08EF083D88EC56B9B33BFCE22BECE8B /* utf8.h in Headers */,
+				C0BCEEBA7E258F3FE6049404578FBDE0 /* util.h in Headers */,
+				57E4432F1C7C265CCC21E33BC836E999 /* vector.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F74E55E7BA473C9585D63C3C4D1437F9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3331410F97436C2D833DE33E8EB5780B /* Pods-ObjectiveGumbo_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		49B600E96C863CF72C0E8A6D0200D543 /* Pods-ObjectiveGumbo_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BDAE9865E6C5FE5C255B9440C31673E /* Build configuration list for PBXNativeTarget "Pods-ObjectiveGumbo_Tests" */;
+			buildPhases = (
+				5961744C4AC54344469638A195B9A201 /* Sources */,
+				BB12765003D102924979251CACEC4208 /* Frameworks */,
+				028B839746EC7C3F062A4586B609690B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-ObjectiveGumbo_Tests";
+			productName = "Pods-ObjectiveGumbo_Tests";
+			productReference = 66F779E2F1AD71E0DCCC8D64797BBB25 /* Pods_ObjectiveGumbo_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		613EB3E2F38C07510507665409E7F072 /* ObjectiveGumbo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DF7F5546A2F4E15EAF7207AD3644006 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */;
+			buildPhases = (
+				70C9C8076F362B9371D7611C8E05FEE8 /* Sources */,
+				201D750FD04AE1E58860D3E84FF3672E /* Frameworks */,
+				B97BA752356D4AD41AE5497CB473ADD5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjectiveGumbo;
+			productName = ObjectiveGumbo;
+			productReference = C09D0FF0F70A1BE34DFA061B53D9BBD8 /* ObjectiveGumbo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		95339F6EBC39A25827E20BD3F26BA6EC /* Pods-ObjectiveGumbo_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A560D3B0DA7EB6FFCDE7463D8F7A27A /* Build configuration list for PBXNativeTarget "Pods-ObjectiveGumbo_Example" */;
+			buildPhases = (
+				491BEAEC58135B92714567CBC3E9A295 /* Sources */,
+				A7E4D05AA36BB3935C5BAC593F23141A /* Frameworks */,
+				F74E55E7BA473C9585D63C3C4D1437F9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB9AFD272FBEF330E54E8BEF56880A41 /* PBXTargetDependency */,
+			);
+			name = "Pods-ObjectiveGumbo_Example";
+			productName = "Pods-ObjectiveGumbo_Example";
+			productReference = 48155DD08F68303E7D652838CB4A4C80 /* Pods_ObjectiveGumbo_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = EFC016331D9A5F3444B5005FD76C18FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				613EB3E2F38C07510507665409E7F072 /* ObjectiveGumbo */,
+				95339F6EBC39A25827E20BD3F26BA6EC /* Pods-ObjectiveGumbo_Example */,
+				49B600E96C863CF72C0E8A6D0200D543 /* Pods-ObjectiveGumbo_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		491BEAEC58135B92714567CBC3E9A295 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46927D32D2D79CA17276B5F798F13E33 /* Pods-ObjectiveGumbo_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5961744C4AC54344469638A195B9A201 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA38598304242E0CB72A8DC5F476B2EE /* Pods-ObjectiveGumbo_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70C9C8076F362B9371D7611C8E05FEE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7045AB599730DB377B81BA2027164DE /* attribute.c in Sources */,
+				6273FEF580865CCBDA53628F4EC27967 /* char_ref.c in Sources */,
+				43D3E6F388C8E107BC587175021BDD74 /* error.c in Sources */,
+				0148062D832BCF9D7DD4BEF71B16DD19 /* NSString+OGString.m in Sources */,
+				0735E25D97ED7E8CCA27313880B9CCE3 /* ObjectiveGumbo-dummy.m in Sources */,
+				07963CEB81F5865977C86E1C8C25C398 /* ObjectiveGumbo.m in Sources */,
+				F178C21A09CEB5F6C10B1F8A52A98B31 /* OGDocument.m in Sources */,
+				DC982F5801B55FC2112AFB85366EFBDA /* OGElement.m in Sources */,
+				DCB6EC376473F7F481AF0C392A3F63CA /* OGError.m in Sources */,
+				85510FA86422368E12169D91F2639414 /* OGNode+OGElementSearch.m in Sources */,
+				1189DCE4A1B89589F668804CDE1DB496 /* OGNode.m in Sources */,
+				06AAE9402FDDDF2E40D5E75B896959C7 /* OGTags.m in Sources */,
+				9A78FD17C177503734F37A8499E343E6 /* OGText.m in Sources */,
+				7C4ADB9E250CC12502ECA53D6419A51D /* parser.c in Sources */,
+				EACEE60E07595FA8F0C1CF3AB08E58F0 /* string_buffer.c in Sources */,
+				91DEC9E8770D1949A1690DBDA54C198F /* string_piece.c in Sources */,
+				6889E5E992F35C00AFEEE0CE88AA78E0 /* tag.c in Sources */,
+				D4F2EF8162F86B929957EFAE8FA55BF8 /* tokenizer.c in Sources */,
+				74C16EB1576B14020D590122E53D53E0 /* utf8.c in Sources */,
+				7D7F909CB0B5561D5B5F50285ED55960 /* util.c in Sources */,
+				7DB4CA70E12147116F83B57404DDE638 /* vector.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB9AFD272FBEF330E54E8BEF56880A41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ObjectiveGumbo;
+			target = 613EB3E2F38C07510507665409E7F072 /* ObjectiveGumbo */;
+			targetProxy = 3A2A1AD8DF177072AE7929F905808C63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		089E58D888A212B77F55210BA256B57B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 460AD835D86D43D80FD30C80DFA6C96F /* Pods-ObjectiveGumbo_Example.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ObjectiveGumbo_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ObjectiveGumbo_Example/Pods-ObjectiveGumbo_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_ObjectiveGumbo_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4E487F173E6C9664F4E9E26B9635D23C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		555714CCAA653B139EA577D9D1D2F6F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02A18BFC9ACEF12638E35AD6419B3184 /* ObjectiveGumbo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ObjectiveGumbo/ObjectiveGumbo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ObjectiveGumbo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ObjectiveGumbo/ObjectiveGumbo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = ObjectiveGumbo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		763A5409F4966B78D01861EEE5A8500B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7CBB2A933F0A52F11A6BD61C9FE93EF /* Pods-ObjectiveGumbo_Tests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ObjectiveGumbo_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ObjectiveGumbo_Tests/Pods-ObjectiveGumbo_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_ObjectiveGumbo_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86359C4313E73968284A9FE54ECB2C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 25D42225B876126501628D6723129511 /* Pods-ObjectiveGumbo_Tests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ObjectiveGumbo_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ObjectiveGumbo_Tests/Pods-ObjectiveGumbo_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_ObjectiveGumbo_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BDD0139D6EB93FA375F887ABD62DAB2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D1E705BE5F1E9E29BE90B132BCADC23C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 073B8BC8A03F05FDF59736A507244AE6 /* Pods-ObjectiveGumbo_Example.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-ObjectiveGumbo_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-ObjectiveGumbo_Example/Pods-ObjectiveGumbo_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_ObjectiveGumbo_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F73FC0409FB8D11C9B0B03CC3342E974 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02A18BFC9ACEF12638E35AD6419B3184 /* ObjectiveGumbo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ObjectiveGumbo/ObjectiveGumbo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ObjectiveGumbo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ObjectiveGumbo/ObjectiveGumbo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = ObjectiveGumbo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DF7F5546A2F4E15EAF7207AD3644006 /* Build configuration list for PBXNativeTarget "ObjectiveGumbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F73FC0409FB8D11C9B0B03CC3342E974 /* Debug */,
+				555714CCAA653B139EA577D9D1D2F6F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E487F173E6C9664F4E9E26B9635D23C /* Debug */,
+				BDD0139D6EB93FA375F887ABD62DAB2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BDAE9865E6C5FE5C255B9440C31673E /* Build configuration list for PBXNativeTarget "Pods-ObjectiveGumbo_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				763A5409F4966B78D01861EEE5A8500B /* Debug */,
+				86359C4313E73968284A9FE54ECB2C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9A560D3B0DA7EB6FFCDE7463D8F7A27A /* Build configuration list for PBXNativeTarget "Pods-ObjectiveGumbo_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D1E705BE5F1E9E29BE90B132BCADC23C /* Debug */,
+				089E58D888A212B77F55210BA256B57B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

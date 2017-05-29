@@ -1,0 +1,6 @@
+framework module ObjectiveGumbo {
+  umbrella header "ObjectiveGumbo-umbrella.h"
+
+  export *
+  module * { export * }
+}
